@@ -1,0 +1,57 @@
+﻿@page "/create-plan"
+
+
+<h3>Create a New Survival Plan</h3>
+
+<!-- Plan Name -->
+<FluentCard Class="plan-card">
+    <FluentTextField @bind="plan.Name" Placeholder="Plan Name" />
+</FluentCard>
+
+<!-- Scenario Selection -->
+<FluentCard Class="plan-card">
+    <FluentSelect @bind="plan.Scenario" TOption="string">
+        <FluentOption Value="">Select Scenario</FluentOption>
+        <FluentOption Value="Nuclear Fallout">Nuclear Fallout</FluentOption>
+        <FluentOption Value="Zombie Outbreak">Zombie Outbreak</FluentOption>
+        <FluentOption Value="Alien Invasion">Alien Invasion</FluentOption>
+    </FluentSelect>
+</FluentCard>
+
+<!-- Shelter Selection -->
+<FluentCard Class="plan-card">
+    <FluentSelect @bind="plan.Shelter" TOption="string">
+        <FluentOption Value="">Select Shelter</FluentOption>
+        <FluentOption Value="Bunker">Bunker</FluentOption>
+        <FluentOption Value="Cabin">Cabin</FluentOption>
+        <FluentOption Value="Apartment">Apartment</FluentOption>
+    </FluentSelect>
+</FluentCard>
+
+<!-- Resources -->
+<FluentCard Class="plan-card">
+    <FluentTextField @bind="plan.Food" Placeholder="Food Supply" />
+    <FluentTextField @bind="plan.Water" Placeholder="Water Supply" />
+</FluentCard>
+
+<!-- Equipment -->
+<FluentCard Class="plan-card">
+    <FluentTextField @bind="plan.Weapons" Placeholder="Weapons" />
+    <FluentTextField @bind="plan.Vehicles" Placeholder="Vehicles" />
+</FluentCard>
+
+<!-- Power and Budget -->
+<FluentCard Class="plan-card">
+    <FluentTextField @bind="plan.FuelPower" Placeholder="Fuel & Power" />
+    <FluentTextField Type="number" @bind="plan.Budget" Placeholder="Budget" />
+</FluentCard>
+
+<!-- Estimated Survival Time -->
+<FluentCard Class="plan-card">
+    <FluentTextField Type="number" @bind="plan.EstimatedSurvivalTime" Placeholder="Estimated Survival Time (Days)" />
+</FluentCard>
+
+<!-- Save Button -->
+<FluentButton Appearance="Appearance.Accent">Save Plan</FluentButton>
+
+
