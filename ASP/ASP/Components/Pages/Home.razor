@@ -1,0 +1,54 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, user!</h1>
+
+Welcome to your all in one destination for planning for catastrophies.
+
+<FluentDataGrid Id="homegrid" Items="@forecasts" GridTemplateColumns="1fr 1fr 1fr" Loading="@(forecasts == null)" Style="height:204px;" TGridItem="WeatherForecast">
+    <PropertyColumn Title="Name" Property="@(c => c!.Name)" Align="Align.Start" />
+    <PropertyColumn Title="Last Opened" Property="@(c => c!.LastOpened)" Align="Align.Center" />
+    <TemplateColumn Title="Actions" Align="Align.Center">
+        <Template>
+            <FluentButton Appearance="Appearance.Accent" @onclick="() => EditItem(context)">Edit</FluentButton>
+            <FluentButton Appearance="Appearance.Neutral" @onclick="() => DeleteItem(context)">Delete</FluentButton>
+        </Template>
+    </TemplateColumn>
+</FluentDataGrid>
+
+@code {
+    private IQueryable<WeatherForecast>? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Name = $"Survial Plan: {index}",
+                LastOpened = startDate.AddDays(index),
+                Summary = summaries[Random.Shared.Next(summaries.Length)]
+            }).AsQueryable();
+    }
+
+    private void EditItem(WeatherForecast item)
+    {
+        // Implement edit functionality here
+    }
+
+    private void DeleteItem(WeatherForecast item)
+    {
+        // Implement delete functionality here
+    }
+
+    private class WeatherForecast
+    {
+        public string Name { get; set; }
+        public DateOnly LastOpened { get; set; }
+        public string? Summary { get; set; }
+    }
+}
