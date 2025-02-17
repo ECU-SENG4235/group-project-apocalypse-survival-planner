@@ -1,36 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\x230 i7\\Documents\\GitHub\\Apocalypse-Survival-Planner\\ASP\\ASP\\ASP.csproj": {}
+    "/Users/teevaughn/group-project-apocalypse-survival-planner/group-project-apocalypse-survival-planner/ASP/ASP/ASP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\x230 i7\\Documents\\GitHub\\Apocalypse-Survival-Planner\\ASP\\ASP\\ASP.csproj": {
+    "/Users/teevaughn/group-project-apocalypse-survival-planner/group-project-apocalypse-survival-planner/ASP/ASP/ASP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\x230 i7\\Documents\\GitHub\\Apocalypse-Survival-Planner\\ASP\\ASP\\ASP.csproj",
+        "projectUniqueName": "/Users/teevaughn/group-project-apocalypse-survival-planner/group-project-apocalypse-survival-planner/ASP/ASP/ASP.csproj",
         "projectName": "ASP",
-        "projectPath": "C:\\Users\\x230 i7\\Documents\\GitHub\\Apocalypse-Survival-Planner\\ASP\\ASP\\ASP.csproj",
-        "packagesPath": "C:\\Users\\x230 i7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\x230 i7\\Documents\\GitHub\\Apocalypse-Survival-Planner\\ASP\\ASP\\obj\\",
+        "projectPath": "/Users/teevaughn/group-project-apocalypse-survival-planner/group-project-apocalypse-survival-planner/ASP/ASP/ASP.csproj",
+        "packagesPath": "/Users/teevaughn/.nuget/packages/",
+        "outputPath": "/Users/teevaughn/group-project-apocalypse-survival-planner/group-project-apocalypse-survival-planner/ASP/ASP/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\x230 i7\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/teevaughn/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -47,16 +41,46 @@
         "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
             "Microsoft.FluentUI.AspNetCore.Components": {
               "target": "Package",
-              "version": "[4.11.3, )"
+              "version": "[4.11.4, )"
             },
             "Microsoft.FluentUI.AspNetCore.Components.Icons": {
               "target": "Package",
-              "version": "[4.11.3, )"
+              "version": "[4.11.4, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -78,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
