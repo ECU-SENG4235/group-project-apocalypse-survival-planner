@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\ASP",
-    "\\ASP\\ASP",
-    "\\ASP\\ASP\\Components",
-    "\\ASP\\ASP\\Components\\Pages"
+    ""
   ],
-  "SelectedNode": "\\ASP\\ASP\\Components\\Pages\\Home.razor",
+  "SelectedNode": "\\ASP.sln",
   "PreviewInSolutionExplorer": false
 }
