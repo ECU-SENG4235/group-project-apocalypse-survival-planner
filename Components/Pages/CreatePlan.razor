@@ -1,57 +1,163 @@
 ﻿@page "/create-plan"
+@inject ASP.Data.PlansDbContext _dbContext
 
+<PageTitle>Create Plan</PageTitle>
 
-<h3>Create a New Survival Plan</h3>
+<h3>@buttonText</h3>
 
-<!-- Plan Name -->
-<FluentCard Class="plan-card">
-    <FluentTextField @bind="plan.Name" Placeholder="Plan Name" />
-</FluentCard>
+<!-- Main Container -->
+<div style="display: flex; flex-direction: column; gap: 32px; max-width: 900px; margin: auto;">
 
-<!-- Scenario Selection -->
-<FluentCard Class="plan-card">
-    <FluentSelect @bind="plan.Scenario" TOption="string">
-        <FluentOption Value="">Select Scenario</FluentOption>
-        <FluentOption Value="Nuclear Fallout">Nuclear Fallout</FluentOption>
-        <FluentOption Value="Zombie Outbreak">Zombie Outbreak</FluentOption>
-        <FluentOption Value="Alien Invasion">Alien Invasion</FluentOption>
-    </FluentSelect>
-</FluentCard>
+    <!-- Plan Name Section -->
+    <FluentCard style="padding: 32px; min-height: 150px;">
+        <h3>Plan Details</h3>
+        <FluentTextField @bind-Value="planName" Placeholder="Enter plan name..." Label="Plan Name" />
+    </FluentCard>
 
-<!-- Shelter Selection -->
-<FluentCard Class="plan-card">
-    <FluentSelect @bind="plan.Shelter" TOption="string">
-        <FluentOption Value="">Select Shelter</FluentOption>
-        <FluentOption Value="Bunker">Bunker</FluentOption>
-        <FluentOption Value="Cabin">Cabin</FluentOption>
-        <FluentOption Value="Apartment">Apartment</FluentOption>
-    </FluentSelect>
-</FluentCard>
+    <!-- Scenario Selection -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Scenario</h3>
+        <FluentCombobox TOption="string" @bind-Value="selectedScenario" Label="Scenario" class="scrollable-dropdown">
+            <FluentOption Value="Zombie Virus Outbreak">Zombie Virus Outbreak</FluentOption>
+            <FluentOption Value="Nuclear Fallout">Nuclear Fallout</FluentOption>
+            <FluentOption Value="Alien Invasion">Alien Invasion</FluentOption>
+            <FluentOption Value="Ice Age">Ice Age</FluentOption>
+            <FluentOption Value="Supervolcano Eruption">Supervolcano Eruption</FluentOption>
+            <FluentOption Value="AI Uprising">AI Uprising</FluentOption>
+            <FluentOption Value="World War III">World War III</FluentOption>
+            <FluentOption Value="Biological Plague">Biological Plague</FluentOption>
+            <FluentOption Value="Meteor Impact">Meteor Impact</FluentOption>
+        </FluentCombobox>
+    </FluentCard>
 
-<!-- Resources -->
-<FluentCard Class="plan-card">
-    <FluentTextField @bind="plan.Food" Placeholder="Food Supply" />
-    <FluentTextField @bind="plan.Water" Placeholder="Water Supply" />
-</FluentCard>
+    <!-- Shelter Selection -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Shelter</h3>
+        <FluentCombobox TOption="string" @bind-Value="selectedShelter" Label="Shelter Type">
+            <FluentOption Value="Bunker">Bunker</FluentOption>
+            <FluentOption Value="Mountain Cabin">Mountain Cabin</FluentOption>
+            <FluentOption Value="Metropolitan Apartment">Metropolitan Apartment</FluentOption>
+            <FluentOption Value="Suburban House">Suburban House</FluentOption>
+        </FluentCombobox>
+    </FluentCard>
 
-<!-- Equipment -->
-<FluentCard Class="plan-card">
-    <FluentTextField @bind="plan.Weapons" Placeholder="Weapons" />
-    <FluentTextField @bind="plan.Vehicles" Placeholder="Vehicles" />
-</FluentCard>
+    <!-- Food Source Section -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Food Sources</h3>
+        <FluentCheckbox @bind-Value="foodSources[0]">Canned Food</FluentCheckbox>
+        <FluentCheckbox @bind-Value="foodSources[1]">Garden</FluentCheckbox>
+        <FluentCheckbox @bind-Value="foodSources[2]">Farm</FluentCheckbox>
+        <FluentCheckbox @bind-Value="foodSources[3]">Hunting/Fishing</FluentCheckbox>
+    </FluentCard>
 
-<!-- Power and Budget -->
-<FluentCard Class="plan-card">
-    <FluentTextField @bind="plan.FuelPower" Placeholder="Fuel & Power" />
-    <FluentTextField Type="number" @bind="plan.Budget" Placeholder="Budget" />
-</FluentCard>
+    <!-- Water Source Section -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Water Sources</h3>
+        <FluentCheckbox @bind-Value="waterSources[0]">Bottled Water</FluentCheckbox>
+        <FluentCheckbox @bind-Value="waterSources[1]">River</FluentCheckbox>
+        <FluentCheckbox @bind-Value="waterSources[2]">Reservoir</FluentCheckbox>
+        <FluentCheckbox @bind-Value="waterSources[3]">Well</FluentCheckbox>
+    </FluentCard>
 
-<!-- Estimated Survival Time -->
-<FluentCard Class="plan-card">
-    <FluentTextField Type="number" @bind="plan.EstimatedSurvivalTime" Placeholder="Estimated Survival Time (Days)" />
-</FluentCard>
+    <!-- Weapons Section -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Weapons</h3>
+        <FluentCheckbox @bind-Value="weaponChoices[0]">Bat</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[1]">Firearm</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[2]">Chainsaw</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[3]">Slingshot</FluentCheckbox>
+    </FluentCard>
 
-<!-- Save Button -->
-<FluentButton Appearance="Appearance.Accent">Save Plan</FluentButton>
+    <!-- Vehicles Section -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Vehicles</h3>
+        <FluentCheckbox @bind-Value="vehicleChoices[0]">Car</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[1]">Bicycle</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[2]">Helicopter</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[3]">Boat</FluentCheckbox>
+    </FluentCard>
 
+    <!-- Fuel/Power Section -->
+    <FluentCard style="padding: 32px; min-height: 300px;">
+        <h3>Fuel/Power Sources</h3>
+        <FluentCheckbox @bind-Value="fuelChoices[0]">Gasoline</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[1]">Solar Panel</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[2]">Batteries</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[3]">Hamster-wheel Generator</FluentCheckbox>
+    </FluentCard>
 
+    <!-- Save Button -->
+    <div style="display: flex; justify-content: center; margin-top: 32px;">
+        <FluentButton @onclick="SavePlan">Save Plan</FluentButton>
+    </div>
+
+</div>
+
+@code {
+    private string buttonText = "Save Plan";
+    private string planName = "";
+    private string selectedScenario = "Zombie Virus Outbreak";
+    private string selectedShelter = "Bunker";
+
+    private bool[] foodSources = new bool[4];
+    private bool[] waterSources = new bool[4];
+    private bool[] weaponChoices = new bool[4];
+    private bool[] vehicleChoices = new bool[4];
+    private bool[] fuelChoices = new bool[4];
+
+    private async Task SavePlan()
+    {
+        if (string.IsNullOrWhiteSpace(planName))
+        {
+            buttonText = "Plan name cannot be empty.";
+            return;
+        }
+
+        var selectedFoods = new List<string>();
+        if (foodSources[0]) selectedFoods.Add("Canned Food");
+        if (foodSources[1]) selectedFoods.Add("Garden");
+        if (foodSources[2]) selectedFoods.Add("Farm");
+        if (foodSources[3]) selectedFoods.Add("Hunting/Fishing");
+
+        var selectedWaters = new List<string>();
+        if (waterSources[0]) selectedWaters.Add("Bottled Water");
+        if (waterSources[1]) selectedWaters.Add("River");
+        if (waterSources[2]) selectedWaters.Add("Reservoir");
+        if (waterSources[3]) selectedWaters.Add("Well");
+
+        var selectedWeapons = new List<string>();
+        if (weaponChoices[0]) selectedWeapons.Add("Bat");
+        if (weaponChoices[1]) selectedWeapons.Add("Firearm");
+        if (weaponChoices[2]) selectedWeapons.Add("Chainsaw");
+        if (weaponChoices[3]) selectedWeapons.Add("Slingshot");
+
+        var selectedVehicles = new List<string>();
+        if (vehicleChoices[0]) selectedVehicles.Add("Car");
+        if (vehicleChoices[1]) selectedVehicles.Add("Bicycle");
+        if (vehicleChoices[2]) selectedVehicles.Add("Helicopter");
+        if (vehicleChoices[3]) selectedVehicles.Add("Boat");
+
+        var selectedFuel = new List<string>();
+        if (fuelChoices[0]) selectedFuel.Add("Gasoline");
+        if (fuelChoices[1]) selectedFuel.Add("Solar Panel");
+        if (fuelChoices[2]) selectedFuel.Add("Batteries");
+        if (fuelChoices[3]) selectedFuel.Add("Hamster-wheel Generator");
+
+        var newPlan = new ASP.Models.Plan
+            {
+                PlanName = planName,
+                Scenario = selectedScenario,
+                Shelter = selectedShelter,
+                FoodSources = string.Join(", ", selectedFoods),
+                WaterSources = string.Join(", ", selectedWaters),
+                Weapons = string.Join(", ", selectedWeapons),
+                Vehicles = string.Join(", ", selectedVehicles),
+                Fuel = string.Join(", ", selectedFuel)
+            };
+
+        _dbContext.Plans.Add(newPlan);
+        await _dbContext.SaveChangesAsync();
+
+        buttonText = $"Plan '{planName}' saved successfully!";
+    }
+}
