@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\x230 i7\\Documents\\GitHub\\group-project-apocalypse-survival-planner\\ASP.csproj": {}
+    "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\x230 i7\\Documents\\GitHub\\group-project-apocalypse-survival-planner\\ASP.csproj": {
+    "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\x230 i7\\Documents\\GitHub\\group-project-apocalypse-survival-planner\\ASP.csproj",
+        "projectUniqueName": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj",
         "projectName": "ASP",
-        "projectPath": "C:\\Users\\x230 i7\\Documents\\GitHub\\group-project-apocalypse-survival-planner\\ASP.csproj",
-        "packagesPath": "C:\\Users\\x230 i7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\x230 i7\\Documents\\GitHub\\group-project-apocalypse-survival-planner\\obj\\",
+        "projectPath": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj",
+        "packagesPath": "/Users/teevaughn/.nuget/packages/",
+        "outputPath": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\x230 i7\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/teevaughn/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -112,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
