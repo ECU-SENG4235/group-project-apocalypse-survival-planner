@@ -47,6 +47,25 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/" )
+    {
+        if (!(context.User.Identity?.IsAuthenticated ?? false))
+        {
+            context.Response.Redirect("/Identity/Account/Register");
+            return;
+        }
+        else
+        {
+            context.Response.Redirect("/Home");
+            return;
+        }
+    }
+    await next();
+});
+
 app.MapRazorPages();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
