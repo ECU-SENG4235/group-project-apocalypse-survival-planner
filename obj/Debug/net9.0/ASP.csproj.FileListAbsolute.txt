@@ -1809,5 +1809,8 @@ C:/Users/x230 i7/Documents/GitHub/group-project-apocalypse-survival-planner/obj/
 /home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ce3jdgqjyd-7k7toi9b0o.gz
 /home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/lrn4bhlx4w-n2s0c9bbw5.gz
 /home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/k61jugimwc-p3cjz1qxm4.gz
-/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-78g54kztaa.gz
 /home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/pe0gk9wy9o-y3ysgwbegz.gz
+/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/Components/Pages/ComparePlans.razor.rz.scp.css
+/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css
+/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-71ut61x9oj.gz
+/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ohgrlz8z6z-375patd1e6.gz

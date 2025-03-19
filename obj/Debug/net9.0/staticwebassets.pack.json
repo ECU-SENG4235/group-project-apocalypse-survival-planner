@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css",
+      "PackagePath": "staticwebassets/ASP.375patd1e6.bundle.scp.css"
+    },
+    {
       "Id": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/wwwroot/app.css",
       "PackagePath": "staticwebassets/app.css"
     },

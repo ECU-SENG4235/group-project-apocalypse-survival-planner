@@ -1,3 +1,37 @@
+
+<style>
+.analysis-table {
+    display:block flexbox;
+    flex-direction: column;
+    width: 70%;
+    height: 70vh;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.analysis-table th, .analysis-table td {
+    padding: 12px;
+    border: 1px solid #ffffff;
+    text-align: center;
+}
+
+.analysis-table th {
+    background-color: #666000;
+    color: #000000;
+}
+
+.compare-table th {
+    text-align: center;
+    background-color: #666000;
+    color: #ffffff;
+}
+
+.compare-table td {
+    padding: 5px;
+}
+</style>
+
+
 @page "/compare-plans"
 @using ASP.Models
 @attribute [StreamRendering]
@@ -44,6 +78,9 @@
 @if (selectedPlans.Count >= 2)
 {
     <h2>Plan Comparison</h2>
+    
+    <!-- Basic Attributes Comparison -->
+    <h3>Basic Attributes</h3>
     <table class="compare-table">
         <thead>
             <tr>
@@ -57,7 +94,7 @@
         <tbody>
             @foreach (var property in typeof(listOfPlans).GetProperties())
             {
-                if (property.Name != "Id" && property.Name != "PlanName") // Skip ID & Name in comparison
+                if (property.Name != "Id" && property.Name != "PlanName")
                 {
                     <tr>
                         <td>@property.Name</td>
@@ -69,10 +106,151 @@
                 }
             }
         </tbody>
+    <!-- Survival Analysis -->
+        <h3>Survival Analysis</h3>
+        @if (selectedPlans.Count >= 2)
+        {
+            var bestPlan = DetermineBestPlan();
+            <div style="margin-bottom: 50px;">
+                <h4>Best Overall Plan: @bestPlan.PlanName</h4>
+                <p>Based on survival capabilities analysis</p>
+            </div>
+        }
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Situation</th>
+                    @foreach (var plan in selectedPlans)
+                    {
+                        <th>
+                            @plan.PlanName
+                            @if (plan.Id == DetermineBestPlan().Id)
+                            {
+                                <span style="color: gold;"> ⭐</span>
+                            }
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">🏙️ Urban Survival</th>
+                    @foreach (var plan in selectedPlans)
+                    {
+                        <td>@RenderAnalysisBadge(AnalyzeUrbanSurvival(plan))</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row">🌲 Wilderness Survival</th>
+                    @foreach (var plan in selectedPlans)
+                    {
+                        <td>@RenderAnalysisBadge(AnalyzeWildernessSurvival(plan))</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row">🌾 Long-term Sustainability</th>
+                    @foreach (var plan in selectedPlans)
+                    {
+                        <td>@RenderAnalysisBadge(AnalyzeLongTermSurvival(plan))</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
     </table>
 }
 
 @code {
+    private listOfPlans DetermineBestPlan()
+    {
+        var planScores = selectedPlans.Select(plan => new
+        {
+            Plan = plan,
+            Score = CalculatePlanScore(plan)
+        }).ToList();
+
+        return planScores.OrderByDescending(x => x.Score).First().Plan;
+    }
+
+    private int CalculatePlanScore(listOfPlans plan)
+    {
+        int score = 0;
+        
+        // Urban survival scoring
+        if (!string.IsNullOrEmpty(plan.Shelter) && plan.Shelter.ToLower().Contains("suburban house")) score += 2;
+        if (!string.IsNullOrEmpty(plan.Vehicles) && (plan.Vehicles.Contains("Car") || plan.Vehicles.Contains("Helicopter"))) score += 2;
+        if (!string.IsNullOrEmpty(plan.Weapons) && plan.Weapons.Contains("Firearm")) score += 2;
+
+        // Wilderness survival scoring
+        if (!string.IsNullOrEmpty(plan.WaterSources)) score += 2;
+        if (!string.IsNullOrEmpty(plan.FoodSources) && 
+            (plan.FoodSources.ToLower().Contains("hunt") || plan.FoodSources.ToLower().Contains("forage"))) score += 2;
+
+        // Long-term sustainability scoring
+        if (!string.IsNullOrEmpty(plan.FoodSources) && plan.FoodSources.ToLower().Contains("farm")) score += 3;
+        if (!string.IsNullOrEmpty(plan.WaterSources) && 
+            (plan.WaterSources.ToLower().Contains("well") || plan.WaterSources.ToLower().Contains("Reservoir"))) score += 3;
+
+        return score;
+    }
+
+    private string RenderAnalysisBadge(string analysis)
+    {
+        return analysis;
+    }
+
+    private string AnalyzeUrbanSurvival(listOfPlans plan)
+    {
+        var analysis = new List<string>();
+        
+        if (!string.IsNullOrEmpty(plan.Shelter) && plan.Shelter.Contains("Metropolitan Apartment"))
+            analysis.Add("Good urban shelter choice ");
+        
+        if (!string.IsNullOrEmpty(plan.Vehicles)  && (plan.Vehicles.Contains("Car") || plan.Vehicles.Contains("Helicopter")))
+            analysis.Add("Mobile evacuation capable " );
+            
+        if (!string.IsNullOrEmpty(plan.Weapons) && plan.Weapons.Contains("Firearm"))
+            analysis.Add("Has strong defense capabilities ");
+
+        if (!string.IsNullOrEmpty(plan.Weapons) && !plan.Weapons.Contains("Firearm"))
+        analysis.Add("No firearm in your plan may lead to your death ");
+        return analysis.Count > 0 ? string.Join(", ", analysis) : "Weak urban survival capability";
+    }
+
+    private string AnalyzeWildernessSurvival(listOfPlans plan)
+    {
+        var analysis = new List<string>();
+        
+        if (!string.IsNullOrEmpty(plan.WaterSources) && plan.WaterSources.Contains("Reservoir") || plan.WaterSources.Contains("Well"))
+            analysis.Add("Has water procurement");
+            
+        if (!string.IsNullOrEmpty(plan.FoodSources) && 
+            (plan.FoodSources.ToLower().Contains("hunt") || plan.FoodSources.ToLower().Contains("forage")))
+            analysis.Add("Can obtain wilderness food");
+
+        return analysis.Count > 0 ? string.Join(", ", analysis) : "Limited wilderness survival capability";
+    }
+
+    private string AnalyzeLongTermSurvival(listOfPlans plan)
+    {
+        var analysis = new List<string>();
+        
+        if (!string.IsNullOrEmpty(plan.FoodSources) && 
+            plan.FoodSources.ToLower().Contains("farm"))
+            analysis.Add("Sustainable food source not bad");
+            
+        if (!string.IsNullOrEmpty(plan.WaterSources) && 
+            (plan.WaterSources.ToLower().Contains("well") || plan.WaterSources.ToLower().Contains("purif")))
+            analysis.Add("Reliable water source");
+
+        return analysis.Count > 0 ? string.Join(", ", analysis) : "Poor long-term sustainability you will likely run out of food and water";
+    }
+}
+
+
+
+@code {
+
+    
     private List<Plan>? survivalPlans;
     private List<listOfPlans>? curPlan;
     private List<int> selectedPlanIds = new();
@@ -129,3 +307,5 @@
         public string? Fuel { get; set; }
     }
 }
+
+

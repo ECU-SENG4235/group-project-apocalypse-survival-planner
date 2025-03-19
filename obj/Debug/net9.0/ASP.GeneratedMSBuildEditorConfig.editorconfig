@@ -40,10 +40,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/Components/Pages/ComparePlans.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db21wYXJlUGxhbnMucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -79,6 +75,10 @@ build_metadata.AdditionalFiles.CssScope =
 [/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
+
+[/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/Components/Pages/ComparePlans.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db21wYXJlUGxhbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-lz5ln8i81q
 
 [/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvQWNjb3VudC9BY2Nlc3NEZW5pZWQuY3NodG1s

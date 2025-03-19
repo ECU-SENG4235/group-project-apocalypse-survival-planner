@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LvbFDotnWXyAodJS3buuDZYc50mNDeeowuFm+m9LrVA=",
+  "Hash": "9i+it9ZWllopywwaPfRi1lSCYgiNoVWvO/8cbkwDgiM=",
   "Source": "ASP",
   "BasePath": "_content/ASP",
   "Mode": "Default",
@@ -13352,6 +13352,27 @@
       "OriginalItemSpec": "/home/yagdali-rivas/.nuget/packages/microsoft.fast.components.fluentui/3.8.0/staticwebassets/lib/monaco-editor/min/vs/basic-languages/ecl/ecl.js"
     },
     {
+      "Identity": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ohgrlz8z6z-375patd1e6.gz",
+      "SourceId": "ASP",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/ASP",
+      "RelativePath": "ASP#[.{fingerprint=375patd1e6}]!.bundle.scp.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "go7hr0rt69",
+      "Integrity": "ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css"
+    },
+    {
       "Identity": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/okb10ftqe4-wxo9stzlnc.gz",
       "SourceId": "Microsoft.Fast.Components.FluentUI",
       "SourceType": "Package",
@@ -14759,12 +14780,12 @@
       "OriginalItemSpec": "/home/yagdali-rivas/.nuget/packages/microsoft.fast.components.fluentui/3.8.0/staticwebassets/lib/monaco-editor/min/vs/basic-languages/sparql/sparql.js"
     },
     {
-      "Identity": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-78g54kztaa.gz",
+      "Identity": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-71ut61x9oj.gz",
       "SourceId": "ASP",
       "SourceType": "Computed",
       "ContentRoot": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/ASP",
-      "RelativePath": "ASP#[.{fingerprint=78g54kztaa}]?.styles.css.gz",
+      "RelativePath": "ASP#[.{fingerprint=71ut61x9oj}]?.styles.css.gz",
       "AssetKind": "All",
       "AssetMode": "CurrentProject",
       "AssetRole": "Alternative",
@@ -14773,8 +14794,8 @@
       "RelatedAsset": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/bundle/ASP.styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "h6g8lk83yb",
-      "Integrity": "F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU=",
+      "Fingerprint": "cmi23fvrn0",
+      "Integrity": "xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/bundle/ASP.styles.css"
@@ -15802,11 +15823,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "78g54kztaa",
-      "Integrity": "Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ=",
+      "Fingerprint": "71ut61x9oj",
+      "Integrity": "tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/bundle/ASP.styles.css"
+    },
+    {
+      "Identity": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css",
+      "SourceId": "ASP",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/",
+      "BasePath": "_content/ASP",
+      "RelativePath": "ASP#[.{fingerprint}]!.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "375patd1e6",
+      "Integrity": "cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css"
     },
     {
       "Identity": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/wwwroot/app.css",
@@ -59086,13 +59128,13 @@
       ]
     },
     {
-      "Route": "ASP.78g54kztaa.styles.css",
-      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-78g54kztaa.gz",
+      "Route": "ASP.375patd1e6.bundle.scp.css",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ohgrlz8z6z-375patd1e6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.008064516129"
+          "Quality": "0.003690036900"
         }
       ],
       "ResponseHeaders": [
@@ -59102,15 +59144,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "123"
+          "Value": "270"
         },
         {
           "Name": "ETag",
-          "Value": "\"F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU=\""
+          "Value": "\"ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 22:04:46 GMT"
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -59130,7 +59172,168 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ=\""
+          "Value": "W/\"cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "375patd1e6"
+        },
+        {
+          "Name": "label",
+          "Value": "ASP.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc="
+        }
+      ]
+    },
+    {
+      "Route": "ASP.375patd1e6.bundle.scp.css",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "543"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "375patd1e6"
+        },
+        {
+          "Name": "label",
+          "Value": "ASP.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc="
+        }
+      ]
+    },
+    {
+      "Route": "ASP.375patd1e6.bundle.scp.css.gz",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ohgrlz8z6z-375patd1e6.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "270"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "375patd1e6"
+        },
+        {
+          "Name": "label",
+          "Value": "ASP.bundle.scp.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU="
+        }
+      ]
+    },
+    {
+      "Route": "ASP.71ut61x9oj.styles.css",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-71ut61x9oj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002941176471"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "339"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A=\""
         },
         {
           "Name": "Link",
@@ -59140,11 +59343,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "78g54kztaa"
+          "Value": "71ut61x9oj"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ="
+          "Value": "sha256-tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A="
         },
         {
           "Name": "label",
@@ -59153,7 +59356,7 @@
       ]
     },
     {
-      "Route": "ASP.78g54kztaa.styles.css",
+      "Route": "ASP.71ut61x9oj.styles.css",
       "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/bundle/ASP.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -59167,7 +59370,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "234"
+          "Value": "777"
         },
         {
           "Name": "Content-Type",
@@ -59175,11 +59378,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ=\""
+          "Value": "\"tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 22:04:46 GMT"
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
         },
         {
           "Name": "Link",
@@ -59189,11 +59392,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "78g54kztaa"
+          "Value": "71ut61x9oj"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ="
+          "Value": "sha256-tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A="
         },
         {
           "Name": "label",
@@ -59202,8 +59405,8 @@
       ]
     },
     {
-      "Route": "ASP.78g54kztaa.styles.css.gz",
-      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-78g54kztaa.gz",
+      "Route": "ASP.71ut61x9oj.styles.css.gz",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-71ut61x9oj.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -59212,7 +59415,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "123"
+          "Value": "339"
         },
         {
           "Name": "Content-Type",
@@ -59220,11 +59423,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU=\""
+          "Value": "\"xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 22:04:46 GMT"
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -59242,7 +59445,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "78g54kztaa"
+          "Value": "71ut61x9oj"
         },
         {
           "Name": "label",
@@ -59250,7 +59453,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU="
+          "Value": "sha256-xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64="
+        }
+      ]
+    },
+    {
+      "Route": "ASP.bundle.scp.css",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ohgrlz8z6z-375patd1e6.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003690036900"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "270"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc="
+        }
+      ]
+    },
+    {
+      "Route": "ASP.bundle.scp.css",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "543"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cStRy7ZlVQL92UY2vOcJiRsKMPx0yGiMzv6nItnSwsc="
+        }
+      ]
+    },
+    {
+      "Route": "ASP.bundle.scp.css.gz",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/ohgrlz8z6z-375patd1e6.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "270"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ICy+ZmSYgitUCyhiO8jm5EZzyP8C0GjyAsn3HH3d0UU="
         }
       ]
     },
@@ -59393,12 +59733,12 @@
     },
     {
       "Route": "ASP.styles.css",
-      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-78g54kztaa.gz",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-71ut61x9oj.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.008064516129"
+          "Quality": "0.002941176471"
         }
       ],
       "ResponseHeaders": [
@@ -59408,15 +59748,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "123"
+          "Value": "339"
         },
         {
           "Name": "ETag",
-          "Value": "\"F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU=\""
+          "Value": "\"xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 22:04:46 GMT"
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -59436,7 +59776,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ=\""
+          "Value": "W/\"tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A=\""
         },
         {
           "Name": "Link",
@@ -59446,7 +59786,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ="
+          "Value": "sha256-tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A="
         }
       ]
     },
@@ -59465,7 +59805,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "234"
+          "Value": "777"
         },
         {
           "Name": "Content-Type",
@@ -59473,11 +59813,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ=\""
+          "Value": "\"tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 22:04:46 GMT"
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
         },
         {
           "Name": "Link",
@@ -59487,13 +59827,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Z6WtyQ2HDMlXL9FVquxuCXngpwBV4gftwF4w+T4cSkQ="
+          "Value": "sha256-tQhh+duB4HuK8bPPJbky0rXichf3FlMV1wzMTML4J4A="
         }
       ]
     },
     {
       "Route": "ASP.styles.css.gz",
-      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-78g54kztaa.gz",
+      "AssetFile": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/Debug/net9.0/compressed/viken71cyk-71ut61x9oj.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -59502,7 +59842,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "123"
+          "Value": "339"
         },
         {
           "Name": "Content-Type",
@@ -59510,11 +59850,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU=\""
+          "Value": "\"xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 16 Mar 2025 22:04:46 GMT"
+          "Value": "Wed, 19 Mar 2025 16:05:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -59532,7 +59872,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-F7dJ6f/zrsbPMAbtSOC2DLbW7NgVt2uqHg28pQuGhSU="
+          "Value": "sha256-xPl4xKm2XC9jWeFHtJMT84wUHRpjqSEKks/gwFMbD64="
         }
       ]
     },
