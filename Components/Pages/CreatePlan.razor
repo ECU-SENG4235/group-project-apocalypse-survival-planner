@@ -1,6 +1,6 @@
 ﻿@page "/create-plan"
 @inject ASP.Data.PlansDbContext _dbContext
-
+@inject PlanService PlanService
 <PageTitle>Create Plan</PageTitle>
 
 <h3>@buttonText</h3>
@@ -155,8 +155,7 @@
                 Fuel = string.Join(", ", selectedFuel)
             };
 
-        _dbContext.Plans.Add(newPlan);
-        await _dbContext.SaveChangesAsync();
+        await PlanService.SavePlanAsync(newPlan);
 
         buttonText = $"Plan '{planName}' saved successfully!";
     }

@@ -1,12 +1,12 @@
 using ASP.Components;
 using ASP.Data;
-using Microsoft.FluentUI.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<PlanService>();
 
 var userDbConnectionString = builder.Configuration.GetConnectionString("ApplicationDbContext")
     ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.");
@@ -14,14 +14,11 @@ var userDbConnectionString = builder.Configuration.GetConnectionString("Applicat
 var plansDbConnectionString = builder.Configuration.GetConnectionString("PlansDbContext")
     ?? throw new InvalidOperationException("Connection string 'PlansDbContext' not found.");
 
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(userDbConnectionString));
 
-
 builder.Services.AddDbContext<PlansDbContext>(options =>
     options.UseSqlite(plansDbConnectionString));
-
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
@@ -50,7 +47,7 @@ app.UseAntiforgery();
 
 app.Use(async (context, next) =>
 {
-    if (context.Request.Path == "/" )
+    if (context.Request.Path == "/")
     {
         if (!(context.User.Identity?.IsAuthenticated ?? false))
         {

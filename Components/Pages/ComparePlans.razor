@@ -1,0 +1,131 @@
+﻿@page "/compare-plans"
+@using ASP.Models
+@attribute [StreamRendering]
+@inject ASP.Data.PlansDbContext _dbContext
+@inject PlanService PlanService
+@inject ASP.Data.PlansDbContext _dbContext
+
+<PageTitle>Compare Plans</PageTitle>
+
+<h1>Compare your plans</h1>
+<p><i>Compare your abominations</i></p>
+
+
+<!-- Plans List with Selection Checkboxes -->
+<FluentDataGrid Id="planGrid" Items="@((curPlan ?? new List<listOfPlans>()).AsQueryable())" GridTemplateColumns="0.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr" Loading="@(curPlan == null)" Style="height: 304px;" TGridItem="listOfPlans">
+
+
+
+    <TemplateColumn Title="Select">
+        <ChildContent>
+            <FluentCheckbox Checked="@IsPlanSelected(context.Id)"
+                            @onchange="@(e => TogglePlanSelection(context.Id))" />
+        </ChildContent>
+    </TemplateColumn>
+
+
+    <PropertyColumn Title="ID" Property="@(c => c!.Id)" Align="Align.Start" />
+    <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start" />
+    <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start" />
+    <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center" />
+    <PropertyColumn Title="Food" Property="@(c => c!.FoodSources)" Align="Align.Center" />
+    <PropertyColumn Title="Water" Property="@(c => c!.WaterSources)" Align="Align.Center" />
+    <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End" />
+    <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End" />
+    <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End" />
+</FluentDataGrid>
+
+<!-- Compare Button -->
+<FluentButton @onclick="CompareSelectedPlans" Disabled="@(selectedPlanIds.Count < 2)">
+    Compare Selected Plans
+</FluentButton>
+
+<!-- Comparison Table (Only visible when 2+ plans are selected) -->
+@if (selectedPlans.Count >= 2)
+{
+    <h2>Plan Comparison</h2>
+    <table class="compare-table">
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                @foreach (var plan in selectedPlans)
+                {
+                    <th>@plan.PlanName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var property in typeof(listOfPlans).GetProperties())
+            {
+                if (property.Name != "Id" && property.Name != "PlanName") // Skip ID & Name in comparison
+                {
+                    <tr>
+                        <td>@property.Name</td>
+                        @foreach (var plan in selectedPlans)
+                        {
+                            <td>@property.GetValue(plan)?.ToString()</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Plan>? survivalPlans;
+    private List<listOfPlans>? curPlan;
+    private List<int> selectedPlanIds = new();
+    private List<listOfPlans> selectedPlans = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        survivalPlans = await PlanService.GetPlansAsync();
+        await Task.Delay(500);
+
+        curPlan = survivalPlans.Select(plan => new listOfPlans
+            {
+                Id = plan.Id,
+                PlanName = plan.PlanName,
+                Scenario = plan.Scenario,
+                Shelter = plan.Shelter,
+                FoodSources = plan.FoodSources,
+                WaterSources = plan.WaterSources,
+                Weapons = plan.Weapons,
+                Vehicles = plan.Vehicles,
+                Fuel = plan.Fuel
+            }).ToList();
+    }
+
+    private bool IsPlanSelected(int planId) => selectedPlanIds.Contains(planId);
+
+    private void TogglePlanSelection(int planId)
+    {
+        if (selectedPlanIds.Contains(planId))
+        {
+            selectedPlanIds.Remove(planId);
+        }
+        else if (selectedPlanIds.Count < 3) // Allow max 3 plans for comparison
+        {
+            selectedPlanIds.Add(planId);
+        }
+    }
+
+    private void CompareSelectedPlans()
+    {
+        selectedPlans = curPlan.Where(p => selectedPlanIds.Contains(p.Id)).ToList();
+    }
+
+    private class listOfPlans
+    {
+        public int Id { get; set; }
+        public string? PlanName { get; set; }
+        public string? Scenario { get; set; }
+        public string? Shelter { get; set; }
+        public string? FoodSources { get; set; }
+        public string? WaterSources { get; set; }
+        public string? Weapons { get; set; }
+        public string? Vehicles { get; set; }
+        public string? Fuel { get; set; }
+    }
+}

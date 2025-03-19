@@ -1,0 +1,72 @@
+﻿@page "/my-plans"
+@attribute [StreamRendering]
+@using ASP.Models
+@inject ASP.Data.PlansDbContext _dbContext
+@inject PlanService PlanService
+@inject NavigationManager NavigationManager
+
+<PageTitle>my-plans</PageTitle>
+
+<h1> My Plans</h1>
+
+<p><i>  A glimps at your creations  </i></p>
+
+
+<!-- This page is rendered in SSR mode, so the FluentDataGrid component does not offer any interactivity (like sorting). -->
+<FluentDataGrid Id="weathergrid" Items="@curPlan" GridTemplateColumns="1fr 1fr 1r 1fr 1fr 1fr 1fr 1fr 1fr" Loading="@(curPlan == null)" Style="height:304px;" TGridItem="listOfPlans">
+    <PropertyColumn Title="id" Property="@(c => c!.Id)" Align="Align.Start" />
+    <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start" />
+    <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start" />
+    <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center" />
+    <PropertyColumn Title="Food type" Property="@(c => c!.FoodSources)" Align="Align.Center" />
+    <PropertyColumn Title="Water type" Property="@(c => c!.WaterSources)" Align="Align.Center" />
+    <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End" />
+    <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End" />
+    <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End" />
+
+</FluentDataGrid>
+
+@code {
+
+    private List<Plan>? survivalPlans; // Nullable list
+
+    private IQueryable<listOfPlans>? curPlan;
+
+    protected override async Task OnInitializedAsync()
+    {
+        survivalPlans = await PlanService.GetPlansAsync();
+
+
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+        curPlan = Enumerable.Range(0, survivalPlans.Count).Select(index => new listOfPlans
+            {
+                Id = survivalPlans![index].Id,
+                PlanName = survivalPlans![index].PlanName,
+                Scenario = survivalPlans![index].Scenario,
+                Shelter = survivalPlans![index].Shelter,
+                FoodSources = survivalPlans![index].FoodSources,
+                WaterSources = survivalPlans![index].WaterSources,
+                Weapons = survivalPlans![index].Weapons,
+                Vehicles = survivalPlans![index].Vehicles,
+                Fuel = survivalPlans![index].Fuel
+            }).AsQueryable();
+    }
+
+    private class listOfPlans
+    {
+        public int Id { get; set; }
+        public string? PlanName { get; set; }
+        public string? Scenario { get; set; }
+        public string? Shelter { get; set; }
+        public string? FoodSources { get; set; }
+        public string? WaterSources { get; set; }
+        public string? Weapons { get; set; }
+        public string? Vehicles { get; set; }
+        public string? Fuel { get; set; }
+    }
+
+}

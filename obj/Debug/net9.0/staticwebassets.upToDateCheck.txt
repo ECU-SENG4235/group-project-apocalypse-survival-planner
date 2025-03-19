@@ -1,4 +1,4 @@
-C:\Users\x230 i7\Documents\GitHub\group-project-apocalypse-survival-planner\wwwroot\favicon.ico
-C:\Users\x230 i7\Documents\GitHub\group-project-apocalypse-survival-planner\wwwroot\app.css
+C:\Users\presetup\Desktop\ProjMan\wwwroot\favicon.ico
+C:\Users\presetup\Desktop\ProjMan\wwwroot\app.css
 wwwroot\app.css
 wwwroot\favicon.ico
