@@ -28,6 +28,11 @@
             <FluentOption Value="Biological Plague">Biological Plague</FluentOption>
             <FluentOption Value="Meteor Impact">Meteor Impact</FluentOption>
         </FluentCombobox>
+
+        @if (!string.IsNullOrEmpty(scenarioImageUrl))
+        {
+            <img src="@scenarioImageUrl" alt="@selectedScenario" style="max-width: 100%; margin-top: 16px; border-radius: 8px;" />
+        }
     </FluentCard>
 
     <!-- Shelter Selection -->
@@ -38,52 +43,84 @@
             <FluentOption Value="Mountain Cabin">Mountain Cabin</FluentOption>
             <FluentOption Value="Metropolitan Apartment">Metropolitan Apartment</FluentOption>
             <FluentOption Value="Suburban House">Suburban House</FluentOption>
+            <FluentOption Value="Medieval Castle">Medieval Castle</FluentOption>
+            <FluentOption Value="Jungle Hut">Jungle Hut</FluentOption>
+            <FluentOption Value="Military Base">Military Base</FluentOption>
+            <FluentOption Value="Cruise Ship">Cruise Ship</FluentOption>
+            <FluentOption Value="RV">RV</FluentOption>
+            <FluentOption Value="Tent">Tent</FluentOption>
         </FluentCombobox>
+
+        @if (!string.IsNullOrEmpty(shelterImageUrl))
+        {
+            <img src="@shelterImageUrl" alt="@selectedShelter" style="max-width: 100%; margin-top: 16px; border-radius: 8px;" />
+        }
     </FluentCard>
 
-    <!-- Food Source Section -->
+    <!-- Food Sources -->
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Food Sources</h3>
         <FluentCheckbox @bind-Value="foodSources[0]">Canned Food</FluentCheckbox>
         <FluentCheckbox @bind-Value="foodSources[1]">Garden</FluentCheckbox>
         <FluentCheckbox @bind-Value="foodSources[2]">Farm</FluentCheckbox>
         <FluentCheckbox @bind-Value="foodSources[3]">Hunting/Fishing</FluentCheckbox>
+        <FluentCheckbox @bind-Value="foodSources[4]">MREs</FluentCheckbox>
+        <FluentCheckbox @bind-Value="foodSources[5]">Foraging</FluentCheckbox>
+        <FluentCheckbox @bind-Value="foodSources[6]">Insect Farming</FluentCheckbox>
     </FluentCard>
 
-    <!-- Water Source Section -->
+    <!-- Water Sources -->
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Water Sources</h3>
         <FluentCheckbox @bind-Value="waterSources[0]">Bottled Water</FluentCheckbox>
         <FluentCheckbox @bind-Value="waterSources[1]">River</FluentCheckbox>
         <FluentCheckbox @bind-Value="waterSources[2]">Reservoir</FluentCheckbox>
         <FluentCheckbox @bind-Value="waterSources[3]">Well</FluentCheckbox>
+        <FluentCheckbox @bind-Value="waterSources[4]">Rainwater Collection</FluentCheckbox>
+        <FluentCheckbox @bind-Value="waterSources[5]">Desalination</FluentCheckbox>
+        <FluentCheckbox @bind-Value="waterSources[6]">Water Purification Tablets</FluentCheckbox>
     </FluentCard>
 
-    <!-- Weapons Section -->
+    <!-- Weapons -->
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Weapons</h3>
         <FluentCheckbox @bind-Value="weaponChoices[0]">Bat</FluentCheckbox>
         <FluentCheckbox @bind-Value="weaponChoices[1]">Firearm</FluentCheckbox>
         <FluentCheckbox @bind-Value="weaponChoices[2]">Chainsaw</FluentCheckbox>
         <FluentCheckbox @bind-Value="weaponChoices[3]">Slingshot</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[4]">Crossbow</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[5]">Katana</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[6]">Molotov Cocktails</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[7]">Spear</FluentCheckbox>
+        <FluentCheckbox @bind-Value="weaponChoices[8]">Taser</FluentCheckbox>
     </FluentCard>
 
-    <!-- Vehicles Section -->
+    <!-- Vehicles -->
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Vehicles</h3>
         <FluentCheckbox @bind-Value="vehicleChoices[0]">Car</FluentCheckbox>
         <FluentCheckbox @bind-Value="vehicleChoices[1]">Bicycle</FluentCheckbox>
         <FluentCheckbox @bind-Value="vehicleChoices[2]">Helicopter</FluentCheckbox>
         <FluentCheckbox @bind-Value="vehicleChoices[3]">Boat</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[4]">Motorcycle</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[5]">Tank</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[6]">Horse</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[7]">ATV</FluentCheckbox>
+        <FluentCheckbox @bind-Value="vehicleChoices[8]">Bus</FluentCheckbox>
     </FluentCard>
 
-    <!-- Fuel/Power Section -->
+    <!-- Fuel/Power Sources -->
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Fuel/Power Sources</h3>
         <FluentCheckbox @bind-Value="fuelChoices[0]">Gasoline</FluentCheckbox>
         <FluentCheckbox @bind-Value="fuelChoices[1]">Solar Panel</FluentCheckbox>
         <FluentCheckbox @bind-Value="fuelChoices[2]">Batteries</FluentCheckbox>
         <FluentCheckbox @bind-Value="fuelChoices[3]">Hamster-wheel Generator</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[4]">Wind Turbine</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[5]">Hydroelectric Generator</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[6]">Coal</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[7]">Wood-Burning Stove</FluentCheckbox>
+        <FluentCheckbox @bind-Value="fuelChoices[8]">Biofuel</FluentCheckbox>
     </FluentCard>
 
     <!-- Save Button -->
@@ -96,14 +133,80 @@
 @code {
     private string buttonText = "Save Plan";
     private string planName = "";
-    private string selectedScenario = "Zombie Virus Outbreak";
-    private string selectedShelter = "Bunker";
 
-    private bool[] foodSources = new bool[4];
-    private bool[] waterSources = new bool[4];
-    private bool[] weaponChoices = new bool[4];
-    private bool[] vehicleChoices = new bool[4];
-    private bool[] fuelChoices = new bool[4];
+    private string _selectedScenario = "Zombie Virus Outbreak";
+    private string selectedScenario
+    {
+        get => _selectedScenario;
+        set
+        {
+            _selectedScenario = value;
+            UpdateScenarioImage();
+        }
+    }
+
+
+    private bool[] foodSources = new bool[7];
+    private bool[] waterSources = new bool[7];
+    private bool[] weaponChoices = new bool[9];
+    private bool[] vehicleChoices = new bool[9];
+    private bool[] fuelChoices = new bool[9];
+
+    private string scenarioImageUrl = "";
+
+    private Dictionary<string, string> scenarioImages = new()
+    {
+        { "Zombie Virus Outbreak", "images/scenarios/ZombieApoc.webp" },
+        { "Nuclear Fallout", "images/scenarios/NuclearFall.webp" },
+        { "Alien Invasion", "images/scenarios/AlienInv.webp" },
+        { "Ice Age", "images/scenarios/IceAge.webp" },
+        { "Supervolcano Eruption", "images/scenarios/SuperVol.webp" },
+        { "AI Uprising", "images/scenarios/AIUp.webp" },
+        { "World War III", "images/scenarios/WW3.webp" },
+        { "Biological Plague", "images/scenarios/BioPlag.webp" },
+        { "Meteor Impact", "images/scenarios/MetImp.webp" }
+    };
+
+    private void UpdateScenarioImage()
+    {
+        scenarioImageUrl = scenarioImages.GetValueOrDefault(selectedScenario, null);
+    }
+
+
+    private string shelterImageUrl = "";
+
+    private Dictionary<string, string> shelterImages = new()
+    {
+        { "Bunker", "images/shelters/Bunker.webp" },
+        { "Mountain Cabin", "images/shelters/MountainCabin.webp" },
+        { "Metropolitan Apartment", "images/shelters/MetropolitanApartment.webp" },
+        { "Suburban House", "images/shelters/SuburbanHouse.webp" },
+        { "Medieval Castle", "images/shelters/MedievalCastle.webp" },
+        { "Jungle Hut", "images/shelters/JungleHut.webp" },
+        { "Military Base", "images/shelters/MilitaryBase.webp" },
+        { "Cruise Ship", "images/shelters/CruiseShip.webp" },
+        { "RV", "images/shelters/RV.webp" },
+        { "Tent", "images/shelters/Tent.webp" }
+    };
+
+    private string _selectedShelter = "Bunker";
+    private string selectedShelter
+    {
+        get => _selectedShelter;
+        set
+        {
+            _selectedShelter = value;
+            UpdateShelterImage();
+        }
+    }
+
+    private void UpdateShelterImage()
+    {
+        if (!shelterImages.TryGetValue(selectedShelter, out shelterImageUrl))
+        {
+            shelterImageUrl = null;
+        }
+    }
 
     private async Task SavePlan()
     {
@@ -118,30 +221,51 @@
         if (foodSources[1]) selectedFoods.Add("Garden");
         if (foodSources[2]) selectedFoods.Add("Farm");
         if (foodSources[3]) selectedFoods.Add("Hunting/Fishing");
+        if (foodSources[4]) selectedFoods.Add("MREs");
+        if (foodSources[5]) selectedFoods.Add("Foraging");
+        if (foodSources[6]) selectedFoods.Add("Insect Farming");
 
         var selectedWaters = new List<string>();
         if (waterSources[0]) selectedWaters.Add("Bottled Water");
         if (waterSources[1]) selectedWaters.Add("River");
         if (waterSources[2]) selectedWaters.Add("Reservoir");
         if (waterSources[3]) selectedWaters.Add("Well");
+        if (waterSources[4]) selectedWaters.Add("Rainwater Collection");
+        if (waterSources[5]) selectedWaters.Add("Desalination");
+        if (waterSources[6]) selectedWaters.Add("Water Purification Tablets");
 
         var selectedWeapons = new List<string>();
         if (weaponChoices[0]) selectedWeapons.Add("Bat");
         if (weaponChoices[1]) selectedWeapons.Add("Firearm");
         if (weaponChoices[2]) selectedWeapons.Add("Chainsaw");
         if (weaponChoices[3]) selectedWeapons.Add("Slingshot");
+        if (weaponChoices[4]) selectedWeapons.Add("Crossbow");
+        if (weaponChoices[5]) selectedWeapons.Add("Katana");
+        if (weaponChoices[6]) selectedWeapons.Add("Molotov Cocktails");
+        if (weaponChoices[7]) selectedWeapons.Add("Spear");
+        if (weaponChoices[8]) selectedWeapons.Add("Taser");
 
         var selectedVehicles = new List<string>();
         if (vehicleChoices[0]) selectedVehicles.Add("Car");
         if (vehicleChoices[1]) selectedVehicles.Add("Bicycle");
         if (vehicleChoices[2]) selectedVehicles.Add("Helicopter");
         if (vehicleChoices[3]) selectedVehicles.Add("Boat");
+        if (vehicleChoices[4]) selectedVehicles.Add("Motorcycle");
+        if (vehicleChoices[5]) selectedVehicles.Add("Tank");
+        if (vehicleChoices[6]) selectedVehicles.Add("Horse");
+        if (vehicleChoices[7]) selectedVehicles.Add("ATV");
+        if (vehicleChoices[8]) selectedVehicles.Add("Bus");
 
         var selectedFuel = new List<string>();
         if (fuelChoices[0]) selectedFuel.Add("Gasoline");
         if (fuelChoices[1]) selectedFuel.Add("Solar Panel");
         if (fuelChoices[2]) selectedFuel.Add("Batteries");
         if (fuelChoices[3]) selectedFuel.Add("Hamster-wheel Generator");
+        if (fuelChoices[4]) selectedFuel.Add("Wind Turbine");
+        if (fuelChoices[5]) selectedFuel.Add("Hydroelectric Generator");
+        if (fuelChoices[6]) selectedFuel.Add("Coal");
+        if (fuelChoices[7]) selectedFuel.Add("Wood-Burning Stove");
+        if (fuelChoices[8]) selectedFuel.Add("Biofuel");
 
         var newPlan = new ASP.Models.Plan
             {
