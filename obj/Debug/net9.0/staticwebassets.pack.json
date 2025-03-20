@@ -1,31 +1,111 @@
 {
   "Files": [
     {
-      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\ASP.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ASP.fkw37snkh9.bundle.scp.css"
     },
     {
-      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/favicon.ico",
-      "PackagePath": "staticwebassets/favicon.ico"
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\AIUp.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\AIUp.webp"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.ASP.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\AlienInv.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\AlienInv.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\BioPlag.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\BioPlag.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\IceAge.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\IceAge.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\MetImp.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\MetImp.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\NuclearFall.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\NuclearFall.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\SuperVol.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\SuperVol.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\WW3.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\WW3.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Scenarios\\ZombieApoc.webp",
+      "PackagePath": "staticwebassets\\Images\\Scenarios\\ZombieApoc.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\Bunker.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\Bunker.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\CruiseShip.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\CruiseShip.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\JungleHut.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\JungleHut.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\MedievalCastle.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\MedievalCastle.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\MetropolitanApartment.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\MetropolitanApartment.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\MilitaryBase.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\MilitaryBase.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\MountainCabin.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\MountainCabin.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\RV.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\RV.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\SuburbanHouse.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\SuburbanHouse.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\Images\\Shelters\\Tent.webp",
+      "PackagePath": "staticwebassets\\Images\\Shelters\\Tent.webp"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.ASP.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.ASP.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.ASP.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.ASP.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.ASP.props",
       "PackagePath": "build\\ASP.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.ASP.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.ASP.props",
       "PackagePath": "buildMultiTargeting\\ASP.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.ASP.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.ASP.props",
       "PackagePath": "buildTransitive\\ASP.props"
     }
   ],

@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj": {}
+    "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj": {}
   },
   "projects": {
-    "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj": {
+    "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj",
+        "projectUniqueName": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj",
         "projectName": "ASP",
-        "projectPath": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/ASP.csproj",
-        "packagesPath": "/Users/teevaughn/.nuget/packages/",
-        "outputPath": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/obj/",
+        "projectPath": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj",
+        "packagesPath": "C:\\Users\\theon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/teevaughn/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,15 +65,21 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -74,9 +87,13 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Microsoft.Fast.Components.FluentUI": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
             "Microsoft.FluentUI.AspNetCore.Components": {
               "target": "Package",
-              "version": "[4.11.5, )"
+              "version": "[4.11.6, )"
             },
             "Microsoft.FluentUI.AspNetCore.Components.Icons": {
               "target": "Package",
@@ -106,7 +123,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
