@@ -46,38 +46,68 @@
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6">
         <section>
-            <h3>Use another service to log in.</h3>
+            <h3>About Apocalypse Survival Planner</h3>
             <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
+            <p>The Apocalypse Survival Planner is a tool designed for survival enthusiasts and doomsday preppers. It allows users to create comprehensive survival plans for various apocalypse scenarios.</p>
+            <p>Users can manage various plan components such as shelter, food, weapons, vehicles, fuel, power sources, and more. The planner also includes a budget tool and price calculator to estimate the total cost of a plan, as well as a survival calculator tool to estimate the amount of time one can survive under a given scenario.</p>
+            <p>Whether you're preparing for the worst or just planning for emergencies, the Apocalypse Survival Planner provides detailed feedback to help you craft the best survival plan possible.</p>
         </section>
     </div>
 </div>
 
+@section Styles {
+    <style>
+        /* Apocalypse-themed background */
+        body {
+            background: url('https://wallpapercave.com/wp/wp7643331.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f2f2f2;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .container, .form-control {
+            background-color: rgba(10, 10, 10, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        h1, h3 {
+            color: #ff3c00;
+            text-shadow: 3px 3px 6px #000;
+        }
+
+        .btn-primary {
+            background-color: #a83232;
+            border-color: #751f1f;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 0 10px #751f1f;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #751f1f;
+            box-shadow: 0 0 20px #ff0000;
+        }
+
+        .form-label, .form-control {
+            color: #fff;
+        }
+
+        .text-danger {
+            color: #ff6b6b !important;
+        }
+
+        /* Additional vibe */
+        .row {
+            backdrop-filter: blur(4px);
+        }
+    </style>
+}
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

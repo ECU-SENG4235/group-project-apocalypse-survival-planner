@@ -1131,3 +1131,5 @@ C:/Users/x230 i7/Documents/GitHub/group-project-apocalypse-survival-planner/obj/
 /Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/obj/Debug/net9.0/ASP.pdb
 /Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/obj/Debug/net9.0/ASP.genruntimeconfig.cache
 /Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/obj/Debug/net9.0/ref/ASP.dll
+/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/bin/Debug/net9.0/SendGrid.dll
+/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/bin/Debug/net9.0/StarkbankEcdsa.dll
