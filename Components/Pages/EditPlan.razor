@@ -1,0 +1,245 @@
+﻿@page "/edit-plan/{id:int}"
+@using ASP.Models
+@inject PlanService PlanService
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Plan? plan;
+    private string buttonText = "Update Plan";
+
+    private bool cannedFood;
+    private bool garden;
+    private bool farm;
+    private bool huntingFishing;
+
+    private bool bottledWater;
+    private bool river;
+    private bool reservoir;
+    private bool well;
+
+    private bool bat;
+    private bool firearm;
+    private bool chainsaw;
+    private bool slingshot;
+
+    private bool car;
+    private bool bicycle;
+    private bool helicopter;
+    private bool boat;
+
+    private bool gasoline;
+    private bool solarPanel;
+    private bool batteries;
+    private bool hamsterWheelGenerator;
+
+
+    private void NavigateToEditPlan(int planId)
+    {
+        NavigationManager.NavigateTo($"/edit-plan/{planId}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            plan = await PlanService.GetPlanByIdAsync(Id);
+            if (plan != null)
+            {
+                cannedFood = plan.FoodSources?.Contains("Canned Food") ?? false;
+                garden = plan.FoodSources?.Contains("Garden") ?? false;
+                farm = plan.FoodSources?.Contains("Farm") ?? false;
+                huntingFishing = plan.FoodSources?.Contains("Hunting/Fishing") ?? false;
+
+                bottledWater = plan.WaterSources?.Contains("Bottled Water") ?? false;
+                river = plan.WaterSources?.Contains("River") ?? false;
+                reservoir = plan.WaterSources?.Contains("Reservoir") ?? false;
+                well = plan.WaterSources?.Contains("Well") ?? false;
+
+                bat = plan.Weapons?.Contains("Bat") ?? false;
+                firearm = plan.Weapons?.Contains("Firearm") ?? false;
+                chainsaw = plan.Weapons?.Contains("Chainsaw") ?? false;
+                slingshot = plan.Weapons?.Contains("Slingshot") ?? false;
+
+                car = plan.Vehicles?.Contains("Car") ?? false;
+                bicycle = plan.Vehicles?.Contains("Bicycle") ?? false;
+                helicopter = plan.Vehicles?.Contains("Helicopter") ?? false;
+                boat = plan.Vehicles?.Contains("Boat") ?? false;
+
+                gasoline = plan.Fuel?.Contains("Gasoline") ?? false;
+                solarPanel = plan.Fuel?.Contains("Solar Panel") ?? false;
+                batteries = plan.Fuel?.Contains("Batteries") ?? false;
+                hamsterWheelGenerator = plan.Fuel?.Contains("Hamster-wheel Generator") ?? false;
+            }
+            else
+            {
+                buttonText = "Plan not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            buttonText = $"Error loading plan: {ex.Message}";
+        }
+    }
+
+    private async Task UpdatePlan()
+    {
+        if (plan == null || string.IsNullOrWhiteSpace(plan.PlanName))
+        {
+            buttonText = "Plan name cannot be empty.";
+            return;
+        }
+
+        plan.FoodSources = string.Join(", ", GetSelectedFoodSources());
+        plan.WaterSources = string.Join(", ", GetSelectedWaterSources());
+        plan.Weapons = string.Join(", ", GetSelectedWeapons());
+        plan.Vehicles = string.Join(", ", GetSelectedVehicles());
+        plan.Fuel = string.Join(", ", GetSelectedFuel());
+
+        await PlanService.UpdatePlanAsync(plan);
+        buttonText = $"Plan '{plan.PlanName}' updated successfully!";
+        NavigationManager.NavigateTo("/my-plans");
+    }
+
+
+    private IEnumerable<string> GetSelectedFoodSources()
+    {
+        if (cannedFood) yield return "Canned Food";
+        if (garden) yield return "Garden";
+        if (farm) yield return "Farm";
+        if (huntingFishing) yield return "Hunting/Fishing";
+    }
+
+    private IEnumerable<string> GetSelectedWaterSources()
+    {
+        if (bottledWater) yield return "Bottled Water";
+        if (river) yield return "River";
+        if (reservoir) yield return "Reservoir";
+        if (well) yield return "Well";
+    }
+
+    private IEnumerable<string> GetSelectedWeapons()
+    {
+        if (bat) yield return "Bat";
+        if (firearm) yield return "Firearm";
+        if (chainsaw) yield return "Chainsaw";
+        if (slingshot) yield return "Slingshot";
+    }
+
+    private IEnumerable<string> GetSelectedVehicles()
+    {
+        if (car) yield return "Car";
+        if (bicycle) yield return "Bicycle";
+        if (helicopter) yield return "Helicopter";
+        if (boat) yield return "Boat";
+    }
+
+    private IEnumerable<string> GetSelectedFuel()
+    {
+        if (gasoline) yield return "Gasoline";
+        if (solarPanel) yield return "Solar Panel";
+        if (batteries) yield return "Batteries";
+        if (hamsterWheelGenerator) yield return "Hamster-wheel Generator";
+    }
+}
+
+<PageTitle>Edit Plan</PageTitle>
+
+<h3>@buttonText</h3>
+
+@if (plan == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <!-- Main Container -->
+    <div style="display: flex; flex-direction: column; gap: 32px; max-width: 900px; margin: auto;">
+
+        <!-- Plan Name Section -->
+        <FluentCard style="padding: 32px; min-height: 150px;">
+            <h3>Plan Details</h3>
+            <FluentTextField @bind-Value="plan.PlanName" Placeholder="Enter plan name..." Label="Plan Name" />
+        </FluentCard>
+
+        <!-- Scenario Selection -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Scenario</h3>
+            <FluentCombobox TOption="string" @bind-Value="plan.Scenario" Label="Scenario" class="scrollable-dropdown">
+                <FluentOption Value="Zombie Virus Outbreak">Zombie Virus Outbreak</FluentOption>
+                <FluentOption Value="Nuclear Fallout">Nuclear Fallout</FluentOption>
+                <FluentOption Value="Alien Invasion">Alien Invasion</FluentOption>
+                <FluentOption Value="Ice Age">Ice Age</FluentOption>
+                <FluentOption Value="Supervolcano Eruption">Supervolcano Eruption</FluentOption>
+                <FluentOption Value="AI Uprising">AI Uprising</FluentOption>
+                <FluentOption Value="World War III">World War III</FluentOption>
+                <FluentOption Value="Biological Plague">Biological Plague</FluentOption>
+                <FluentOption Value="Meteor Impact">Meteor Impact</FluentOption>
+            </FluentCombobox>
+        </FluentCard>
+
+        <!-- Shelter Selection -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Shelter</h3>
+            <FluentCombobox TOption="string" @bind-Value="plan.Shelter" Label="Shelter Type">
+                <FluentOption Value="Bunker">Bunker</FluentOption>
+                <FluentOption Value="Mountain Cabin">Mountain Cabin</FluentOption>
+                <FluentOption Value="Metropolitan Apartment">Metropolitan Apartment</FluentOption>
+                <FluentOption Value="Suburban House">Suburban House</FluentOption>
+            </FluentCombobox>
+        </FluentCard>
+
+        <!-- Food Source Section -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Food Sources</h3>
+            <FluentCheckbox @bind-Value="cannedFood">Canned Food</FluentCheckbox>
+            <FluentCheckbox @bind-Value="garden">Garden</FluentCheckbox>
+            <FluentCheckbox @bind-Value="farm">Farm</FluentCheckbox>
+            <FluentCheckbox @bind-Value="huntingFishing">Hunting/Fishing</FluentCheckbox>
+        </FluentCard>
+
+        <!-- Water Source Section -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Water Sources</h3>
+            <FluentCheckbox @bind-Value="bottledWater">Bottled Water</FluentCheckbox>
+            <FluentCheckbox @bind-Value="river">River</FluentCheckbox>
+            <FluentCheckbox @bind-Value="reservoir">Reservoir</FluentCheckbox>
+            <FluentCheckbox @bind-Value="well">Well</FluentCheckbox>
+        </FluentCard>
+
+        <!-- Weapons Section -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Weapons</h3>
+            <FluentCheckbox @bind-Value="bat">Bat</FluentCheckbox>
+            <FluentCheckbox @bind-Value="firearm">Firearm</FluentCheckbox>
+            <FluentCheckbox @bind-Value="chainsaw">Chainsaw</FluentCheckbox>
+            <FluentCheckbox @bind-Value="slingshot">Slingshot</FluentCheckbox>
+        </FluentCard>
+
+        <!-- Vehicles Section -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Vehicles</h3>
+            <FluentCheckbox @bind-Value="car">Car</FluentCheckbox>
+            <FluentCheckbox @bind-Value="bicycle">Bicycle</FluentCheckbox>
+            <FluentCheckbox @bind-Value="helicopter">Helicopter</FluentCheckbox>
+            <FluentCheckbox @bind-Value="boat">Boat</FluentCheckbox>
+        </FluentCard>
+
+        <!-- Fuel/Power Section -->
+        <FluentCard style="padding: 32px; min-height: 300px;">
+            <h3>Fuel/Power Sources</h3>
+            <FluentCheckbox @bind-Value="gasoline">Gasoline</FluentCheckbox>
+            <FluentCheckbox @bind-Value="solarPanel">Solar Panel</FluentCheckbox>
+            <FluentCheckbox @bind-Value="batteries">Batteries</FluentCheckbox>
+            <FluentCheckbox @bind-Value="hamsterWheelGenerator">Hamster-wheel Generator</FluentCheckbox>
+        </FluentCard>
+
+        <!-- Update Button -->
+        <div style="display: flex; justify-content: center; margin-top: 32px;">
+            <FluentButton @onclick="UpdatePlan">Update Plan</FluentButton>
+        </div>
+
+    </div>
+}

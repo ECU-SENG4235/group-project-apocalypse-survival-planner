@@ -1,0 +1,37 @@
+﻿@page "/edit-plans"
+@using ASP.Models
+@inject PlanService PlanService
+@inject NavigationManager NavigationManager
+
+<h3>Edit Plans</h3>
+
+@if (plans == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var plan in plans)
+        {
+            <li style="margin-bottom: 10px;">
+                @plan.PlanName
+                <FluentButton style="margin-left: 10px;" Appearance="Appearance.Accent" @onclick="() => EditPlan(plan.Id)">Edit</FluentButton>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Plan>? plans;
+
+    protected override async Task OnInitializedAsync()
+    {
+        plans = await PlanService.GetPlansAsync();
+    }
+
+    private void EditPlan(int planId)
+    {
+        NavigationManager.NavigateTo($"/edit-plan/{planId}");
+    }
+}

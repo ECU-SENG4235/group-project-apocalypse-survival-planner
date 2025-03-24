@@ -1,59 +1,188 @@
 ﻿@page "/Home"
+@attribute [StreamRendering]
+@using ASP.Models
+<PageTitle>Apocalypse Survival Planner - Home</PageTitle>
+@inject ASP.Data.PlansDbContext _dbContext
+@inject PlanService PlanService
 
-<PageTitle>Home</PageTitle>
+<style>
+    .container {
+        padding: 1rem;
+        background-color: #0f0e00;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
 
-<h1>Hello, user!</h1>
+    h1 {
+        color: #666000;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
 
-Welcome to your all in one destination for planning for catastrophies.
+    .alert-warning {
+        border-left: 5px solid #ffc107;
+        background-color: rgba(255, 193, 7, 0.1);
+    }
 
-<FluentDataGrid Id="homegrid" Items="@forecasts" GridTemplateColumns="1fr 1fr 1fr" Loading="@(forecasts == null)" Style="height:204px;" TGridItem="WeatherForecast">
-    <PropertyColumn Title="Name" Property="@(c => c!.Name)" Align="Align.Start" />
-    <PropertyColumn Title="Last Opened" Property="@(c => c!.LastOpened)" Align="Align.Center" />
-    @*<TemplateColumn Title="Actions" Align="Align.Center">
+    .quick-tips li {
+        padding: 0.5rem 0;
+        transition: transform 0.2s;
+    }
 
+    .quick-tips li:hover {
+        transform: translateX(10px);
+        color: #000000;
+    }
+
+    .emergency-contact {
+        padding: 1rem;
+        border-radius: 8px;
+        background-color: #666100;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .emergency-contact:hover {
+        transform: translateY(-5px);
+    }
+
+    ::deep .fluent-data-grid {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mb-4">Welcome to Apocalypse Survival Planner</h1>
     
- 
-        <Template>
-            <FluentButton Appearance="Appearance.Accent" @onclick="() => EditItem(context)">Edit</FluentButton>
-            <FluentButton Appearance="Appearance.Neutral" @onclick="() => DeleteItem(context)">Delete</FluentButton>
-        </Template>
-    </TemplateColumn>
-    *@
+    <div class="alert alert-warning">
+        <h3>Doomsday Clock Status</h3>
+        <div class="d-flex align-items-center">
+            <div class="digital-clock" style="font-family: 'Digital', monospace; background: #016017c4; color: #ff0000; padding: 15px; border-radius: 5px; margin-right: 20px; text-align: center; width: 200px;">
+                <div style="font-size: 24px; font-weight: bold;">11:58:30 PM</div>
+                <div style="font-size: 10px;"> CRITICAL WARNING </div>
+            </div>
+
+            <div>
+                <p class="mb-1">Current Time: 90 Seconds to Midnight</p>
+                <small>Source: Bulletin of the Atomic Scientists</small>
+            </div>
+        </div>
+    </div>
+
+    @code {
+        private double _rotation = 0;
+
+        protected override void OnInitialized()
+        {
+            // 90 seconds represented as degrees on clock (90/180 * 360 = 180 degrees)
+            _rotation = 180;
+            StartAnimation();
+        }
+
+        private async void StartAnimation()
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+                _rotation = (_rotation + 6) % 360;
+                StateHasChanged();
+            }
+        }
+    }
+
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h3>Your Recent Survival Plans</h3>
+<FluentDataGrid Id="weathergrid" Items="@curPlan" GridTemplateColumns="1fr 1fr 1r 1fr 1fr 1fr 1fr 1fr 1fr" Loading="@(curPlan == null)" Style="height:304px;" TGridItem="listOfPlans">
+    <PropertyColumn Title="id" Property="@(c => c!.Id)" Align="Align.Start"/>
+    <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start"/>
+    <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start"/>
+    <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center"/>
+    <PropertyColumn Title="Food type" Property="@(c => c!.FoodSources)" Align="Align.Center"/> 
+    <PropertyColumn Title="Water type" Property="@(c => c!.WaterSources)" Align="Align.Center"/>
+    <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End"/>
+    <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End"/>  
+    <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End"/>
     
 </FluentDataGrid>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Quick Tips</h3>
+            <ul class="list-unstyled quick-tips">
+                <li>✓ Keep emergency supplies updated</li>
+                <li>✓ Have a communication plan</li>
+                <li>✓ Know your evacuation routes</li>
+                <li>✓ Store important documents safely</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Emergency Contacts</h3>
+            <div class="d-flex justify-content-between">
+                <div class="emergency-contact">
+                    <h5>FEMA</h5>
+                    <p>1-800-621-3362</p>
+                    <a href="https://www.fema.gov">www.fema.gov</a>
+                </div>
+                <div class="emergency-contact">
+                    <h5>Red Cross</h5>
+                    <p>1-800-733-2767</p>
+                    <a href="https://www.redcross.org">www.redcross.org</a>
+                </div>
+                <div class="emergency-contact">
+                    <h5>CDC Emergency</h5>
+                    <p>1-800-232-4636</p>
+                    <a href="https://emergency.cdc.gov">emergency.cdc.gov</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
-    private IQueryable<WeatherForecast>? forecasts;
+    private List<Plan>? survivalPlans; // Nullable list
+
+    private IQueryable<listOfPlans>? curPlan;
 
     protected override async Task OnInitializedAsync()
     {
+        survivalPlans = await PlanService.GetPlansAsync();
+
+
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Name = $"Survial Plan: {index}",
-                LastOpened = startDate.AddDays(index),
-                Summary = summaries[Random.Shared.Next(summaries.Length)]
-            }).AsQueryable();
+        curPlan = Enumerable.Range(survivalPlans!.Count - 3, 3).Select(index => new listOfPlans
+        { 
+            Id = survivalPlans![index].Id,
+            PlanName = survivalPlans![index].PlanName,
+            Scenario = survivalPlans![index].Scenario,
+            Shelter = survivalPlans![index].Shelter,
+            FoodSources = survivalPlans![index].FoodSources,
+            WaterSources = survivalPlans![index].WaterSources,
+            Weapons = survivalPlans![index].Weapons,
+            Vehicles = survivalPlans![index].Vehicles,
+            Fuel = survivalPlans![index].Fuel
+        }).AsQueryable();
     }
 
-    private void EditItem(WeatherForecast item)
-    {
-        // Implement edit functionality here
-    }
 
-    private void DeleteItem(WeatherForecast item)
+        private class listOfPlans
     {
-        // Implement delete functionality here
-    }
-
-    private class WeatherForecast
-    {
-        public string? Name { get; set; }
-        public DateOnly LastOpened { get; set; }
-        public string? Summary { get; set; }
+        public int Id { get; set; }
+        public string? PlanName { get; set; }
+        public string? Scenario { get; set; }
+        public string? Shelter { get; set; }
+        public string? FoodSources { get; set; }
+        public string? WaterSources { get; set; }
+        public string? Weapons { get; set; }
+        public string? Vehicles { get; set; }
+        public string? Fuel { get; set; }
     }
 }

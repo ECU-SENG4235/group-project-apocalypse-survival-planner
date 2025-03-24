@@ -183,12 +183,12 @@
         // Wilderness survival scoring
         if (!string.IsNullOrEmpty(plan.WaterSources)) score += 2;
         if (!string.IsNullOrEmpty(plan.FoodSources) && 
-            (plan.FoodSources.ToLower().Contains("hunt") || plan.FoodSources.ToLower().Contains("forage"))) score += 2;
+            (plan.FoodSources.Contains("Farm") || plan.FoodSources.Contains("Hunting/Fishing"))) score += 2;
 
         // Long-term sustainability scoring
         if (!string.IsNullOrEmpty(plan.FoodSources) && plan.FoodSources.ToLower().Contains("farm")) score += 3;
         if (!string.IsNullOrEmpty(plan.WaterSources) && 
-            (plan.WaterSources.ToLower().Contains("well") || plan.WaterSources.ToLower().Contains("Reservoir"))) score += 3;
+            (plan.WaterSources.Contains("Well") || plan.WaterSources.Contains("Reservoir"))) score += 3;
 
         return score;
     }
@@ -224,7 +224,7 @@
             analysis.Add("Has water procurement");
             
         if (!string.IsNullOrEmpty(plan.FoodSources) && 
-            (plan.FoodSources.ToLower().Contains("hunt") || plan.FoodSources.ToLower().Contains("forage")))
+            (plan.FoodSources.Contains("Hunting/Fishing") || plan.FoodSources.Contains("Foraging")))
             analysis.Add("Can obtain wilderness food");
 
         return analysis.Count > 0 ? string.Join(", ", analysis) : "Limited wilderness survival capability";

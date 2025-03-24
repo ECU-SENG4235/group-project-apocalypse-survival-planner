@@ -8001,32 +8001,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\theon\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/yagdali-rivas/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj",
+      "projectUniqueName": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/ASP.csproj",
       "projectName": "ASP",
-      "projectPath": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj",
-      "packagesPath": "C:\\Users\\theon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\obj\\",
+      "projectPath": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/ASP.csproj",
+      "packagesPath": "/home/yagdali-rivas/.nuget/packages/",
+      "outputPath": "/home/yagdali-rivas/Documents/GitHub/group-project-apocalypse-survival-planner/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/yagdali-rivas/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8045,7 +8038,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -8123,7 +8116,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.104/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
