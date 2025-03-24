@@ -9,12 +9,17 @@ Welcome to your all in one destination for planning for catastrophies.
 <FluentDataGrid Id="homegrid" Items="@forecasts" GridTemplateColumns="1fr 1fr 1fr" Loading="@(forecasts == null)" Style="height:204px;" TGridItem="WeatherForecast">
     <PropertyColumn Title="Name" Property="@(c => c!.Name)" Align="Align.Start" />
     <PropertyColumn Title="Last Opened" Property="@(c => c!.LastOpened)" Align="Align.Center" />
-    <TemplateColumn Title="Actions" Align="Align.Center">
+    @*<TemplateColumn Title="Actions" Align="Align.Center">
+
+    
+ 
         <Template>
             <FluentButton Appearance="Appearance.Accent" @onclick="() => EditItem(context)">Edit</FluentButton>
             <FluentButton Appearance="Appearance.Neutral" @onclick="() => DeleteItem(context)">Delete</FluentButton>
         </Template>
     </TemplateColumn>
+    *@
+    
 </FluentDataGrid>
 
 @code {
@@ -47,7 +52,7 @@ Welcome to your all in one destination for planning for catastrophies.
 
     private class WeatherForecast
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public DateOnly LastOpened { get; set; }
         public string? Summary { get; set; }
     }

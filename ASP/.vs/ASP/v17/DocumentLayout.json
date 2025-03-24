@@ -1,0 +1,44 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\createplan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CreatePlan.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\CreatePlan.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\CreatePlan.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-19T18:06:29.647Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
