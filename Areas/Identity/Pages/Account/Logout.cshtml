@@ -19,3 +19,56 @@
         }
     }
 </header>
+
+
+@section Styles {
+    <style>
+        /* Apocalypse-themed background */
+        body {
+            background: url('https://wallpapercave.com/wp/wp7643331.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f2f2f2;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .container, .form-control {
+            background-color: rgba(10, 10, 10, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        h1, h3 {
+            color: #ff3c00;
+            text-shadow: 3px 3px 6px #000;
+        }
+
+        .btn-primary {
+            background-color: #a83232;
+            border-color: #751f1f;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 0 10px #751f1f;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #751f1f;
+            box-shadow: 0 0 20px #ff0000;
+        }
+
+        .form-label, .form-control {
+            color: #fff;
+        }
+
+        .text-danger {
+            color: #ff6b6b !important;
+        }
+
+        /* Additional vibe */
+        .row {
+            backdrop-filter: blur(4px);
+        }
+    </style>
+}
