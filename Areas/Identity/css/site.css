@@ -2,11 +2,14 @@
     background: transparent !important;  /* Makes navbar transparent */
 }
 
+
+
 .navbar .navbar-brand {
-    color: #ff3c00 !important; /* Apocalypse red text */
+    color: #ff3c00 !important;
     font-weight: bold;
     text-shadow: 2px 2px 5px black;
 }
+
 
 .navbar .navbar-toggler {
     border: none;
