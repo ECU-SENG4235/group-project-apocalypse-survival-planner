@@ -3,31 +3,79 @@
 @using ASP.Models
 @inject ASP.Data.PlansDbContext _dbContext
 @inject PlanService PlanService
+<style>
+    .plans-container {
+        padding: 20px;
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
 
+    h1 {
+        color: #666000;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #d4d4d4;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+
+    ::deep .fluent-data-grid {
+        border: 1px solid #444;
+        border-radius: 8px;
+        overflow: auto;
+        max-height: 600px;
+    }
+
+        ::deep .fluent-data-grid th {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 12px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        ::deep .fluent-data-grid td {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            padding: 10px;
+            transition: background-color 0.3s;
+            white-space: normal;
+            word-wrap: break-word;
+            min-width: 100px;
+        }
+
+        ::deep .fluent-data-grid tr:hover td {
+            background-color: rgba(255, 77, 77, 0.1);
+        }
+</style>
 
 <PageTitle>my-plans</PageTitle>
 
-<h1> My Plans</h1>
+<div class="plans-container">
+    <h1>My Plans</h1>
+    <p><i>A glimpse at your creations</i></p>
 
-<p><i>  A glimps at your creations  </i></p>
-
-
-<!-- This page is rendered in SSR mode, so the FluentDataGrid component does not offer any interactivity (like sorting). -->
-<FluentDataGrid Id="weathergrid" Items="@curPlan" GridTemplateColumns="1fr 1fr 1r 1fr 1fr 1fr 1fr 1fr 1fr" Loading="@(curPlan == null)" Style="height:304px;" TGridItem="listOfPlans">
-    <PropertyColumn Title="id" Property="@(c => c!.Id)" Align="Align.Start"/>
-    <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start"/>
-    <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start"/>
-    <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center"/>
-    <PropertyColumn Title="Food type" Property="@(c => c!.FoodSources)" Align="Align.Center"/> 
-    <PropertyColumn Title="Water type" Property="@(c => c!.WaterSources)" Align="Align.Center"/>
-    <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End"/>
-    <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End"/>  
-    <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End"/>
-    
-</FluentDataGrid>
+    <FluentDataGrid Id="weathergrid" Items="@curPlan" GridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr" Loading="@(curPlan == null)" Style="height:304px;" TGridItem="listOfPlans">
+        <PropertyColumn Title="ID" Property="@(c => c!.Id)" Align="Align.Start" />
+        <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start" />
+        <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start" />
+        <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center" />
+        <PropertyColumn Title="Food Type" Property="@(c => c!.FoodSources)" Align="Align.Center" />
+        <PropertyColumn Title="Water Type" Property="@(c => c!.WaterSources)" Align="Align.Center" />
+        <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End" />
+        <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End" />
+        <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End" />
+    </FluentDataGrid>
+</div>
 
 @code {
-
     private List<Plan>? survivalPlans; // Nullable list
 
     private IQueryable<listOfPlans>? curPlan;
@@ -42,19 +90,20 @@
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        curPlan = Enumerable.Range(0, survivalPlans.Count).Select(index => new listOfPlans
-        { 
-            Id = survivalPlans![index].Id,
-            PlanName = survivalPlans![index].PlanName,
-            Scenario = survivalPlans![index].Scenario,
-            Shelter = survivalPlans![index].Shelter,
-            FoodSources = survivalPlans![index].FoodSources,
-            WaterSources = survivalPlans![index].WaterSources,
-            Weapons = survivalPlans![index].Weapons,
-            Vehicles = survivalPlans![index].Vehicles,
-            Fuel = survivalPlans![index].Fuel
-        }).AsQueryable();
+        curPlan = Enumerable.Range(0, survivalPlans!.Count).Select(index => new listOfPlans
+            {
+                Id = survivalPlans![index].Id,
+                PlanName = survivalPlans![index].PlanName,
+                Scenario = survivalPlans![index].Scenario,
+                Shelter = survivalPlans![index].Shelter,
+                FoodSources = survivalPlans![index].FoodSources,
+                WaterSources = survivalPlans![index].WaterSources,
+                Weapons = survivalPlans![index].Weapons,
+                Vehicles = survivalPlans![index].Vehicles,
+                Fuel = survivalPlans![index].Fuel
+            }).AsQueryable();
     }
+
 
     private class listOfPlans
     {
@@ -68,5 +117,4 @@
         public string? Vehicles { get; set; }
         public string? Fuel { get; set; }
     }
-
 }

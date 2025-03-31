@@ -4,6 +4,36 @@
   "Documents": [
     {
       "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\createplan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\services\\pricecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\myplans.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\editplans.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\editplan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\compareplans.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\services\\planservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\asp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -13,7 +43,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -25,13 +55,134 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "..\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-28T17:54:26.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-24T00:52:50.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ComparePlans.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\ComparePlans.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\ComparePlans.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\ComparePlans.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\ComparePlans.razor",
+              "ViewState": "AgIAAMgAAAAAAAAAAADwvzQBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-24T00:47:51.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PriceCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Services\\PriceCalculator.cs",
+              "RelativeDocumentMoniker": "..\\Services\\PriceCalculator.cs",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Services\\PriceCalculator.cs",
+              "RelativeToolTip": "..\\Services\\PriceCalculator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T16:42:28.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PlanService.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Services\\PlanService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\PlanService.cs",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Services\\PlanService.cs",
+              "RelativeToolTip": "..\\Services\\PlanService.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAqwC0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-19T22:52:43.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyPlans.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\MyPlans.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\MyPlans.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\MyPlans.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\MyPlans.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-19T22:46:24.463Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditPlans.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\EditPlans.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\EditPlans.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\EditPlans.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\EditPlans.razor",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-19T22:41:59.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EditPlan.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\EditPlan.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\EditPlan.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\EditPlan.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\EditPlan.razor",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAPQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-19T22:41:35.924Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "..\\Components\\Layout\\NavMenu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-19T22:39:22.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ASP.csproj",
+              "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj",
+              "RelativeDocumentMoniker": "..\\ASP.csproj",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP.csproj",
+              "RelativeToolTip": "..\\ASP.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-19T18:47:59.142Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CreatePlan.razor",
               "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
               "RelativeDocumentMoniker": "..\\Components\\Pages\\CreatePlan.razor",
               "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
               "RelativeToolTip": "..\\Components\\Pages\\CreatePlan.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAG0DAAAAAAAAAAAAAIgDAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-19T18:06:29.647Z",
               "EditorCaption": ""

@@ -48,6 +48,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVQbGFuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/theon/OneDrive/Desktop/ASPRH3/group-project-apocalypse-survival-planner/Components/Pages/EditPlan.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFZGl0UGxhbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/theon/OneDrive/Desktop/ASPRH3/group-project-apocalypse-survival-planner/Components/Pages/EditPlans.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFZGl0UGxhbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/theon/OneDrive/Desktop/ASPRH3/group-project-apocalypse-survival-planner/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

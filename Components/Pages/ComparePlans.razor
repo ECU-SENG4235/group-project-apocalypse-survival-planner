@@ -1,34 +1,34 @@
 
 <style>
-.analysis-table {
-    display:block flexbox;
-    flex-direction: column;
-    width: 70%;
-    height: 70vh;
-    border-collapse: collapse;
-    margin-top: 16px;
-}
+    .analysis-table {
+        display: block flexbox;
+        flex-direction: column;
+        width: 70%;
+        height: 70vh;
+        border-collapse: collapse;
+        margin-top: 16px;
+    }
 
-.analysis-table th, .analysis-table td {
-    padding: 12px;
-    border: 1px solid #ffffff;
-    text-align: center;
-}
+        .analysis-table th, .analysis-table td {
+            padding: 12px;
+            border: 1px solid #ffffff;
+            text-align: center;
+        }
 
-.analysis-table th {
-    background-color: #666000;
-    color: #000000;
-}
+        .analysis-table th {
+            background-color: #666000;
+            color: #000000;
+        }
 
-.compare-table th {
-    text-align: center;
-    background-color: #666000;
-    color: #ffffff;
-}
+    .compare-table th {
+        text-align: center;
+        background-color: #666000;
+        color: #ffffff;
+    }
 
-.compare-table td {
-    padding: 5px;
-}
+    .compare-table td {
+        padding: 5px;
+    }
 </style>
 
 
@@ -46,10 +46,10 @@
 
 
 <!-- Plans List with Selection Checkboxes -->
-<FluentDataGrid Id="planGrid" Items="@((curPlan ?? new List<listOfPlans>()).AsQueryable())" GridTemplateColumns="0.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr"               Loading="@(curPlan == null)" Style="height: 304px;" TGridItem="listOfPlans">
+<FluentDataGrid Id="planGrid" Items="@((curPlan ?? new List<listOfPlans>()).AsQueryable())" GridTemplateColumns="0.7fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr" Loading="@(curPlan == null)" Style="height: 304px;" TGridItem="listOfPlans">
 
 
-        
+
     <TemplateColumn Title="Select">
         <ChildContent>
             <FluentCheckbox Checked="@IsPlanSelected(context.Id)"
@@ -58,15 +58,15 @@
     </TemplateColumn>
 
 
-    <PropertyColumn Title="ID" Property="@(c => c!.Id)" Align="Align.Start"/>
-    <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start"/>
-    <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start"/>
-    <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center"/>
-    <PropertyColumn Title="Food" Property="@(c => c!.FoodSources)" Align="Align.Center"/> 
-    <PropertyColumn Title="Water" Property="@(c => c!.WaterSources)" Align="Align.Center"/>
-    <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End"/>
-    <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End"/>  
-    <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End"/>
+    <PropertyColumn Title="ID" Property="@(c => c!.Id)" Align="Align.Start" />
+    <PropertyColumn Title="Name" Property="@(c => c!.PlanName)" Align="Align.Start" />
+    <PropertyColumn Title="Scenario" Property="@(c => c!.Scenario)" Align="Align.Start" />
+    <PropertyColumn Title="Shelter" Property="@(c => c!.Shelter)" Align="Align.Center" />
+    <PropertyColumn Title="Food" Property="@(c => c!.FoodSources)" Align="Align.Center" />
+    <PropertyColumn Title="Water" Property="@(c => c!.WaterSources)" Align="Align.Center" />
+    <PropertyColumn Title="Weapons" Property="@(c => c!.Weapons)" Align="Align.End" />
+    <PropertyColumn Title="Vehicles" Property="@(c => c!.Vehicles)" Align="Align.End" />
+    <PropertyColumn Title="Fuel" Property="@(c => c!.Fuel)" Align="Align.End" />
 </FluentDataGrid>
 
 <!-- Compare Button -->
@@ -78,7 +78,7 @@
 @if (selectedPlans.Count >= 2)
 {
     <h2>Plan Comparison</h2>
-    
+
     <!-- Basic Attributes Comparison -->
     <h3>Basic Attributes</h3>
     <table class="compare-table">
@@ -106,7 +106,7 @@
                 }
             }
         </tbody>
-    <!-- Survival Analysis -->
+        <!-- Survival Analysis -->
         <h3>Survival Analysis</h3>
         @if (selectedPlans.Count >= 2)
         {
@@ -174,7 +174,7 @@
     private int CalculatePlanScore(listOfPlans plan)
     {
         int score = 0;
-        
+
         // Urban survival scoring
         if (!string.IsNullOrEmpty(plan.Shelter) && plan.Shelter.ToLower().Contains("suburban house")) score += 2;
         if (!string.IsNullOrEmpty(plan.Vehicles) && (plan.Vehicles.Contains("Car") || plan.Vehicles.Contains("Helicopter"))) score += 2;
@@ -182,13 +182,13 @@
 
         // Wilderness survival scoring
         if (!string.IsNullOrEmpty(plan.WaterSources)) score += 2;
-        if (!string.IsNullOrEmpty(plan.FoodSources) && 
-            (plan.FoodSources.ToLower().Contains("hunt") || plan.FoodSources.ToLower().Contains("forage"))) score += 2;
+        if (!string.IsNullOrEmpty(plan.FoodSources) &&
+            (plan.FoodSources.Contains("Farm") || plan.FoodSources.Contains("Hunting/Fishing"))) score += 2;
 
         // Long-term sustainability scoring
         if (!string.IsNullOrEmpty(plan.FoodSources) && plan.FoodSources.ToLower().Contains("farm")) score += 3;
-        if (!string.IsNullOrEmpty(plan.WaterSources) && 
-            (plan.WaterSources.ToLower().Contains("well") || plan.WaterSources.ToLower().Contains("Reservoir"))) score += 3;
+        if (!string.IsNullOrEmpty(plan.WaterSources) &&
+            (plan.WaterSources.Contains("Well") || plan.WaterSources.Contains("Reservoir"))) score += 3;
 
         return score;
     }
@@ -201,30 +201,30 @@
     private string AnalyzeUrbanSurvival(listOfPlans plan)
     {
         var analysis = new List<string>();
-        
+
         if (!string.IsNullOrEmpty(plan.Shelter) && plan.Shelter.Contains("Metropolitan Apartment"))
             analysis.Add("Good urban shelter choice ");
-        
-        if (!string.IsNullOrEmpty(plan.Vehicles)  && (plan.Vehicles.Contains("Car") || plan.Vehicles.Contains("Helicopter")))
-            analysis.Add("Mobile evacuation capable " );
-            
+
+        if (!string.IsNullOrEmpty(plan.Vehicles) && (plan.Vehicles.Contains("Car") || plan.Vehicles.Contains("Helicopter")))
+            analysis.Add("Mobile evacuation capable ");
+
         if (!string.IsNullOrEmpty(plan.Weapons) && plan.Weapons.Contains("Firearm"))
             analysis.Add("Has strong defense capabilities ");
 
         if (!string.IsNullOrEmpty(plan.Weapons) && !plan.Weapons.Contains("Firearm"))
-        analysis.Add("No firearm in your plan may lead to your death ");
+            analysis.Add("No firearm in your plan may lead to your death ");
         return analysis.Count > 0 ? string.Join(", ", analysis) : "Weak urban survival capability";
     }
 
     private string AnalyzeWildernessSurvival(listOfPlans plan)
     {
         var analysis = new List<string>();
-        
+
         if (!string.IsNullOrEmpty(plan.WaterSources) && plan.WaterSources.Contains("Reservoir") || plan.WaterSources.Contains("Well"))
             analysis.Add("Has water procurement");
-            
-        if (!string.IsNullOrEmpty(plan.FoodSources) && 
-            (plan.FoodSources.ToLower().Contains("hunt") || plan.FoodSources.ToLower().Contains("forage")))
+
+        if (!string.IsNullOrEmpty(plan.FoodSources) &&
+            (plan.FoodSources.Contains("Hunting/Fishing") || plan.FoodSources.Contains("Foraging")))
             analysis.Add("Can obtain wilderness food");
 
         return analysis.Count > 0 ? string.Join(", ", analysis) : "Limited wilderness survival capability";
@@ -233,12 +233,12 @@
     private string AnalyzeLongTermSurvival(listOfPlans plan)
     {
         var analysis = new List<string>();
-        
-        if (!string.IsNullOrEmpty(plan.FoodSources) && 
+
+        if (!string.IsNullOrEmpty(plan.FoodSources) &&
             plan.FoodSources.ToLower().Contains("farm"))
             analysis.Add("Sustainable food source not bad");
-            
-        if (!string.IsNullOrEmpty(plan.WaterSources) && 
+
+        if (!string.IsNullOrEmpty(plan.WaterSources) &&
             (plan.WaterSources.ToLower().Contains("well") || plan.WaterSources.ToLower().Contains("purif")))
             analysis.Add("Reliable water source");
 
@@ -250,7 +250,7 @@
 
 @code {
 
-    
+
     private List<Plan>? survivalPlans;
     private List<listOfPlans>? curPlan;
     private List<int> selectedPlanIds = new();
@@ -262,17 +262,17 @@
         await Task.Delay(500);
 
         curPlan = survivalPlans.Select(plan => new listOfPlans
-        {
-            Id = plan.Id,
-            PlanName = plan.PlanName,
-            Scenario = plan.Scenario,
-            Shelter = plan.Shelter,
-            FoodSources = plan.FoodSources,
-            WaterSources = plan.WaterSources,
-            Weapons = plan.Weapons,
-            Vehicles = plan.Vehicles,
-            Fuel = plan.Fuel
-        }).ToList();
+            {
+                Id = plan.Id,
+                PlanName = plan.PlanName,
+                Scenario = plan.Scenario,
+                Shelter = plan.Shelter,
+                FoodSources = plan.FoodSources,
+                WaterSources = plan.WaterSources,
+                Weapons = plan.Weapons,
+                Vehicles = plan.Vehicles,
+                Fuel = plan.Fuel
+            }).ToList();
     }
 
     private bool IsPlanSelected(int planId) => selectedPlanIds.Contains(planId);
@@ -307,5 +307,3 @@
         public string? Fuel { get; set; }
     }
 }
-
-
