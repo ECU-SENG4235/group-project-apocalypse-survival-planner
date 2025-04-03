@@ -1,10 +1,11 @@
 ﻿@page "/Home"
 @attribute [StreamRendering]
 @using ASP.Models
+@using Microsoft.AspNetCore.Components.Authorization
 <PageTitle>Apocalypse Survival Planner - Home</PageTitle>
 @inject ASP.Data.PlansDbContext _dbContext
 @inject PlanService PlanService
-
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <style>
     .container {
         padding: 1rem;
@@ -151,6 +152,21 @@
     protected override async Task OnInitializedAsync()
     {
         survivalPlans = await PlanService.GetPlansAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+           
+            survivalPlans = new List<Plan>();
+        }
+        else
+        {
+            survivalPlans = await PlanService.GetPlansAsync();
+            survivalPlans = survivalPlans.Where(p => p.OwnerId == userId).ToList();
+
+        }
 
 
         // Simulate asynchronous loading to demonstrate streaming rendering
@@ -158,17 +174,18 @@
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        curPlan = Enumerable.Range(survivalPlans!.Count - 3, 3).Select(index => new listOfPlans
+        int countToTake = Math.Min(3, survivalPlans!.Count);
+        curPlan = survivalPlans.Skip(survivalPlans.Count - countToTake).Select(plan => new listOfPlans
         { 
-            Id = survivalPlans![index].Id,
-            PlanName = survivalPlans![index].PlanName,
-            Scenario = survivalPlans![index].Scenario,
-            Shelter = survivalPlans![index].Shelter,
-            FoodSources = survivalPlans![index].FoodSources,
-            WaterSources = survivalPlans![index].WaterSources,
-            Weapons = survivalPlans![index].Weapons,
-            Vehicles = survivalPlans![index].Vehicles,
-            Fuel = survivalPlans![index].Fuel
+            Id = plan.Id,
+            PlanName = plan.PlanName,
+            Scenario = plan.Scenario,
+            Shelter = plan.Shelter,
+            FoodSources = plan.FoodSources,
+            WaterSources = plan.WaterSources,
+            Weapons = plan.Weapons,
+            Vehicles = plan.Vehicles,
+            Fuel = plan.Fuel
         }).AsQueryable();
     }
 

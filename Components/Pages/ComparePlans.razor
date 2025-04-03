@@ -34,10 +34,12 @@
 
 @page "/compare-plans"
 @using ASP.Models
+@using Microsoft.AspNetCore.Components.Authorization
 @attribute [StreamRendering]
 @inject ASP.Data.PlansDbContext _dbContext
 @inject PlanService PlanService
 @inject ASP.Data.PlansDbContext _dbContext
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Compare Plans</PageTitle>
 
@@ -271,7 +273,8 @@
             WaterSources = plan.WaterSources,
             Weapons = plan.Weapons,
             Vehicles = plan.Vehicles,
-            Fuel = plan.Fuel
+            Fuel = plan.Fuel,
+            //OwnerId = plan.OwnerId
         }).ToList();
     }
 

@@ -1,5 +1,7 @@
 ﻿@page "/create-plan"
+@using Microsoft.AspNetCore.Components.Authorization
 @inject ASP.Data.PlansDbContext _dbContext
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Create Plan</PageTitle>
 
@@ -215,6 +217,17 @@
             buttonText = "Plan name cannot be empty.";
             return;
         }
+        
+        // Retrieve the current user's authentication state
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+    
+        if (string.IsNullOrEmpty(userId))
+        {
+        buttonText = "User not authenticated.";
+        return;
+        }
 
         var selectedFoods = new List<string>();
         if (foodSources[0]) selectedFoods.Add("Canned Food");
@@ -276,7 +289,8 @@
                 WaterSources = string.Join(", ", selectedWaters),
                 Weapons = string.Join(", ", selectedWeapons),
                 Vehicles = string.Join(", ", selectedVehicles),
-                Fuel = string.Join(", ", selectedFuel)
+                Fuel = string.Join(", ", selectedFuel),
+                OwnerId = userId
             };
 
         _dbContext.Plans.Add(newPlan);

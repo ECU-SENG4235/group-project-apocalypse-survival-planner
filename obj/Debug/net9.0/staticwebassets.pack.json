@@ -1,0 +1,113 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/obj/Debug/net9.0/scopedcss/projectbundle/ASP.bundle.scp.css",
+      "PackagePath": "staticwebassets/ASP.375patd1e6.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/AIUp.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/AIUp.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/AlienInv.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/AlienInv.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/BioPlag.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/BioPlag.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/IceAge.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/IceAge.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/MetImp.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/MetImp.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/NuclearFall.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/NuclearFall.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/SuperVol.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/SuperVol.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/WW3.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/WW3.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Scenarios/ZombieApoc.webp",
+      "PackagePath": "staticwebassets/Images/Scenarios/ZombieApoc.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/Bunker.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/Bunker.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/CruiseShip.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/CruiseShip.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/JungleHut.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/JungleHut.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/MedievalCastle.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/MedievalCastle.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/MetropolitanApartment.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/MetropolitanApartment.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/MilitaryBase.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/MilitaryBase.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/MountainCabin.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/MountainCabin.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/RV.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/RV.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/SuburbanHouse.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/SuburbanHouse.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/Images/Shelters/Tent.webp",
+      "PackagePath": "staticwebassets/Images/Shelters/Tent.webp"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/teevaughn/group-project-apocalypse-survival-planner-fluentblazor/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.ASP.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.ASP.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.ASP.props",
+      "PackagePath": "build\\ASP.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.ASP.props",
+      "PackagePath": "buildMultiTargeting\\ASP.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.ASP.props",
+      "PackagePath": "buildTransitive\\ASP.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,7 +1,9 @@
 ﻿@page "/edit-plan/{id:int}"
 @using ASP.Models
+@using Microsoft.AspNetCore.Components.Authorization
 @inject PlanService PlanService
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @code {
     [Parameter]
@@ -46,6 +48,22 @@
         try
         {
             plan = await PlanService.GetPlanByIdAsync(Id);
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                plan = null;
+                buttonText = "User not found.";
+                return;
+            }
+            if (plan != null && plan.OwnerId != userId)
+            {
+            plan = null;
+            buttonText = "Unauthorized access.";
+            return;
+            }
+
             if (plan != null)
             {
                 cannedFood = plan.FoodSources?.Contains("Canned Food") ?? false;
@@ -73,6 +91,7 @@
                 batteries = plan.Fuel?.Contains("Batteries") ?? false;
                 hamsterWheelGenerator = plan.Fuel?.Contains("Hamster-wheel Generator") ?? false;
             }
+            
             else
             {
                 buttonText = "Plan not found.";

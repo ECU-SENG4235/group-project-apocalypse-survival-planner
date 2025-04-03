@@ -1,7 +1,9 @@
 ﻿@page "/edit-plans"
 @using ASP.Models
+@using Microsoft.AspNetCore.Components.Authorization
 @inject PlanService PlanService
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h3>Edit Plans</h3>
 
@@ -27,7 +29,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
         plans = await PlanService.GetPlansAsync();
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            // No user is logged in, so we can return an empty list or handle it as needed
+            return;
+        }
+        plans = (await PlanService.GetPlansAsync())
+                .Where(p => p.OwnerId == userId)
+                .ToList();
     }
 
     private void EditPlan(int planId)

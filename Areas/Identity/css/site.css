@@ -3,21 +3,12 @@
 }
 
 
-
 .navbar .navbar-brand {
     color: #ff3c00 !important;
     font-weight: bold;
     text-shadow: 2px 2px 5px black;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 705684d (merged with main)
-=======
-
->>>>>>> d9c1ce6 (username changes)
 .navbar .navbar-toggler {
     border: none;
 }

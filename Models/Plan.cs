@@ -5,6 +5,7 @@ namespace ASP.Models
     public class Plan
     {
         public int Id { get; set; }
+        public string OwnerId { get; set; }
 
         //[Required]
         public string? PlanName { get; set; }
