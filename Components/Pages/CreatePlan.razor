@@ -1,4 +1,4 @@
-﻿@page "/create-plan"
+@page "/create-plan"
 @inject ASP.Data.PlansDbContext _dbContext
 @using ASP.Services
 
@@ -47,17 +47,12 @@
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Shelter</h3>
         <FluentCombobox TOption="string" @bind-Value="selectedShelter" Label="Shelter Type">
-            <FluentOption Value="Bunker">Bunker</FluentOption>
-            <FluentOption Value="Mountain Cabin">Mountain Cabin</FluentOption>
-            <FluentOption Value="Metropolitan Apartment">Metropolitan Apartment</FluentOption>
-            <FluentOption Value="Suburban House">Suburban House</FluentOption>
-            <FluentOption Value="Medieval Castle">Medieval Castle</FluentOption>
-            <FluentOption Value="Jungle Hut">Jungle Hut</FluentOption>
-            <FluentOption Value="Military Base">Military Base</FluentOption>
-            <FluentOption Value="Cruise Ship">Cruise Ship</FluentOption>
-            <FluentOption Value="RV">RV</FluentOption>
-            <FluentOption Value="Tent">Tent</FluentOption>
+            @foreach (var shelter in shelterPrices.Keys)
+            {
+                <FluentOption Value="@shelter">@GetShelterLabel(shelter)</FluentOption>
+            }
         </FluentCombobox>
+
 
         @if (!string.IsNullOrEmpty(shelterImageUrl))
         {
@@ -633,6 +628,13 @@
     private string buttonText = "Save Plan";
     private string planName = "";
 
+    enum ItemType
+    {
+        Countable,
+        Binary
+    }
+
+
     private string _selectedScenario = "Zombie Virus Outbreak";
     private string selectedScenario
     {
@@ -685,6 +687,7 @@
         {
             _selectedShelter = value;
             UpdateShelterImage();
+            RecalculateTotalPrice();
         }
     }
 
@@ -710,6 +713,31 @@
             shelterImageUrl = null;
         }
     }
+
+    private Dictionary<string, decimal> shelterPrices = new()
+    {
+        { "Bunker", 5000 },
+        { "Mountain Cabin", 4000 },
+        { "Metropolitan Apartment", 3000 },
+        { "Suburban House", 3500 },
+        { "Medieval Castle", 10000 },
+        { "Jungle Hut", 2000 },
+        { "Military Base", 12000 },
+        { "Cruise Ship", 15000 },
+        { "RV", 2500 },
+        { "Tent", 500 }
+    };
+
+    private string GetShelterLabel(string shelterName)
+    {
+        if (shelterPrices.TryGetValue(shelterName, out var price))
+        {
+            return $"{shelterName} (${price:N0})";
+        }
+        return shelterName;
+    }
+
+
 
     private int[] foodQuantities = new int[7];
     private decimal[] foodPrices = new decimal[] { 10, 100, 500, 150, 75, 30, 200 };
@@ -816,6 +844,12 @@
 
 
         totalPrice = PlanPriceCalculator.CalculateTotal(itemCounts);
+
+        if (shelterPrices.TryGetValue(selectedShelter, out var priceOfShelter))
+        {
+            totalPrice += priceOfShelter;
+        }
+
 
         // Budget check
         if (decimal.TryParse(budgetText, out var parsedBudget))
