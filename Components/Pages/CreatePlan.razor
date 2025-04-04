@@ -1,5 +1,6 @@
 ﻿@page "/create-plan"
 @inject ASP.Data.PlansDbContext _dbContext
+@using ASP.Services
 
 <PageTitle>Create Plan</PageTitle>
 
@@ -13,6 +14,13 @@
         <h3>Plan Details</h3>
         <FluentTextField @bind-Value="planName" Placeholder="Enter plan name..." Label="Plan Name" />
     </FluentCard>
+
+    <!-- Budget Input -->
+    <FluentCard style="padding: 32px;">
+        <h3>Set Budget</h3>
+        <FluentTextField @bind-Value="budgetText" Label="Budget ($)" Placeholder="Enter your budget..." />
+    </FluentCard>
+
 
     <!-- Scenario Selection -->
     <FluentCard style="padding: 32px; min-height: 300px;">
@@ -39,17 +47,12 @@
     <FluentCard style="padding: 32px; min-height: 300px;">
         <h3>Shelter</h3>
         <FluentCombobox TOption="string" @bind-Value="selectedShelter" Label="Shelter Type">
-            <FluentOption Value="Bunker">Bunker</FluentOption>
-            <FluentOption Value="Mountain Cabin">Mountain Cabin</FluentOption>
-            <FluentOption Value="Metropolitan Apartment">Metropolitan Apartment</FluentOption>
-            <FluentOption Value="Suburban House">Suburban House</FluentOption>
-            <FluentOption Value="Medieval Castle">Medieval Castle</FluentOption>
-            <FluentOption Value="Jungle Hut">Jungle Hut</FluentOption>
-            <FluentOption Value="Military Base">Military Base</FluentOption>
-            <FluentOption Value="Cruise Ship">Cruise Ship</FluentOption>
-            <FluentOption Value="RV">RV</FluentOption>
-            <FluentOption Value="Tent">Tent</FluentOption>
+            @foreach (var shelter in shelterPrices.Keys)
+            {
+                <FluentOption Value="@shelter">@GetShelterLabel(shelter)</FluentOption>
+            }
         </FluentCombobox>
+
 
         @if (!string.IsNullOrEmpty(shelterImageUrl))
         {
@@ -58,81 +61,579 @@
     </FluentCard>
 
     <!-- Food Sources -->
-    <FluentCard style="padding: 32px; min-height: 300px;">
+    <FluentCard style="padding: 32px;">
         <h3>Food Sources</h3>
-        <FluentCheckbox @bind-Value="foodSources[0]">Canned Food</FluentCheckbox>
-        <FluentCheckbox @bind-Value="foodSources[1]">Garden</FluentCheckbox>
-        <FluentCheckbox @bind-Value="foodSources[2]">Farm</FluentCheckbox>
-        <FluentCheckbox @bind-Value="foodSources[3]">Hunting/Fishing</FluentCheckbox>
-        <FluentCheckbox @bind-Value="foodSources[4]">MREs</FluentCheckbox>
-        <FluentCheckbox @bind-Value="foodSources[5]">Foraging</FluentCheckbox>
-        <FluentCheckbox @bind-Value="foodSources[6]">Insect Farming</FluentCheckbox>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Canned Food</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[0]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 0, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[0]"
+                               ValueChanged="@((decimal val) => { foodPrices[0] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Garden</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[1]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 1, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[1]"
+                               ValueChanged="@((decimal val) => { foodPrices[1] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Farm</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[2]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 2, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[2]"
+                               ValueChanged="@((decimal val) => { foodPrices[2] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Hunting/Fishing</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[3]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 3, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[3]"
+                               ValueChanged="@((decimal val) => { foodPrices[3] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">MREs</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[4]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 4, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[4]"
+                               ValueChanged="@((decimal val) => { foodPrices[4] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Foraging</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[5]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 5, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[5]"
+                               ValueChanged="@((decimal val) => { foodPrices[5] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Insect Farming</label>
+            <FluentNumberField TValue="int"
+                               Value="@foodQuantities[6]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 6, foodQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@foodPrices[6]"
+                               ValueChanged="@((decimal val) => { foodPrices[6] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
     </FluentCard>
+
+
+
+
+
+
 
     <!-- Water Sources -->
-    <FluentCard style="padding: 32px; min-height: 300px;">
+    <FluentCard style="padding: 32px;">
         <h3>Water Sources</h3>
-        <FluentCheckbox @bind-Value="waterSources[0]">Bottled Water</FluentCheckbox>
-        <FluentCheckbox @bind-Value="waterSources[1]">River</FluentCheckbox>
-        <FluentCheckbox @bind-Value="waterSources[2]">Reservoir</FluentCheckbox>
-        <FluentCheckbox @bind-Value="waterSources[3]">Well</FluentCheckbox>
-        <FluentCheckbox @bind-Value="waterSources[4]">Rainwater Collection</FluentCheckbox>
-        <FluentCheckbox @bind-Value="waterSources[5]">Desalination</FluentCheckbox>
-        <FluentCheckbox @bind-Value="waterSources[6]">Water Purification Tablets</FluentCheckbox>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Bottled Water</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[0]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 0, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[0]"
+                               ValueChanged="@((decimal val) => { waterPrices[0] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">River</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[1]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 1, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[1]"
+                               ValueChanged="@((decimal val) => { waterPrices[1] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Reservoir</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[2]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 2, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[2]"
+                               ValueChanged="@((decimal val) => { waterPrices[2] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Well</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[3]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 3, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[3]"
+                               ValueChanged="@((decimal val) => { waterPrices[3] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Rainwater Collection</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[4]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 4, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[4]"
+                               ValueChanged="@((decimal val) => { waterPrices[4] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Desalination</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[5]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 5, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[5]"
+                               ValueChanged="@((decimal val) => { waterPrices[5] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Water Purification Tablets</label>
+            <FluentNumberField TValue="int"
+                               Value="@waterQuantities[6]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 6, waterQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@waterPrices[6]"
+                               ValueChanged="@((decimal val) => { waterPrices[6] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
     </FluentCard>
+
+
+
+
 
     <!-- Weapons -->
-    <FluentCard style="padding: 32px; min-height: 300px;">
+    <FluentCard style="padding: 32px;">
         <h3>Weapons</h3>
-        <FluentCheckbox @bind-Value="weaponChoices[0]">Bat</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[1]">Firearm</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[2]">Chainsaw</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[3]">Slingshot</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[4]">Crossbow</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[5]">Katana</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[6]">Molotov Cocktails</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[7]">Spear</FluentCheckbox>
-        <FluentCheckbox @bind-Value="weaponChoices[8]">Taser</FluentCheckbox>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Bat</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[0]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 0, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[0]"
+                               ValueChanged="@((decimal val) => { weaponPrices[0] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Firearm</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[1]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 1, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[1]"
+                               ValueChanged="@((decimal val) => { weaponPrices[1] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Chainsaw</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[2]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 2, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[2]"
+                               ValueChanged="@((decimal val) => { weaponPrices[2] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Slingshot</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[3]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 3, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[3]"
+                               ValueChanged="@((decimal val) => { weaponPrices[3] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Crossbow</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[4]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 4, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[4]"
+                               ValueChanged="@((decimal val) => { weaponPrices[4] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Katana</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[5]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 5, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[5]"
+                               ValueChanged="@((decimal val) => { weaponPrices[5] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Molotov Cocktails</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[6]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 6, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[6]"
+                               ValueChanged="@((decimal val) => { weaponPrices[6] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Spear</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[7]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 7, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[7]"
+                               ValueChanged="@((decimal val) => { weaponPrices[7] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Taser</label>
+            <FluentNumberField TValue="int"
+                               Value="@weaponQuantities[8]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 8, weaponQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@weaponPrices[8]"
+                               ValueChanged="@((decimal val) => { weaponPrices[8] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
     </FluentCard>
+
+
+
 
     <!-- Vehicles -->
-    <FluentCard style="padding: 32px; min-height: 300px;">
+    <FluentCard style="padding: 32px;">
         <h3>Vehicles</h3>
-        <FluentCheckbox @bind-Value="vehicleChoices[0]">Car</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[1]">Bicycle</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[2]">Helicopter</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[3]">Boat</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[4]">Motorcycle</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[5]">Tank</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[6]">Horse</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[7]">ATV</FluentCheckbox>
-        <FluentCheckbox @bind-Value="vehicleChoices[8]">Bus</FluentCheckbox>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Car</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[0]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 0, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[0]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[0] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Bicycle</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[1]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 1, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[1]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[1] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Helicopter</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[2]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 2, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[2]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[2] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Boat</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[3]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 3, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[3]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[3] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Motorcycle</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[4]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 4, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[4]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[4] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Tank</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[5]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 5, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[5]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[5] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Horse</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[6]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 6, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[6]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[6] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">ATV</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[7]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 7, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[7]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[7] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Bus</label>
+            <FluentNumberField TValue="int"
+                               Value="@vehicleQuantities[8]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 8, vehicleQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@vehiclePrices[8]"
+                               ValueChanged="@((decimal val) => { vehiclePrices[8] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
     </FluentCard>
+
+
+
+
 
     <!-- Fuel/Power Sources -->
-    <FluentCard style="padding: 32px; min-height: 300px;">
+    <FluentCard style="padding: 32px;">
         <h3>Fuel/Power Sources</h3>
-        <FluentCheckbox @bind-Value="fuelChoices[0]">Gasoline</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[1]">Solar Panel</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[2]">Batteries</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[3]">Hamster-wheel Generator</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[4]">Wind Turbine</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[5]">Hydroelectric Generator</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[6]">Coal</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[7]">Wood-Burning Stove</FluentCheckbox>
-        <FluentCheckbox @bind-Value="fuelChoices[8]">Biofuel</FluentCheckbox>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Gasoline</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[0]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 0, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[0]"
+                               ValueChanged="@((decimal val) => { fuelPrices[0] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Solar Panel</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[1]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 1, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[1]"
+                               ValueChanged="@((decimal val) => { fuelPrices[1] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Batteries</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[2]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 2, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[2]"
+                               ValueChanged="@((decimal val) => { fuelPrices[2] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Hamster-wheel Generator</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[3]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 3, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[3]"
+                               ValueChanged="@((decimal val) => { fuelPrices[3] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Wind Turbine</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[4]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 4, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[4]"
+                               ValueChanged="@((decimal val) => { fuelPrices[4] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Hydroelectric Generator</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[5]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 5, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[5]"
+                               ValueChanged="@((decimal val) => { fuelPrices[5] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Coal</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[6]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 6, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[6]"
+                               ValueChanged="@((decimal val) => { fuelPrices[6] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Wood-Burning Stove</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[7]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 7, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[7]"
+                               ValueChanged="@((decimal val) => { fuelPrices[7] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+            <label style="width: 200px;">Biofuel</label>
+            <FluentNumberField TValue="int"
+                               Value="@fuelQuantities[8]"
+                               ValueChanged="@((int val) => OnQuantityChanged(val, 8, fuelQuantities))"
+                               Min="0" Step="1" />
+            <FluentNumberField TValue="decimal"
+                               Value="@fuelPrices[8]"
+                               ValueChanged="@((decimal val) => { fuelPrices[8] = val; RecalculateTotalPrice(); })"
+                               Min="0" Step="1" />
+        </div>
+
     </FluentCard>
 
-    <!-- Save Button -->
-    <div style="display: flex; justify-content: center; margin-top: 32px;">
-        <FluentButton @onclick="SavePlan">Save Plan</FluentButton>
+
+
+
+    <!-- Total Price & Budget Check -->
+    <div style="text-align: center; margin-top: 32px;">
+        <h3>Total Price: @totalPrice.ToString("C")</h3>
+        @if (budgetExceeded)
+        {
+            <p style="color: red;">⚠️ Over budget by @overBudgetAmount.ToString("C")</p>
+        }
     </div>
 
+
+    <!-- Save Button -->
+    @if (!budgetExceeded)
+    {
+        <div style="display: flex; justify-content: center; margin-top: 32px;">
+            <FluentButton @onclick="SavePlan">Save Plan</FluentButton>
+        </div>
+    }
+
+
 </div>
+
 
 @code {
     private string buttonText = "Save Plan";
     private string planName = "";
+
+    enum ItemType
+    {
+        Countable,
+        Binary
+    }
+
 
     private string _selectedScenario = "Zombie Virus Outbreak";
     private string selectedScenario
@@ -145,16 +646,22 @@
         }
     }
 
+    private string budgetText = "";
+    private decimal budget = 0;
+    private bool budgetExceeded = false;
+    private decimal overBudgetAmount = 0;
 
-    private bool[] foodSources = new bool[7];
-    private bool[] waterSources = new bool[7];
-    private bool[] weaponChoices = new bool[9];
-    private bool[] vehicleChoices = new bool[9];
-    private bool[] fuelChoices = new bool[9];
+
+
+    private void OnCheckboxChanged(bool value, int index, bool[] targetArray)
+    {
+        targetArray[index] = value;
+        RecalculateTotalPrice();
+    }
+
 
     private string scenarioImageUrl = "";
-
-    private Dictionary<string, string?> scenarioImages = new()
+    private Dictionary<string, string> scenarioImages = new()
     {
         { "Zombie Virus Outbreak", "images/scenarios/ZombieApoc.webp" },
         { "Nuclear Fallout", "images/scenarios/NuclearFall.webp" },
@@ -172,9 +679,19 @@
         scenarioImageUrl = scenarioImages.GetValueOrDefault(selectedScenario, null);
     }
 
+    private string _selectedShelter = "Bunker";
+    private string selectedShelter
+    {
+        get => _selectedShelter;
+        set
+        {
+            _selectedShelter = value;
+            UpdateShelterImage();
+            RecalculateTotalPrice();
+        }
+    }
 
-    private string? shelterImageUrl = "";
-
+    private string shelterImageUrl = "";
     private Dictionary<string, string> shelterImages = new()
     {
         { "Bunker", "images/shelters/Bunker.webp" },
@@ -189,22 +706,162 @@
         { "Tent", "images/shelters/Tent.webp" }
     };
 
-    private string _selectedShelter = "Bunker";
-    private string selectedShelter
-    {
-        get => _selectedShelter;
-        set
-        {
-            _selectedShelter = value;
-            UpdateShelterImage();
-        }
-    }
-
     private void UpdateShelterImage()
     {
         if (!shelterImages.TryGetValue(selectedShelter, out shelterImageUrl))
         {
             shelterImageUrl = null;
+        }
+    }
+
+    private Dictionary<string, decimal> shelterPrices = new()
+    {
+        { "Bunker", 5000 },
+        { "Mountain Cabin", 4000 },
+        { "Metropolitan Apartment", 3000 },
+        { "Suburban House", 3500 },
+        { "Medieval Castle", 10000 },
+        { "Jungle Hut", 2000 },
+        { "Military Base", 12000 },
+        { "Cruise Ship", 15000 },
+        { "RV", 2500 },
+        { "Tent", 500 }
+    };
+
+    private string GetShelterLabel(string shelterName)
+    {
+        if (shelterPrices.TryGetValue(shelterName, out var price))
+        {
+            return $"{shelterName} (${price:N0})";
+        }
+        return shelterName;
+    }
+
+
+
+    private int[] foodQuantities = new int[7];
+    private decimal[] foodPrices = new decimal[] { 10, 100, 500, 150, 75, 30, 200 };
+
+
+    private int[] waterQuantities = new int[7];
+    private decimal[] waterPrices = new decimal[] { 20, 50, 200, 100, 80, 400, 15 };
+
+
+    private int[] weaponQuantities = new int[9];
+    private decimal[] weaponPrices = new decimal[] { 30, 600, 250, 40, 350, 500, 60, 90, 120 };
+
+
+    private int[] vehicleQuantities = new int[9];
+    private decimal[] vehiclePrices = new decimal[] { 10000, 300, 50000, 8000, 3000, 100000, 5000, 7000, 25000 };
+
+
+    private int[] fuelQuantities = new int[9];
+    private decimal[] fuelPrices = new decimal[] { 100, 1500, 50, 200, 2000, 3000, 75, 150, 125 };
+
+
+    private decimal totalPrice = 0;
+
+
+    private void OnQuantityChanged(int value, int index, int[] targetArray)
+    {
+        targetArray[index] = value;
+        RecalculateTotalPrice();
+    }
+
+
+
+
+
+    private void RecalculateTotalPrice()
+    {
+        var selectedItems = new List<string>();
+
+        var itemCounts = new Dictionary<string, (int quantity, decimal price)>();
+
+        void Add(string label, int quantity, decimal price)
+        {
+            if (quantity > 0)
+                itemCounts[label] = (quantity, price);
+        }
+
+        // Food
+        Add("Canned Food", foodQuantities[0], foodPrices[0]);
+        Add("Garden", foodQuantities[1], foodPrices[1]);
+        Add("Farm", foodQuantities[2], foodPrices[2]);
+        Add("Hunting/Fishing", foodQuantities[3], foodPrices[3]);
+        Add("MREs", foodQuantities[4], foodPrices[4]);
+        Add("Foraging", foodQuantities[5], foodPrices[5]);
+        Add("Insect Farming", foodQuantities[6], foodPrices[6]);
+
+
+        // Water
+        Add("Bottled Water", waterQuantities[0], waterPrices[0]);
+        Add("River", waterQuantities[1], waterPrices[1]);
+        Add("Reservoir", waterQuantities[2], waterPrices[2]);
+        Add("Well", waterQuantities[3], waterPrices[3]);
+        Add("Rainwater Collection", waterQuantities[4], waterPrices[4]);
+        Add("Desalination", waterQuantities[5], waterPrices[5]);
+        Add("Water Purification Tablets", waterQuantities[6], waterPrices[6]);
+
+
+        // Weapons
+        Add("Bat", weaponQuantities[0], weaponPrices[0]);
+        Add("Firearm", weaponQuantities[1], weaponPrices[1]);
+        Add("Chainsaw", weaponQuantities[2], weaponPrices[2]);
+        Add("Slingshot", weaponQuantities[3], weaponPrices[3]);
+        Add("Crossbow", weaponQuantities[4], weaponPrices[4]);
+        Add("Katana", weaponQuantities[5], weaponPrices[5]);
+        Add("Molotov Cocktails", weaponQuantities[6], weaponPrices[6]);
+        Add("Spear", weaponQuantities[7], weaponPrices[7]);
+        Add("Taser", weaponQuantities[8], weaponPrices[8]);
+        
+
+
+        // Vehicles
+        Add("Car", vehicleQuantities[0], vehiclePrices[0]);
+        Add("Bicycle", vehicleQuantities[1], vehiclePrices[1]);
+        Add("Helicopter", vehicleQuantities[2], vehiclePrices[2]);
+        Add("Boat", vehicleQuantities[3], vehiclePrices[3]);
+        Add("Motorcycle", vehicleQuantities[4], vehiclePrices[4]);
+        Add("Tank", vehicleQuantities[5], vehiclePrices[5]);
+        Add("Horse", vehicleQuantities[6], vehiclePrices[6]);
+        Add("ATV", vehicleQuantities[7], vehiclePrices[7]);
+        Add("Bus", vehicleQuantities[8], vehiclePrices[8]);
+
+
+
+        // Fuel/Power
+        Add("Gasoline", fuelQuantities[0], fuelPrices[0]);
+        Add("Solar Panel", fuelQuantities[1], fuelPrices[1]);
+        Add("Batteries", fuelQuantities[2], fuelPrices[2]);
+        Add("Hamster-wheel Generator", fuelQuantities[3], fuelPrices[3]);
+        Add("Wind Turbine", fuelQuantities[4], fuelPrices[4]);
+        Add("Hydroelectric Generator", fuelQuantities[5], fuelPrices[5]);
+        Add("Coal", fuelQuantities[6], fuelPrices[6]);
+        Add("Wood-Burning Stove", fuelQuantities[7], fuelPrices[7]);
+        Add("Biofuel", fuelQuantities[8], fuelPrices[8]);
+
+
+
+        totalPrice = PlanPriceCalculator.CalculateTotal(itemCounts);
+
+        if (shelterPrices.TryGetValue(selectedShelter, out var priceOfShelter))
+        {
+            totalPrice += priceOfShelter;
+        }
+
+
+        // Budget check
+        if (decimal.TryParse(budgetText, out var parsedBudget))
+        {
+            budget = parsedBudget;
+            budgetExceeded = totalPrice > budget;
+            overBudgetAmount = budgetExceeded ? totalPrice - budget : 0;
+        }
+        else
+        {
+            budgetExceeded = false;
+            overBudgetAmount = 0;
         }
     }
 
@@ -216,56 +873,50 @@
             return;
         }
 
+        // Food
         var selectedFoods = new List<string>();
-        if (foodSources[0]) selectedFoods.Add("Canned Food");
-        if (foodSources[1]) selectedFoods.Add("Garden");
-        if (foodSources[2]) selectedFoods.Add("Farm");
-        if (foodSources[3]) selectedFoods.Add("Hunting/Fishing");
-        if (foodSources[4]) selectedFoods.Add("MREs");
-        if (foodSources[5]) selectedFoods.Add("Foraging");
-        if (foodSources[6]) selectedFoods.Add("Insect Farming");
+        var foodLabels = new[] { "Canned Food", "Garden", "Farm", "Hunting/Fishing", "MREs", "Foraging", "Insect Farming" };
+        for (int i = 0; i < foodQuantities.Length; i++)
+        {
+            if (foodQuantities[i] > 0)
+                selectedFoods.Add($"{foodLabels[i]} x{foodQuantities[i]}");
+        }
 
+        // Water
         var selectedWaters = new List<string>();
-        if (waterSources[0]) selectedWaters.Add("Bottled Water");
-        if (waterSources[1]) selectedWaters.Add("River");
-        if (waterSources[2]) selectedWaters.Add("Reservoir");
-        if (waterSources[3]) selectedWaters.Add("Well");
-        if (waterSources[4]) selectedWaters.Add("Rainwater Collection");
-        if (waterSources[5]) selectedWaters.Add("Desalination");
-        if (waterSources[6]) selectedWaters.Add("Water Purification Tablets");
+        var waterLabels = new[] { "Bottled Water", "River", "Reservoir", "Well", "Rainwater Collection", "Desalination", "Water Purification Tablets" };
+        for (int i = 0; i < waterQuantities.Length; i++)
+        {
+            if (waterQuantities[i] > 0)
+                selectedWaters.Add($"{waterLabels[i]} x{waterQuantities[i]}");
+        }
 
+        // Weapons
         var selectedWeapons = new List<string>();
-        if (weaponChoices[0]) selectedWeapons.Add("Bat");
-        if (weaponChoices[1]) selectedWeapons.Add("Firearm");
-        if (weaponChoices[2]) selectedWeapons.Add("Chainsaw");
-        if (weaponChoices[3]) selectedWeapons.Add("Slingshot");
-        if (weaponChoices[4]) selectedWeapons.Add("Crossbow");
-        if (weaponChoices[5]) selectedWeapons.Add("Katana");
-        if (weaponChoices[6]) selectedWeapons.Add("Molotov Cocktails");
-        if (weaponChoices[7]) selectedWeapons.Add("Spear");
-        if (weaponChoices[8]) selectedWeapons.Add("Taser");
+        var weaponLabels = new[] { "Bat", "Firearm", "Chainsaw", "Slingshot", "Crossbow", "Katana", "Molotov Cocktails", "Spear", "Taser" };
+        for (int i = 0; i < weaponQuantities.Length; i++)
+        {
+            if (weaponQuantities[i] > 0)
+                selectedWeapons.Add($"{weaponLabels[i]} x{weaponQuantities[i]}");
+        }
 
+        // Vehicles
         var selectedVehicles = new List<string>();
-        if (vehicleChoices[0]) selectedVehicles.Add("Car");
-        if (vehicleChoices[1]) selectedVehicles.Add("Bicycle");
-        if (vehicleChoices[2]) selectedVehicles.Add("Helicopter");
-        if (vehicleChoices[3]) selectedVehicles.Add("Boat");
-        if (vehicleChoices[4]) selectedVehicles.Add("Motorcycle");
-        if (vehicleChoices[5]) selectedVehicles.Add("Tank");
-        if (vehicleChoices[6]) selectedVehicles.Add("Horse");
-        if (vehicleChoices[7]) selectedVehicles.Add("ATV");
-        if (vehicleChoices[8]) selectedVehicles.Add("Bus");
+        var vehicleLabels = new[] { "Car", "Bicycle", "Helicopter", "Boat", "Motorcycle", "Tank", "Horse", "ATV", "Bus" };
+        for (int i = 0; i < vehicleQuantities.Length; i++)
+        {
+            if (vehicleQuantities[i] > 0)
+                selectedVehicles.Add($"{vehicleLabels[i]} x{vehicleQuantities[i]}");
+        }
 
+        // Fuel
         var selectedFuel = new List<string>();
-        if (fuelChoices[0]) selectedFuel.Add("Gasoline");
-        if (fuelChoices[1]) selectedFuel.Add("Solar Panel");
-        if (fuelChoices[2]) selectedFuel.Add("Batteries");
-        if (fuelChoices[3]) selectedFuel.Add("Hamster-wheel Generator");
-        if (fuelChoices[4]) selectedFuel.Add("Wind Turbine");
-        if (fuelChoices[5]) selectedFuel.Add("Hydroelectric Generator");
-        if (fuelChoices[6]) selectedFuel.Add("Coal");
-        if (fuelChoices[7]) selectedFuel.Add("Wood-Burning Stove");
-        if (fuelChoices[8]) selectedFuel.Add("Biofuel");
+        var fuelLabels = new[] { "Gasoline", "Solar Panel", "Batteries", "Hamster-wheel Generator", "Wind Turbine", "Hydroelectric Generator", "Coal", "Wood-Burning Stove", "Biofuel" };
+        for (int i = 0; i < fuelQuantities.Length; i++)
+        {
+            if (fuelQuantities[i] > 0)
+                selectedFuel.Add($"{fuelLabels[i]} x{fuelQuantities[i]}");
+        }
 
         var newPlan = new ASP.Models.Plan
             {

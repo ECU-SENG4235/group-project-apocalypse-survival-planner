@@ -1,0 +1,417 @@
+@page "/survival-time-calculator"
+@attribute [StreamRendering]
+@using ASP.Models
+@inject ASP.Data.PlansDbContext _dbContext
+@inject PlanService PlanService
+
+<style>
+    .plans-container {
+        padding: 20px;
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+        color: #666000;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .graph-container {
+        margin: 20px 0;
+        background: #333;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .bar {
+        height: 30px;
+        background: linear-gradient(90deg, #4CAF50, #45a049);
+        transition: width 0.5s ease-in-out;
+        border-radius: 4px;
+        margin: 5px 0;
+    }
+
+    .feedback {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        background-color: #444;
+    }
+
+    .warning {
+        color: #ff6b6b;
+    }
+
+    .success {
+        color: #4CAF50;
+    }
+
+    .input-group {
+        margin: 15px 0;
+        padding: 10px;
+        background: #333;
+        border-radius: 5px;
+    }
+
+    input[type="number"] {
+        background: #444;
+        border: 1px solid #555;
+        color: white;
+        padding: 5px;
+        border-radius: 4px;
+    }
+</style>
+
+<PageTitle>Survival Time Calculator</PageTitle>
+
+<div class="plans-container">
+    <h1>Survival Analysis</h1>
+    <p><i>Select a plan to analyze survival time</i></p>
+
+    <select class="form-select" @onchange="OnPlanSelected">
+        <option value="">Select a Plan</option>
+        @foreach (var plan in survivalPlans!)
+        {
+            <option value="@plan.Id">@plan.PlanName</option>
+        }
+    </select>
+
+    <div style="margin-top: 20px;" hidden="@(selectedPlan == null)">
+        <div class="input-group">
+            <h3>Available Supplies</h3>
+            @if (selectedPlan?.WaterSources?.Contains("Bottled Water") == true)
+            {
+                <label>Water Bottles: <input type="number" @bind="waterBottles" min="0" /></label>
+                <br />
+            }
+            @if (selectedPlan?.FoodSources?.Contains("Canned Food") == true)
+            {
+                <label>Cans of Food: <input type="number" @bind="foodCans" min="0" /></label>
+                <br />
+            }
+            <button class="btn btn-primary mt-2" @onclick="CalculateSurvivalTime">Calculate</button>
+        </div>
+        
+        @if (survivalDays > 0)
+        {
+            <div class="graph-container">
+            <h3>Survival Analysis Dashboard</h3>
+            <h4>Overall Survival Time</h4>
+            <div class="bar" style="width: @(Math.Min((survivalDays / 100.0) *
+             100, 100))%; background: linear-gradient(90deg, #4CAF50, #45a049)">
+                @survivalDays days total
+            </div>
+
+            <h4>Water Supply</h4>
+            <div class="bar" style="width: @(Math.Min((waterDays / 100.0) * 100, 100))%; 
+            background: linear-gradient(90deg, #2196F3, #1976D2)">
+                @waterDays days of water
+            </div>
+
+            <h4>Food Supply</h4>
+            <div class="bar" style="width: @(Math.Min((foodDays / 100.0) * 100, 100))%;
+            background: linear-gradient(90deg, #FF9800, #F57C00)">
+                @foodDays days of food
+            </div>
+
+            <h4>Defense Rating</h4>
+            <div class="bar" style="width: @(Math.Min((defenseDays / 100.0) * 100, 100))%;
+            background: linear-gradient(90deg, #f44336, #d32f2f)">
+                @defenseDays days defense advantage
+            </div>
+
+            <h4>Mobility Score</h4>
+            <div class="bar" style="width: @(Math.Min((mobilityScore / 100.0) * 100, 100))%;
+            background: linear-gradient(90deg, #9C27B0, #7B1FA2)">
+                @mobilityScore mobility points
+            </div>
+
+            <h4>Habitat Hazard Level</h4>
+            <div class="bar" style="width: @(Math.Min((habitatHazard / 100.0) * 100, 100))%;
+            background: linear-gradient(90deg, #795548, #5D4037)">
+                @habitatHazard hazard points
+            </div>
+            </div>
+
+            <div class="feedback">
+                <h4>Survival Analysis:</h4>
+                @if (survivalDays <= 3)
+                {
+                    <p class="warning">⚠️ Critical: You will only survive @survivalDays days! Water shortage is your primary concern.</p>
+                }
+                else if (survivalDays <= 21)
+                {
+                    <p class="warning">⚠️ Warning: Food supplies are critically low. Consider adding more food sources.</p>
+                }
+                else if (survivalDays >= 60)
+                {
+                    <p class="success">✅ Good planning! Your survival setup is well-prepared.</p>
+                }
+
+                <h5>Survival Tips:</h5>
+                <ul>
+                    @if (!selectedPlan.WaterSources.Contains("Well") && !selectedPlan.WaterSources.Contains("River"))
+                    {
+                        <li>Consider adding a reliable water source to your plan</li>
+                    }
+                    @if (!selectedPlan.FoodSources.Contains("Farm"))
+                    {
+                        <li>Adding farming capabilities could extend survival time significantly</li>
+                    }
+                    @if (selectedPlan.Scenario.Contains("Zombie") && !selectedPlan.Weapons.Contains("Firearm"))
+                    {
+                        <li>For zombie scenarios, firearms are essential for longer survival</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Plan>? survivalPlans;
+    private Plan? selectedPlan;
+    private int waterBottles = 0;
+    private int foodCans = 0;
+    private int survivalDays = 0;
+    private int waterDays = 0;
+    private int foodDays = 0;
+    private int defenseDays = 0;    
+
+    private int mobilityScore = 2;
+
+    private int habitatHazard = 5;
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        survivalPlans = await PlanService.GetPlansAsync();
+    }
+
+    private void OnPlanSelected(ChangeEventArgs e)
+    {
+        if (string.IsNullOrEmpty(e.Value?.ToString()))
+        {
+            selectedPlan = null;
+            ResetCalculationValues();
+            return;
+        }
+        if (int.TryParse(e.Value.ToString(), out int selectedId))
+        {
+            selectedPlan = survivalPlans?.FirstOrDefault(p => p.Id == selectedId);
+            ResetCalculationValues();
+        }
+    }
+
+    private void ResetCalculationValues()
+    {
+        waterBottles = 0;
+        foodCans = 0;
+        survivalDays = 0;
+        waterDays = 0;
+        foodDays = 0;
+        defenseDays = 0;
+        mobilityScore = 2;
+        habitatHazard = 5;
+    }
+
+    private void CalculateSurvivalTime()
+    {
+        if (selectedPlan == null) return;
+
+        survivalDays = 0;
+        bool hasWaterSource = false;
+        bool hasFirearm = false;
+        if(selectedPlan.WaterSources?.Contains("Reservoir") == true ||
+           selectedPlan.WaterSources?.Contains("River") == true ||
+           selectedPlan.WaterSources?.Contains("Well") == true)
+        {   
+            hasWaterSource = true;
+        }
+
+        if(selectedPlan.Weapons?.Contains("Firearm") == true)
+        {   
+            hasFirearm = true;
+        }
+
+
+
+        // Calculate water days (need 2 bottles per day)
+        waterDays = (waterBottles * 2) + (hasWaterSource ? 15 : 0);
+        defenseDays = 0;
+        if (hasFirearm)
+        {
+            if (selectedPlan.Scenario?.Contains("Zombie Virus Outbreak") == true)
+                defenseDays += 10;
+            else if (selectedPlan.Scenario?.Contains("World War III") == true)
+                defenseDays += 20;
+            else if (selectedPlan.Scenario?.Contains("Biological Plague") == true)
+                defenseDays += 15;
+            else if (selectedPlan.Scenario?.Contains("Alien Invasion") == true)
+                defenseDays += 25;
+        }
+        else
+        {
+            defenseDays = defenseDays + 30;
+        }
+
+        if (selectedPlan.Weapons?.Contains("Molotov Cocktails") == true)
+        {
+            if (selectedPlan.Scenario?.Contains("Zombie Virus Outbreak") == true)
+                defenseDays += 5;
+            else if (selectedPlan.Scenario?.Contains("World War III") == true)
+                defenseDays += 10;
+            else if (selectedPlan.Scenario?.Contains("Biological Plague") == true)
+                defenseDays += 7;
+            else if (selectedPlan.Scenario?.Contains("Alien Invasion") == true)
+                defenseDays += 12;
+        }
+        else
+        {
+            defenseDays = defenseDays + 20;
+
+        }
+
+        if (selectedPlan.Weapons?.Contains("Katana") == true)
+        {
+            if (selectedPlan.Scenario?.Contains("Zombie Virus Outbreak") == true)
+                defenseDays += 8;
+            else if (selectedPlan.Scenario?.Contains("World War III") == true)
+                defenseDays += 15;
+            else if (selectedPlan.Scenario?.Contains("Biological Plague") == true)
+                defenseDays += 10;
+            else if (selectedPlan.Scenario?.Contains("Alien Invasion") == true)
+                defenseDays += 18;
+        }
+        else
+        {
+            defenseDays = defenseDays + 25;
+
+        }
+        if (selectedPlan.Weapons?.Contains("Chainsaw") == true)
+        {
+            if (selectedPlan.Scenario?.Contains("Zombie Virus Outbreak") == true)
+                defenseDays += 20;
+            else if (selectedPlan.Scenario?.Contains("World War III") == true)
+                defenseDays += 5;
+            else if (selectedPlan.Scenario?.Contains("Biological Plague") == true)
+                defenseDays += 15;
+            else if (selectedPlan.Scenario?.Contains("Alien Invasion") == true)
+                defenseDays += 10;
+        }
+        else
+        {
+            defenseDays = defenseDays + 10;
+
+        }
+
+        if (selectedPlan.Weapons?.Contains("Crossbow") == true)
+        {
+            if (selectedPlan.Scenario?.Contains("Zombie Virus Outbreak") == true)
+                defenseDays += 15;
+            else if (selectedPlan.Scenario?.Contains("World War III") == true)
+                defenseDays += 8;
+            else if (selectedPlan.Scenario?.Contains("Biological Plague") == true)
+                defenseDays += 12;
+            else if (selectedPlan.Scenario?.Contains("Alien Invasion") == true)
+                defenseDays += 20;
+        }
+        else
+        {
+            defenseDays = defenseDays + 15;
+
+        }
+
+
+
+        if (selectedPlan.Vehicles?.Contains("Motorcycle") == true)
+        {
+            mobilityScore += 20;
+        }
+
+        if (selectedPlan.Vehicles?.Contains("Car") == true)
+        {
+            mobilityScore += 30;
+        }
+
+        if (selectedPlan.Vehicles?.Contains("Tank") == true)
+        {
+            mobilityScore += 30;
+        }
+
+        if (selectedPlan.Vehicles?.Contains("Bicycle") == true)
+        {
+            mobilityScore += 5;
+        }
+
+        if (selectedPlan.Vehicles?.Contains("Horse") == true)
+        {
+            mobilityScore += 12;
+        }
+        if (selectedPlan.Vehicles?.Contains("Boat") == true && selectedPlan.Scenario?.Contains("Zombie Virus Outbreak") == true)
+        {
+            mobilityScore += 30;
+        }
+        if (selectedPlan.Vehicles?.Contains("Boat") == true && selectedPlan.Scenario?.Contains("Biological Plague") == true)
+        {
+            mobilityScore += 30;
+        }
+
+        if (selectedPlan.Scenario?.Contains("Nuclear Fallout") == true)
+        {
+            habitatHazard += 20;
+        }
+
+        if (selectedPlan.Scenario?.Contains("Supervolcano Eruption") == true)
+        {
+            habitatHazard += 15;
+        }
+
+        if (selectedPlan.Scenario?.Contains("Meteor Impact") == true)
+        {
+            habitatHazard += 25;
+        }
+
+        if (selectedPlan.Scenario?.Contains("Ice Age") == true)
+        {
+            habitatHazard += 10;
+        }
+
+        // Calculate food days (need 1 can per day)
+        // Adjust survival days based on mobility and habitat hazards
+        foodDays = 0;
+        if (selectedPlan.FoodSources?.Contains("Farm") == true && selectedPlan.Scenario?.Contains("Nuclear Fallout") == false)
+            foodDays += 20;
+        foodDays += foodCans * 3;
+
+        // Base survival calculation from resources
+        int baseResourceDays = Math.Min(waterDays, foodDays);
+        
+        // Calculate survival modifier based on mobility and defense
+        double mobilityFactor = mobilityScore * 0.5; // Mobility helps find new resources
+        double defenseFactor = defenseDays * 0.7;    // Defense helps protect existing resources
+        
+        // Calculate final survival days with modifiers
+        survivalDays = (int)(baseResourceDays * (1 + (mobilityFactor / 100) + (defenseFactor / 100)));
+        
+        // Apply habitat hazard penalty
+        double hazardPenalty = habitatHazard * 0.02;
+        survivalDays = (int)(survivalDays * (1 - hazardPenalty));
+        
+        // Minimum survival thresholds
+        if (waterDays == 0)
+        {
+            survivalDays = Math.Max(3, survivalDays); // At least 3 days without water
+        }
+        if (foodDays == 0)
+        {
+            survivalDays = Math.Max(21, survivalDays); // At least 21 days without food
+        }
+
+    }
+}
