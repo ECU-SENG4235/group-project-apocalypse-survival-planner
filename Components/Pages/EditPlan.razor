@@ -14,26 +14,24 @@
     private bool garden;
     private bool farm;
     private bool huntingFishing;
-
     private bool bottledWater;
     private bool river;
     private bool reservoir;
     private bool well;
-
     private bool bat;
     private bool firearm;
     private bool chainsaw;
     private bool slingshot;
-
     private bool car;
     private bool bicycle;
     private bool helicopter;
     private bool boat;
-
     private bool gasoline;
     private bool solarPanel;
     private bool batteries;
     private bool hamsterWheelGenerator;
+    private int bottledWaterQuantity;
+    private int cannedFoodQuantity;
 
 
     private void NavigateToEditPlan(int planId)
@@ -48,30 +46,30 @@
             plan = await PlanService.GetPlanByIdAsync(Id);
             if (plan != null)
             {
-                cannedFood = plan.FoodSources?.Contains("Canned Food") ?? false;
-                garden = plan.FoodSources?.Contains("Garden") ?? false;
-                farm = plan.FoodSources?.Contains("Farm") ?? false;
-                huntingFishing = plan.FoodSources?.Contains("Hunting/Fishing") ?? false;
+                cannedFood = plan.FoodSources.Contains("Canned Food");
+                garden = plan.FoodSources.Contains("Garden");
+                farm = plan.FoodSources.Contains("Farm");
+                huntingFishing = plan.FoodSources.Contains("Hunting/Fishing");
 
-                bottledWater = plan.WaterSources?.Contains("Bottled Water") ?? false;
-                river = plan.WaterSources?.Contains("River") ?? false;
-                reservoir = plan.WaterSources?.Contains("Reservoir") ?? false;
-                well = plan.WaterSources?.Contains("Well") ?? false;
+                bottledWater = plan.WaterSources.Contains("Bottled Water");
+                river = plan.WaterSources.Contains("River");
+                reservoir = plan.WaterSources.Contains("Reservoir");
+                well = plan.WaterSources.Contains("Well");
 
-                bat = plan.Weapons?.Contains("Bat") ?? false;
-                firearm = plan.Weapons?.Contains("Firearm") ?? false;
-                chainsaw = plan.Weapons?.Contains("Chainsaw") ?? false;
-                slingshot = plan.Weapons?.Contains("Slingshot") ?? false;
+                bat = plan.Weapons.Contains("Bat");
+                firearm = plan.Weapons.Contains("Firearm");
+                chainsaw = plan.Weapons.Contains("Chainsaw");
+                slingshot = plan.Weapons.Contains("Slingshot");
 
-                car = plan.Vehicles?.Contains("Car") ?? false;
-                bicycle = plan.Vehicles?.Contains("Bicycle") ?? false;
-                helicopter = plan.Vehicles?.Contains("Helicopter") ?? false;
-                boat = plan.Vehicles?.Contains("Boat") ?? false;
+                car = plan.Vehicles.Contains("Car");
+                bicycle = plan.Vehicles.Contains("Bicycle");
+                helicopter = plan.Vehicles.Contains("Helicopter");
+                boat = plan.Vehicles.Contains("Boat");
 
-                gasoline = plan.Fuel?.Contains("Gasoline") ?? false;
-                solarPanel = plan.Fuel?.Contains("Solar Panel") ?? false;
-                batteries = plan.Fuel?.Contains("Batteries") ?? false;
-                hamsterWheelGenerator = plan.Fuel?.Contains("Hamster-wheel Generator") ?? false;
+                gasoline = plan.Fuel.Contains("Gasoline");
+                solarPanel = plan.Fuel.Contains("Solar Panel");
+                batteries = plan.Fuel.Contains("Batteries");
+                hamsterWheelGenerator = plan.Fuel.Contains("Hamster-wheel Generator");
             }
             else
             {
@@ -92,8 +90,20 @@
             return;
         }
 
-        plan.FoodSources = string.Join(", ", GetSelectedFoodSources());
-        plan.WaterSources = string.Join(", ", GetSelectedWaterSources());
+        // Create a dictionary to store quantities
+        var quantities = new Dictionary<string, int>();
+
+        // Add quantities for each selected item
+        // You'll need to add corresponding quantity fields in the UI
+        if (bottledWater) quantities["Bottled Water"] = bottledWaterQuantity;
+        if (cannedFood) quantities["Canned Food"] = cannedFoodQuantity;
+        if (river) quantities["River"] = 1;
+        if (reservoir) quantities["Reservoir"] = 1;
+        if (well) quantities["Well"] = 1;
+
+        // Format the strings with quantities
+        plan.FoodSources = string.Join(", ", GetSelectedFoodSources().Select(s => quantities.ContainsKey(s) ? $"{s} x{quantities[s]}" : s));
+        plan.WaterSources = string.Join(", ", GetSelectedWaterSources().Select(s => quantities.ContainsKey(s) ? $"{s} x{quantities[s]}" : s));
         plan.Weapons = string.Join(", ", GetSelectedWeapons());
         plan.Vehicles = string.Join(", ", GetSelectedVehicles());
         plan.Fuel = string.Join(", ", GetSelectedFuel());
@@ -195,6 +205,12 @@ else
         <FluentCard style="padding: 32px; min-height: 300px;">
             <h3>Food Sources</h3>
             <FluentCheckbox @bind-Value="cannedFood">Canned Food</FluentCheckbox>
+
+            @if (cannedFood)
+            {                                   
+                <FluentNumberField @bind-Value="cannedFoodQuantity" Min="1" Label="Quantity" />
+            }
+
             <FluentCheckbox @bind-Value="garden">Garden</FluentCheckbox>
             <FluentCheckbox @bind-Value="farm">Farm</FluentCheckbox>
             <FluentCheckbox @bind-Value="huntingFishing">Hunting/Fishing</FluentCheckbox>
@@ -203,7 +219,13 @@ else
         <!-- Water Source Section -->
         <FluentCard style="padding: 32px; min-height: 300px;">
             <h3>Water Sources</h3>
+            <div style="display: flex; align-items: center; gap: 16px;"></div>
             <FluentCheckbox @bind-Value="bottledWater">Bottled Water</FluentCheckbox>
+            @if (bottledWater)
+            {
+                <FluentNumberField @bind-Value="bottledWaterQuantity" Min="1" Label="Quantity" />
+            }
+            
             <FluentCheckbox @bind-Value="river">River</FluentCheckbox>
             <FluentCheckbox @bind-Value="reservoir">Reservoir</FluentCheckbox>
             <FluentCheckbox @bind-Value="well">Well</FluentCheckbox>
@@ -242,4 +264,5 @@ else
         </div>
 
     </div>
+}
 }

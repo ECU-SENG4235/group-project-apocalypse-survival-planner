@@ -1,9 +1,11 @@
 @page "/my-plans"
 @attribute [StreamRendering]
 @using ASP.Models
+@using Microsoft.AspNetCore.Components.Authorization
 @inject ASP.Data.PlansDbContext _dbContext
 @inject PlanService PlanService
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <style>
 
@@ -85,16 +87,40 @@
     {
         <h1>My Survival Plans</h1>
         <p><i>Select a plan to view details</i></p>
+        <button @onclick="CategorizePlans">Categorize by Scenario</button>
 
-        <FluentGrid Columns="3">
-            @foreach (var plan in survivalPlans ?? new List<Plan>())
+        @if (isCategorized)
+        {
+            @foreach (var scenario in categorizedPlans.Keys)
             {
-                <FluentCard Class="plan-card" @onclick="() => ShowPlanDetails(plan)">
-                    <h3>@plan.PlanName</h3>
-                    <p>Scenario: @plan.Scenario</p>
-                </FluentCard>
+                <h2 style="margin-top: 20px; color: #ff4d4d;">@scenario</h2>
+            <FluentGrid Columns="3">
+                @foreach (var plan in categorizedPlans[scenario])
+                {
+                    <FluentCard Class="plan-card" @onclick="() => ShowPlanDetails(plan)">
+                     <h3>@plan.PlanName</h3>
+                     <p>Scenario: @plan.Scenario</p>
+                     </FluentCard>
+                    }
+
+                </FluentGrid>
             }
-        </FluentGrid>
+        }
+            
+        else
+        {
+
+
+            <FluentGrid Columns="3">
+                @foreach (var plan in survivalPlans ?? new List<Plan>())
+                {
+                    <FluentCard Class="plan-card" @onclick="() => ShowPlanDetails(plan)">
+                        <h3>@plan.PlanName</h3>
+                        <p>Scenario: @plan.Scenario</p>
+                    </FluentCard>
+                }
+            </FluentGrid>
+        }
     }
     else
     {
@@ -159,11 +185,30 @@
 @code {
     private List<Plan>? survivalPlans;
     private Plan? selectedPlan;
+    private bool isCategorized = false;
+    private Dictionary<string, List<Plan>> categorizedPlans = new();
     private bool showDetail = false;
 
     protected override async Task OnInitializedAsync()
     {
         survivalPlans = await PlanService.GetPlansAsync();
+
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+           
+            survivalPlans = new List<Plan>();
+        }
+        else
+        {
+            survivalPlans = await PlanService.GetPlansAsync();
+            survivalPlans = survivalPlans.Where(p => p.OwnerId == userId).ToList();
+
+        }
     }
 
     private void ShowPlanDetails(Plan plan)
@@ -176,5 +221,32 @@
     {
         showDetail = false;
         selectedPlan = null;
+    }
+
+    private void NavigateToPlan(int planId)
+    {
+        NavigationManager.NavigateTo($"/edit-plan/{planId}");
+    }
+
+    private void CategorizePlans()
+    {
+        categorizedPlans = survivalPlans!
+            .GroupBy(plan => plan.Scenario)
+            .ToDictionary(group => group.Key!, group => group.ToList());
+
+        isCategorized = true;
+    }
+
+        private class listOfPlans
+    {
+        public int Id { get; set; }
+        public string? PlanName { get; set; }
+        public string? Scenario { get; set; }
+        public string? Shelter { get; set; }
+        public string? FoodSources { get; set; }
+        public string? WaterSources { get; set; }
+        public string? Weapons { get; set; }
+        public string? Vehicles { get; set; }
+        public string? Fuel { get; set; }
     }
 }

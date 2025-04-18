@@ -3,6 +3,11 @@
 @using ASP.Models
 @inject ASP.Data.PlansDbContext _dbContext
 @inject PlanService PlanService
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
 
 <style>
     .plans-container {
@@ -81,18 +86,17 @@
 
     <div style="margin-top: 20px;" hidden="@(selectedPlan == null)">
         <div class="input-group">
-            <h3>Available Supplies</h3>
-            @if (selectedPlan?.WaterSources?.Contains("Bottled Water") == true)
-            {
-                <label>Water Bottles: <input type="number" @bind="waterBottles" min="0" /></label>
+
+            <h3> Amount of people </h3>
+                <label>Number of adults in plan: <input type="number" @bind="adultNum" min="1" /></label>
+                <label>Number of children in plan: <input type="number" @bind="childNum" min="0" /></label>
                 <br />
-            }
-            @if (selectedPlan?.FoodSources?.Contains("Canned Food") == true)
-            {
-                <label>Cans of Food: <input type="number" @bind="foodCans" min="0" /></label>
-                <br />
-            }
-            <button class="btn btn-primary mt-2" @onclick="CalculateSurvivalTime">Calculate</button>
+            <button class="btn btn-primary mt-2" 
+                    @onclick="async () => { 
+                        CalculateSurvivalTime(); 
+                    }">
+                Calculate
+            </button>
         </div>
         
         @if (survivalDays > 0)
@@ -146,24 +150,71 @@
                 {
                     <p class="warning">⚠️ Warning: Food supplies are critically low. Consider adding more food sources.</p>
                 }
+                else if (survivalDays <= 30)
+                {
+                    <p class="warning">⚠️ Moderate Risk: Your supplies will last less than a month. Focus on gathering more resources.</p>
+                }
+                else if (survivalDays <= 45)
+                {
+                    <p>📊 Adequate: You have basic survival capacity but should look to expand resources.</p>
+                }
                 else if (survivalDays >= 60)
                 {
-                    <p class="success">✅ Good planning! Your survival setup is well-prepared.</p>
+                    <p class="success">✅ Excellent: Your survival setup is well-prepared for long-term sustainability.</p>
+                }
+
+                <p>Estimated Survival Duration: @survivalDays days</p>
+                @if (waterDays < foodDays)
+                {
+                    <p class="warning">Water is your limiting factor - prioritize water sources</p>
+                }
+                else if (foodDays < waterDays)
+                {
+                    <p class="warning">Food is your limiting factor - prioritize food sources</p>
+                }
+
+                <h5>Group Composition:</h5>
+                <p>Adults: @adultNum | Children: @childNum</p>
+                @if (adultNum + childNum > 3)
+                {
+                    <p class="warning">Large groups require significantly more resources!</p>
+                }
+
+                <h5>Defense & Mobility Assessment:</h5>
+                @if (defenseDays < 30)
+                {
+                    <p class="warning">Low defense rating (@defenseDays days) - Consider adding more weapons</p>
+                }
+                @if (mobilityScore < 20)
+                {
+                    <p class="warning">Limited mobility (@mobilityScore) - Adding vehicles would improve survival chances</p>
+                }
+                @if (habitatHazard > 15)
+                {
+                    <p class="warning">High habitat hazard level (@habitatHazard) - Location may be unsafe</p>
                 }
 
                 <h5>Survival Tips:</h5>
                 <ul>
-                    @if (!selectedPlan.WaterSources.Contains("Well") && !selectedPlan.WaterSources.Contains("River"))
+                    @if (selectedPlan?.WaterSources != null && !selectedPlan.WaterSources.Contains("Well") && !selectedPlan.WaterSources.Contains("River"))
                     {
                         <li>Consider adding a reliable water source to your plan</li>
                     }
-                    @if (!selectedPlan.FoodSources.Contains("Farm"))
+                    @if (selectedPlan?.FoodSources != null && !selectedPlan.FoodSources.Contains("Farm"))
                     {
                         <li>Adding farming capabilities could extend survival time significantly</li>
                     }
-                    @if (selectedPlan.Scenario.Contains("Zombie") && !selectedPlan.Weapons.Contains("Firearm"))
+                    @if (selectedPlan?.Scenario != null && selectedPlan.Scenario.Contains("Zombie") && selectedPlan?.Weapons != null && !selectedPlan.Weapons.Contains("Firearm"))
                     {
                         <li>For zombie scenarios, firearms are essential for longer survival</li>
+                    }
+                    @if (waterDays < 30)
+                    {
+                        <li>Water supplies will only last @waterDays days - Find additional sources</li>
+                    }
+                    @if (foodDays < 30)
+                    {
+                        <li>Food supplies will only last @foodDays days - Stock up on more provisions</li>
                     }
                 </ul>
             </div>
@@ -177,7 +228,10 @@
     private int waterBottles = 0;
     private int foodCans = 0;
     private int survivalDays = 0;
-    private int waterDays = 0;
+    private int adultNum = 1;
+    private bool isCalculated = false;
+
+    private int childNum = 0;    private int waterDays = 0;
     private int foodDays = 0;
     private int defenseDays = 0;    
 
@@ -185,12 +239,24 @@
 
     private int habitatHazard = 5;
 
-
-
-
     protected override async Task OnInitializedAsync()
     {
         survivalPlans = await PlanService.GetPlansAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+           
+            survivalPlans = new List<Plan>();
+        }
+        else
+        {
+            survivalPlans = await PlanService.GetPlansAsync();
+            survivalPlans = survivalPlans.Where(p => p.OwnerId == userId).ToList();
+
+        }
     }
 
     private void OnPlanSelected(ChangeEventArgs e)
@@ -210,6 +276,7 @@
 
     private void ResetCalculationValues()
     {
+        survivalDays = 0;
         waterBottles = 0;
         foodCans = 0;
         survivalDays = 0;
@@ -225,6 +292,51 @@
         if (selectedPlan == null) return;
 
         survivalDays = 0;
+        
+        //waterBottles = CountBottledWaterOccurrencesAsync().Result;
+
+
+        if (selectedPlan?.WaterSources != null)
+        {
+            if (selectedPlan.WaterSources.Contains("Bottled Water x"))
+            {
+            var waterEntry = selectedPlan.WaterSources
+                .Split(',')
+                .FirstOrDefault(s => s.Contains("Bottled Water x"));
+            
+            if (waterEntry != null)
+            {
+                var numberPart = waterEntry.Split('x').Last().Trim();
+                if (int.TryParse(numberPart, out int bottles))
+                {
+                waterBottles = bottles;
+                }
+            }
+            }
+        }
+
+
+        if (selectedPlan?.FoodSources != null)
+        {
+            if (selectedPlan.FoodSources.Contains("Canned Food x"))
+            {
+                var foodEntry = selectedPlan.FoodSources
+                    .Split(',')
+                    .FirstOrDefault(s => s.Contains("Canned Food x"));
+                
+                if (foodEntry != null)
+                {
+                    var numberPart = foodEntry.Split('x').Last().Trim();
+                    if (int.TryParse(numberPart, out int cans))
+                    {
+                        foodCans = cans;
+                    }
+                }
+            }
+        }
+
+
+
         bool hasWaterSource = false;
         bool hasFirearm = false;
         if(selectedPlan.WaterSources?.Contains("Reservoir") == true ||
@@ -362,6 +474,11 @@
             mobilityScore += 30;
         }
 
+        if (selectedPlan.Vehicles?.Contains("Boat") == true && selectedPlan.Scenario?.Contains("Nuclear Fallout") == true)
+        {
+            mobilityScore += 30;
+        }
+
         if (selectedPlan.Scenario?.Contains("Nuclear Fallout") == true)
         {
             habitatHazard += 20;
@@ -413,5 +530,34 @@
             survivalDays = Math.Max(21, survivalDays); // At least 21 days without food
         }
 
+        // Adjust survival days based on number of adults and children
+        if (adultNum > 1)
+        {
+            survivalDays = (int)(survivalDays / (adultNum)); // Each additional adult halves survival days
+            waterDays = (int)(waterDays / (adultNum));
+            foodDays = (int)(foodDays / (adultNum));
+        }
+        if (childNum > 0)
+        {
+            survivalDays = (int)(survivalDays * Math.Pow(0.75, childNum));
+            waterDays =  (int)(waterDays * Math.Pow(0.75, childNum));// Multiply by 0.75 for each child
+            foodDays = (int)(foodDays * Math.Pow(0.75, childNum));
+        }
+
     }
+
+    public async Task<int> CountBottledWaterOccurrencesAsync()
+    {
+        var plans = await _dbContext.Plans.ToListAsync();
+
+        int totalCount = plans
+            .Where(p => !string.IsNullOrEmpty(p.WaterSources))
+            .SelectMany(p => p.WaterSources!.Split(',', StringSplitOptions.RemoveEmptyEntries))
+            .Count(w => w.Trim().Equals("Bottled Water", StringComparison.OrdinalIgnoreCase));
+
+        return totalCount;
+
+
+    }
+
 }

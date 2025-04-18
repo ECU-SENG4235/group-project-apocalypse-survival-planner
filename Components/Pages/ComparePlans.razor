@@ -1,4 +1,3 @@
-
 <style>
 .analysis-table {
     display:block flexbox;
@@ -30,14 +29,14 @@
     padding: 5px;
 }
 </style>
-
-
 @page "/compare-plans"
 @using ASP.Models
+@using Microsoft.AspNetCore.Components.Authorization
 @attribute [StreamRendering]
 @inject ASP.Data.PlansDbContext _dbContext
 @inject PlanService PlanService
 @inject ASP.Data.PlansDbContext _dbContext
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Compare Plans</PageTitle>
 
@@ -259,6 +258,24 @@
     protected override async Task OnInitializedAsync()
     {
         survivalPlans = await PlanService.GetPlansAsync();
+
+        survivalPlans = await PlanService.GetPlansAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+           
+            survivalPlans = new List<Plan>();
+        }
+        else
+        {
+            survivalPlans = await PlanService.GetPlansAsync();
+            survivalPlans = survivalPlans.Where(p => p.OwnerId == userId).ToList();
+
+        }
+
         await Task.Delay(500);
 
         curPlan = survivalPlans.Select(plan => new listOfPlans
@@ -271,7 +288,8 @@
             WaterSources = plan.WaterSources,
             Weapons = plan.Weapons,
             Vehicles = plan.Vehicles,
-            Fuel = plan.Fuel
+            Fuel = plan.Fuel,
+            //OwnerId = plan.OwnerId
         }).ToList();
     }
 
@@ -307,5 +325,3 @@
         public string? Fuel { get; set; }
     }
 }
-
-

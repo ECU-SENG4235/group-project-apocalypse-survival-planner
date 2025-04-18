@@ -2,6 +2,8 @@
 @using ASP.Models
 @inject PlanService PlanService
 @inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h3>Edit Plans</h3>
 
@@ -23,11 +25,28 @@ else
 }
 
 @code {
-    private List<Plan>? plans;
+    private List<Plan> plans;
 
     protected override async Task OnInitializedAsync()
     {
         plans = await PlanService.GetPlansAsync();
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+           
+            plans = new List<Plan>();
+        }
+        else
+        {
+            plans = await PlanService.GetPlansAsync();
+            plans = plans.Where(p => p.OwnerId == userId).ToList();
+
+        }
+
     }
 
     private void EditPlan(int planId)

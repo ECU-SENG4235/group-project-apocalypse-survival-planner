@@ -14,7 +14,7 @@ namespace ASP.Migrations.PlansDb
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
 
             modelBuilder.Entity("ASP.Models.Plan", b =>
                 {
@@ -23,35 +23,31 @@ namespace ASP.Migrations.PlansDb
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FoodSources")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Fuel")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OwnerId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PlanName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Scenario")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Shelter")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Vehicles")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WaterSources")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Weapons")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

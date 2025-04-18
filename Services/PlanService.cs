@@ -18,10 +18,7 @@ public class PlanService
         return await _dbContext.Plans.ToListAsync();
     }
 
-    public async Task<Plan> GetPlanByIdAsync(int id)
-    {
-        return await _dbContext.Plans.FindAsync(id);
-    }
+    public async Task<Plan?> GetPlanByIdAsync(int id) => await _dbContext.Plans.FindAsync(id);
 
     public async Task AddPlanAsync(Plan plan)
     {
@@ -55,5 +52,5 @@ public class PlanService
             await UpdatePlanAsync(plan);
         }
     }
+    
 }
-
