@@ -22,5 +22,9 @@ namespace ASP.Models
         public string? Weapons { get; set; }
         public string? Vehicles { get; set; }
         public string? Fuel { get; set; }
+
+        public decimal Budget { get; set; }
+
+        public decimal TotalPrice { get; set; }
     }
 }

@@ -1,159 +1,8 @@
 ﻿@page "/edit-plan/{id:int}"
 @using ASP.Models
+@using ASP.Services
 @inject PlanService PlanService
 @inject NavigationManager NavigationManager
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private Plan? plan;
-    private string buttonText = "Update Plan";
-
-    private bool cannedFood;
-    private bool garden;
-    private bool farm;
-    private bool huntingFishing;
-    private bool bottledWater;
-    private bool river;
-    private bool reservoir;
-    private bool well;
-    private bool bat;
-    private bool firearm;
-    private bool chainsaw;
-    private bool slingshot;
-    private bool car;
-    private bool bicycle;
-    private bool helicopter;
-    private bool boat;
-    private bool gasoline;
-    private bool solarPanel;
-    private bool batteries;
-    private bool hamsterWheelGenerator;
-    private int bottledWaterQuantity;
-    private int cannedFoodQuantity;
-
-
-    private void NavigateToEditPlan(int planId)
-    {
-        NavigationManager.NavigateTo($"/edit-plan/{planId}");
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            plan = await PlanService.GetPlanByIdAsync(Id);
-            if (plan != null)
-            {
-                cannedFood = plan.FoodSources.Contains("Canned Food");
-                garden = plan.FoodSources.Contains("Garden");
-                farm = plan.FoodSources.Contains("Farm");
-                huntingFishing = plan.FoodSources.Contains("Hunting/Fishing");
-
-                bottledWater = plan.WaterSources.Contains("Bottled Water");
-                river = plan.WaterSources.Contains("River");
-                reservoir = plan.WaterSources.Contains("Reservoir");
-                well = plan.WaterSources.Contains("Well");
-
-                bat = plan.Weapons.Contains("Bat");
-                firearm = plan.Weapons.Contains("Firearm");
-                chainsaw = plan.Weapons.Contains("Chainsaw");
-                slingshot = plan.Weapons.Contains("Slingshot");
-
-                car = plan.Vehicles.Contains("Car");
-                bicycle = plan.Vehicles.Contains("Bicycle");
-                helicopter = plan.Vehicles.Contains("Helicopter");
-                boat = plan.Vehicles.Contains("Boat");
-
-                gasoline = plan.Fuel.Contains("Gasoline");
-                solarPanel = plan.Fuel.Contains("Solar Panel");
-                batteries = plan.Fuel.Contains("Batteries");
-                hamsterWheelGenerator = plan.Fuel.Contains("Hamster-wheel Generator");
-            }
-            else
-            {
-                buttonText = "Plan not found.";
-            }
-        }
-        catch (Exception ex)
-        {
-            buttonText = $"Error loading plan: {ex.Message}";
-        }
-    }
-
-    private async Task UpdatePlan()
-    {
-        if (plan == null || string.IsNullOrWhiteSpace(plan.PlanName))
-        {
-            buttonText = "Plan name cannot be empty.";
-            return;
-        }
-
-        // Create a dictionary to store quantities
-        var quantities = new Dictionary<string, int>();
-
-        // Add quantities for each selected item
-        // You'll need to add corresponding quantity fields in the UI
-        if (bottledWater) quantities["Bottled Water"] = bottledWaterQuantity;
-        if (cannedFood) quantities["Canned Food"] = cannedFoodQuantity;
-        if (river) quantities["River"] = 1;
-        if (reservoir) quantities["Reservoir"] = 1;
-        if (well) quantities["Well"] = 1;
-
-        // Format the strings with quantities
-        plan.FoodSources = string.Join(", ", GetSelectedFoodSources().Select(s => quantities.ContainsKey(s) ? $"{s} x{quantities[s]}" : s));
-        plan.WaterSources = string.Join(", ", GetSelectedWaterSources().Select(s => quantities.ContainsKey(s) ? $"{s} x{quantities[s]}" : s));
-        plan.Weapons = string.Join(", ", GetSelectedWeapons());
-        plan.Vehicles = string.Join(", ", GetSelectedVehicles());
-        plan.Fuel = string.Join(", ", GetSelectedFuel());
-
-        await PlanService.UpdatePlanAsync(plan);
-        buttonText = $"Plan '{plan.PlanName}' updated successfully!";
-        NavigationManager.NavigateTo("/my-plans");
-    }
-
-
-    private IEnumerable<string> GetSelectedFoodSources()
-    {
-        if (cannedFood) yield return "Canned Food";
-        if (garden) yield return "Garden";
-        if (farm) yield return "Farm";
-        if (huntingFishing) yield return "Hunting/Fishing";
-    }
-
-    private IEnumerable<string> GetSelectedWaterSources()
-    {
-        if (bottledWater) yield return "Bottled Water";
-        if (river) yield return "River";
-        if (reservoir) yield return "Reservoir";
-        if (well) yield return "Well";
-    }
-
-    private IEnumerable<string> GetSelectedWeapons()
-    {
-        if (bat) yield return "Bat";
-        if (firearm) yield return "Firearm";
-        if (chainsaw) yield return "Chainsaw";
-        if (slingshot) yield return "Slingshot";
-    }
-
-    private IEnumerable<string> GetSelectedVehicles()
-    {
-        if (car) yield return "Car";
-        if (bicycle) yield return "Bicycle";
-        if (helicopter) yield return "Helicopter";
-        if (boat) yield return "Boat";
-    }
-
-    private IEnumerable<string> GetSelectedFuel()
-    {
-        if (gasoline) yield return "Gasoline";
-        if (solarPanel) yield return "Solar Panel";
-        if (batteries) yield return "Batteries";
-        if (hamsterWheelGenerator) yield return "Hamster-wheel Generator";
-    }
-}
 
 <PageTitle>Edit Plan</PageTitle>
 
@@ -165,104 +14,244 @@
 }
 else
 {
-    <!-- Main Container -->
     <div style="display: flex; flex-direction: column; gap: 32px; max-width: 900px; margin: auto;">
 
-        <!-- Plan Name Section -->
-        <FluentCard style="padding: 32px; min-height: 150px;">
+        <!-- Plan Name -->
+        <FluentCard style="padding: 32px;">
             <h3>Plan Details</h3>
             <FluentTextField @bind-Value="plan.PlanName" Placeholder="Enter plan name..." Label="Plan Name" />
+            <FluentTextField @bind-Value="budgetText" Placeholder="Enter your budget..." Label="Budget ($)" />
         </FluentCard>
 
-        <!-- Scenario Selection -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
+        <!-- Scenario -->
+        <FluentCard style="padding: 32px;">
             <h3>Scenario</h3>
-            <FluentCombobox TOption="string" @bind-Value="plan.Scenario" Label="Scenario" class="scrollable-dropdown">
-                <FluentOption Value="Zombie Virus Outbreak">Zombie Virus Outbreak</FluentOption>
-                <FluentOption Value="Nuclear Fallout">Nuclear Fallout</FluentOption>
-                <FluentOption Value="Alien Invasion">Alien Invasion</FluentOption>
-                <FluentOption Value="Ice Age">Ice Age</FluentOption>
-                <FluentOption Value="Supervolcano Eruption">Supervolcano Eruption</FluentOption>
-                <FluentOption Value="AI Uprising">AI Uprising</FluentOption>
-                <FluentOption Value="World War III">World War III</FluentOption>
-                <FluentOption Value="Biological Plague">Biological Plague</FluentOption>
-                <FluentOption Value="Meteor Impact">Meteor Impact</FluentOption>
+            <FluentCombobox TOption="string" Value="plan.Scenario" ValueChanged="OnScenarioChanged" Label="Scenario">
+                @foreach (var scenario in scenarioOptions)
+                {
+                    <FluentOption Value="@scenario">@scenario</FluentOption>
+                }
             </FluentCombobox>
-        </FluentCard>
-
-        <!-- Shelter Selection -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
-            <h3>Shelter</h3>
-            <FluentCombobox TOption="string" @bind-Value="plan.Shelter" Label="Shelter Type">
-                <FluentOption Value="Bunker">Bunker</FluentOption>
-                <FluentOption Value="Mountain Cabin">Mountain Cabin</FluentOption>
-                <FluentOption Value="Metropolitan Apartment">Metropolitan Apartment</FluentOption>
-                <FluentOption Value="Suburban House">Suburban House</FluentOption>
-            </FluentCombobox>
-        </FluentCard>
-
-        <!-- Food Source Section -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
-            <h3>Food Sources</h3>
-            <FluentCheckbox @bind-Value="cannedFood">Canned Food</FluentCheckbox>
-
-            @if (cannedFood)
-            {                                   
-                <FluentNumberField @bind-Value="cannedFoodQuantity" Min="1" Label="Quantity" />
-            }
-
-            <FluentCheckbox @bind-Value="garden">Garden</FluentCheckbox>
-            <FluentCheckbox @bind-Value="farm">Farm</FluentCheckbox>
-            <FluentCheckbox @bind-Value="huntingFishing">Hunting/Fishing</FluentCheckbox>
-        </FluentCard>
-
-        <!-- Water Source Section -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
-            <h3>Water Sources</h3>
-            <div style="display: flex; align-items: center; gap: 16px;"></div>
-            <FluentCheckbox @bind-Value="bottledWater">Bottled Water</FluentCheckbox>
-            @if (bottledWater)
+            @if (!string.IsNullOrEmpty(scenarioImageUrl))
             {
-                <FluentNumberField @bind-Value="bottledWaterQuantity" Min="1" Label="Quantity" />
+                <img src="@scenarioImageUrl" alt="@plan.Scenario" style="max-width: 100%; margin-top: 16px; border-radius: 8px;" />
             }
-            
-            <FluentCheckbox @bind-Value="river">River</FluentCheckbox>
-            <FluentCheckbox @bind-Value="reservoir">Reservoir</FluentCheckbox>
-            <FluentCheckbox @bind-Value="well">Well</FluentCheckbox>
         </FluentCard>
 
-        <!-- Weapons Section -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
-            <h3>Weapons</h3>
-            <FluentCheckbox @bind-Value="bat">Bat</FluentCheckbox>
-            <FluentCheckbox @bind-Value="firearm">Firearm</FluentCheckbox>
-            <FluentCheckbox @bind-Value="chainsaw">Chainsaw</FluentCheckbox>
-            <FluentCheckbox @bind-Value="slingshot">Slingshot</FluentCheckbox>
+        <!-- Shelter -->
+        <FluentCard style="padding: 32px;">
+            <h3>Shelter</h3>
+            <FluentCombobox TOption="string" Value="plan.Shelter" ValueChanged="OnShelterChanged" Label="Shelter">
+                @foreach (var shelter in shelterOptions)
+                {
+                    <FluentOption Value="@shelter">@shelter</FluentOption>
+                }
+            </FluentCombobox>
+            @if (!string.IsNullOrEmpty(shelterImageUrl))
+            {
+                <img src="@shelterImageUrl" alt="@plan.Shelter" style="max-width: 100%; margin-top: 16px; border-radius: 8px;" />
+            }
         </FluentCard>
 
-        <!-- Vehicles Section -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
-            <h3>Vehicles</h3>
-            <FluentCheckbox @bind-Value="car">Car</FluentCheckbox>
-            <FluentCheckbox @bind-Value="bicycle">Bicycle</FluentCheckbox>
-            <FluentCheckbox @bind-Value="helicopter">Helicopter</FluentCheckbox>
-            <FluentCheckbox @bind-Value="boat">Boat</FluentCheckbox>
-        </FluentCard>
+        @foreach (var category in new[] { Food, Water, Weapons, Vehicles, Fuel })
+        {
+            <FluentCard style="padding: 32px;">
+                <h3>@category.Name</h3>
+                @for (int i = 0; i < category.Labels.Length; i++)
+                {
+                    var index = i;
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <label style="width: 200px;">@category.Labels[index]</label>
+                        <FluentNumberField TValue="int"
+                                           Value="@category.Quantities[index]"
+                                           ValueChanged="@((int val) => OnQuantityChanged(val, index, category))"
+                                           Min="0" Step="1" />
+                        <FluentNumberField TValue="decimal"
+                                           Value="@category.Prices[index]"
+                                           ValueChanged="@((decimal val) => { category.Prices[index] = val; RecalculateTotalPrice(); })"
+                                           Min="0" Step="1" />
+                    </div>
+                }
+            </FluentCard>
+        }
 
-        <!-- Fuel/Power Section -->
-        <FluentCard style="padding: 32px; min-height: 300px;">
-            <h3>Fuel/Power Sources</h3>
-            <FluentCheckbox @bind-Value="gasoline">Gasoline</FluentCheckbox>
-            <FluentCheckbox @bind-Value="solarPanel">Solar Panel</FluentCheckbox>
-            <FluentCheckbox @bind-Value="batteries">Batteries</FluentCheckbox>
-            <FluentCheckbox @bind-Value="hamsterWheelGenerator">Hamster-wheel Generator</FluentCheckbox>
-        </FluentCard>
+        <!-- Total & Save -->
+        <div style="text-align: center; margin-top: 32px;">
+            <h3>Total Price: @totalPrice.ToString("C")</h3>
+        </div>
 
-        <!-- Update Button -->
         <div style="display: flex; justify-content: center; margin-top: 32px;">
             <FluentButton @onclick="UpdatePlan">Update Plan</FluentButton>
         </div>
 
     </div>
 }
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private Plan? plan;
+    private string buttonText = "Update Plan";
+
+    private decimal totalPrice = 0;
+    private string budgetText = "";
+
+    private string scenarioImageUrl = "";
+    private string shelterImageUrl = "";
+
+    private Dictionary<string, string> scenarioImages = new()
+    {
+        { "Zombie Virus Outbreak", "images/scenarios/ZombieApoc.webp" },
+        { "Nuclear Fallout", "images/scenarios/NuclearFall.webp" },
+        { "Alien Invasion", "images/scenarios/AlienInv.webp" },
+        { "Ice Age", "images/scenarios/IceAge.webp" },
+        { "Supervolcano Eruption", "images/scenarios/SuperVol.webp" },
+        { "AI Uprising", "images/scenarios/AIUp.webp" },
+        { "World War III", "images/scenarios/WW3.webp" },
+        { "Biological Plague", "images/scenarios/BioPlag.webp" },
+        { "Meteor Impact", "images/scenarios/MetImp.webp" }
+    };
+
+    private Dictionary<string, string> shelterImages = new()
+    {
+        { "Bunker", "images/shelters/Bunker.webp" },
+        { "Mountain Cabin", "images/shelters/MountainCabin.webp" },
+        { "Metropolitan Apartment", "images/shelters/MetropolitanApartment.webp" },
+        { "Suburban House", "images/shelters/SuburbanHouse.webp" },
+        { "Medieval Castle", "images/shelters/MedievalCastle.webp" },
+        { "Jungle Hut", "images/shelters/JungleHut.webp" },
+        { "Military Base", "images/shelters/MilitaryBase.webp" },
+        { "Cruise Ship", "images/shelters/CruiseShip.webp" },
+        { "RV", "images/shelters/RV.webp" },
+        { "Tent", "images/shelters/Tent.webp" }
+    };
+
+    private string[] scenarioOptions = Array.Empty<string>();
+    private string[] shelterOptions = Array.Empty<string>();
+
+
+    private ItemCategory Food = new("Food")
+        {
+            Labels = new[] { "Canned Food", "Garden", "Farm", "Hunting/Fishing", "MREs", "Foraging", "Insect Farming" },
+            Prices = new[] { 10m, 100m, 500m, 150m, 75m, 30m, 200m },
+            Quantities = new int[7]
+        };
+
+    private ItemCategory Water = new("Water")
+        {
+            Labels = new[] { "Bottled Water", "River", "Reservoir", "Well", "Rainwater Collection", "Desalination", "Water Purification Tablets" },
+            Prices = new[] { 20m, 50m, 200m, 100m, 80m, 400m, 15m },
+            Quantities = new int[7]
+        };
+
+    private ItemCategory Weapons = new("Weapons")
+        {
+            Labels = new[] { "Bat", "Firearm", "Chainsaw", "Slingshot", "Crossbow", "Katana", "Molotov Cocktails", "Spear", "Taser" },
+            Prices = new[] { 30m, 600m, 250m, 40m, 350m, 500m, 60m, 90m, 120m },
+            Quantities = new int[9]
+        };
+
+    private ItemCategory Vehicles = new("Vehicles")
+        {
+            Labels = new[] { "Car", "Bicycle", "Helicopter", "Boat", "Motorcycle", "Tank", "Horse", "ATV", "Bus" },
+            Prices = new[] { 10000m, 300m, 50000m, 8000m, 3000m, 100000m, 5000m, 7000m, 25000m },
+            Quantities = new int[9]
+        };
+
+    private ItemCategory Fuel = new("Fuel")
+        {
+            Labels = new[] { "Gasoline", "Solar Panel", "Batteries", "Hamster-wheel Generator", "Wind Turbine", "Hydroelectric Generator", "Coal", "Wood-Burning Stove", "Biofuel" },
+            Prices = new[] { 100m, 1500m, 50m, 200m, 2000m, 3000m, 75m, 150m, 125m },
+            Quantities = new int[9]
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        plan = await PlanService.GetPlanByIdAsync(Id);
+        if (plan != null)
+        {
+            LoadCategoryFromPlanString(plan.FoodSources, Food);
+            LoadCategoryFromPlanString(plan.WaterSources, Water);
+            LoadCategoryFromPlanString(plan.Weapons, Weapons);
+            LoadCategoryFromPlanString(plan.Vehicles, Vehicles);
+            LoadCategoryFromPlanString(plan.Fuel, Fuel);
+            budgetText = plan.Budget.ToString();
+            scenarioImageUrl = scenarioImages.GetValueOrDefault(plan.Scenario ?? "", null);
+            shelterImageUrl = shelterImages.GetValueOrDefault(plan.Shelter ?? "", null);
+            RecalculateTotalPrice();
+        }
+        else
+        {
+            buttonText = "Plan not found.";
+        }
+
+        scenarioOptions = scenarioImages.Keys.ToArray();
+        shelterOptions = shelterImages.Keys.ToArray();
+
+    }
+
+    private void LoadCategoryFromPlanString(string? source, ItemCategory category)
+    {
+        if (string.IsNullOrWhiteSpace(source)) return;
+        var entries = source.Split(',', StringSplitOptions.TrimEntries);
+        for (int i = 0; i < category.Labels.Length; i++) category.Quantities[i] = 0;
+        foreach (var entry in entries)
+        {
+            var parts = entry.Split('x', StringSplitOptions.TrimEntries);
+            var label = parts[0];
+            int quantity = parts.Length > 1 && int.TryParse(parts[1], out var q) ? q : 1;
+            var index = Array.IndexOf(category.Labels, label);
+            if (index >= 0) category.Quantities[index] = quantity;
+        }
+    }
+
+    private void OnQuantityChanged(int value, int index, ItemCategory category)
+    {
+        category.Quantities[index] = value;
+        RecalculateTotalPrice();
+    }
+
+    private void OnScenarioChanged(string value)
+    {
+        plan.Scenario = value;
+        scenarioImageUrl = scenarioImages.GetValueOrDefault(value, null);
+    }
+
+    private void OnShelterChanged(string value)
+    {
+        plan.Shelter = value;
+        shelterImageUrl = shelterImages.GetValueOrDefault(value, null);
+    }
+
+    private void RecalculateTotalPrice()
+    {
+        var items = Food.GetItemCounts()
+            .Concat(Water.GetItemCounts())
+            .Concat(Weapons.GetItemCounts())
+            .Concat(Vehicles.GetItemCounts())
+            .Concat(Fuel.GetItemCounts())
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+        totalPrice = PlanPriceCalculator.CalculateTotal(items);
+    }
+
+    private async Task UpdatePlan()
+    {
+        if (plan == null || string.IsNullOrWhiteSpace(plan.PlanName))
+        {
+            buttonText = "Plan name cannot be empty.";
+            return;
+        }
+
+        plan.FoodSources = string.Join(", ", Food.GetSelected());
+        plan.WaterSources = string.Join(", ", Water.GetSelected());
+        plan.Weapons = string.Join(", ", Weapons.GetSelected());
+        plan.Vehicles = string.Join(", ", Vehicles.GetSelected());
+        plan.Fuel = string.Join(", ", Fuel.GetSelected());
+        plan.TotalPrice = totalPrice;
+        plan.Budget = decimal.TryParse(budgetText, out var parsedBudget) ? parsedBudget : 0;
+
+        await PlanService.UpdatePlanAsync(plan);
+        buttonText = $"Plan '{plan.PlanName}' updated successfully!";
+        NavigationManager.NavigateTo("/my-plans");
+    }
 }

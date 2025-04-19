@@ -22,6 +22,9 @@ namespace ASP.Migrations.PlansDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FoodSources")
                         .HasColumnType("TEXT");
 
@@ -29,7 +32,6 @@ namespace ASP.Migrations.PlansDb
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OwnerId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PlanName")
@@ -39,6 +41,9 @@ namespace ASP.Migrations.PlansDb
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Shelter")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Vehicles")

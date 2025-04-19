@@ -1,9 +1,87 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\ASP\\",
+  "WorkspaceRootPath": "C:\\Users\\theon\\source\\repos\\ASPRH5\\ASP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\onedrive\\desktop\\asprh3\\group-project-apocalypse-survival-planner\\components\\pages\\createplan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\editplanstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\editplantests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\editplan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\models\\itemcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\createplan.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\services\\pricecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\models\\plan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\createplan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\survivaltimecalculatortests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\compareplanstests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\compareplans.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\createplantests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\services\\planservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\itemcategorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\data\\plansdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\pricecalculatortests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\planservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\tests\\plantests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\weather.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\theon\\source\\repos\\ASPRH5\\obj\\ASP.csproj.EntityFrameworkCore.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7D89918-DB95-3423-0310-81BCAB9D789C}|..\\ASP.csproj|c:\\users\\theon\\source\\repos\\asprh5\\migrations\\plansdb\\20250418193902_addyourmigrationnamehere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,15 +104,335 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EditPlansTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\EditPlansTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\EditPlansTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\EditPlansTests.cs",
+              "RelativeToolTip": "..\\Tests\\EditPlansTests.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T16:20:54.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EditPlanTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\EditPlanTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\EditPlanTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\EditPlanTests.cs",
+              "RelativeToolTip": "..\\Tests\\EditPlanTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T16:18:01.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SurvivalTimeCalculatorTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\SurvivalTimeCalculatorTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\SurvivalTimeCalculatorTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\SurvivalTimeCalculatorTests.cs",
+              "RelativeToolTip": "..\\Tests\\SurvivalTimeCalculatorTests.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAwwJcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T05:37:42.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ComparePlansTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\ComparePlansTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\ComparePlansTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\ComparePlansTests.cs",
+              "RelativeToolTip": "..\\Tests\\ComparePlansTests.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T05:33:42.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ComparePlans.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\ComparePlans.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\ComparePlans.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\ComparePlans.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\ComparePlans.razor",
+              "ViewState": "AgIAADoBAAAAAAAAAAAAAEYBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T05:32:28.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EditPlan.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\EditPlan.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\EditPlan.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\EditPlan.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\EditPlan.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T05:32:05.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ASP.csproj.EntityFrameworkCore.targets",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\obj\\ASP.csproj.EntityFrameworkCore.targets",
+              "RelativeDocumentMoniker": "..\\obj\\ASP.csproj.EntityFrameworkCore.targets",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\obj\\ASP.csproj.EntityFrameworkCore.targets",
+              "RelativeToolTip": "..\\obj\\ASP.csproj.EntityFrameworkCore.targets",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-04-19T04:06:48.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CreatePlanTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\CreatePlanTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\CreatePlanTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\CreatePlanTests.cs",
+              "RelativeToolTip": "..\\Tests\\CreatePlanTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T03:51:58.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PriceCalculatorTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\PriceCalculatorTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\PriceCalculatorTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\PriceCalculatorTests.cs",
+              "RelativeToolTip": "..\\Tests\\PriceCalculatorTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T03:26:38.787Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PriceCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Services\\PriceCalculator.cs",
+              "RelativeDocumentMoniker": "..\\Services\\PriceCalculator.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Services\\PriceCalculator.cs",
+              "RelativeToolTip": "..\\Services\\PriceCalculator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T03:17:56.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PlanServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\PlanServiceTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\PlanServiceTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\PlanServiceTests.cs",
+              "RelativeToolTip": "..\\Tests\\PlanServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T02:46:16.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PlanService.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Services\\PlanService.cs",
+              "RelativeDocumentMoniker": "..\\Services\\PlanService.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Services\\PlanService.cs",
+              "RelativeToolTip": "..\\Services\\PlanService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:30:31.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ItemCategoryTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\ItemCategoryTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\ItemCategoryTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\ItemCategoryTests.cs",
+              "RelativeToolTip": "..\\Tests\\ItemCategoryTests.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAAAFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T02:35:21.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PlanTests.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\PlanTests.cs",
+              "RelativeDocumentMoniker": "..\\Tests\\PlanTests.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Tests\\PlanTests.cs",
+              "RelativeToolTip": "..\\Tests\\PlanTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T02:17:44.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Program.cs",
+              "RelativeDocumentMoniker": "..\\Program.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Program.cs",
+              "RelativeToolTip": "..\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T01:58:14.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\App.razor",
+              "RelativeDocumentMoniker": "..\\Components\\App.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\App.razor",
+              "RelativeToolTip": "..\\Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T01:57:45.54Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Routes.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Routes.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Routes.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Routes.razor",
+              "RelativeToolTip": "..\\Components\\Routes.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T01:57:39.25Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Weather.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\Weather.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\Weather.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\Weather.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\Weather.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T01:57:32.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T01:57:14.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Error.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\Error.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\Error.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\Error.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\Error.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T01:57:03.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "20250418193902_AddYourMigrationNameHere.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Migrations\\PlansDb\\20250418193902_AddYourMigrationNameHere.cs",
+              "RelativeDocumentMoniker": "..\\Migrations\\PlansDb\\20250418193902_AddYourMigrationNameHere.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Migrations\\PlansDb\\20250418193902_AddYourMigrationNameHere.cs",
+              "RelativeToolTip": "..\\Migrations\\PlansDb\\20250418193902_AddYourMigrationNameHere.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:39:02.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PlansDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Data\\PlansDbContext.cs",
+              "RelativeDocumentMoniker": "..\\Data\\PlansDbContext.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Data\\PlansDbContext.cs",
+              "RelativeToolTip": "..\\Data\\PlansDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:34:28.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Plan.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Models\\Plan.cs",
+              "RelativeDocumentMoniker": "..\\Models\\Plan.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Models\\Plan.cs",
+              "RelativeToolTip": "..\\Models\\Plan.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAmwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:28:42.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CreatePlan.razor",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\CreatePlan.razor",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\CreatePlan.razor",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\CreatePlan.razor",
+              "RelativeToolTip": "..\\Components\\Pages\\CreatePlan.razor",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAAKsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-18T19:27:35.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ItemCategory.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Models\\ItemCategory.cs",
+              "RelativeDocumentMoniker": "..\\Models\\ItemCategory.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Models\\ItemCategory.cs",
+              "RelativeToolTip": "..\\Models\\ItemCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:25:23.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreatePlan.razor.cs",
+              "DocumentMoniker": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\CreatePlan.razor.cs",
+              "RelativeDocumentMoniker": "..\\Components\\Pages\\CreatePlan.razor.cs",
+              "ToolTip": "C:\\Users\\theon\\source\\repos\\ASPRH5\\Components\\Pages\\CreatePlan.razor.cs",
+              "RelativeToolTip": "..\\Components\\Pages\\CreatePlan.razor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:22:57.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "CreatePlan.razor",
               "DocumentMoniker": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
-              "RelativeDocumentMoniker": "..\\Components\\Pages\\CreatePlan.razor",
-              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor*",
-              "RelativeToolTip": "..\\Components\\Pages\\CreatePlan.razor*",
-              "ViewState": "AgIAAA0BAAAAAAAAAAAqwB4BAAABAAAAAAAAAA==",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
+              "ToolTip": "C:\\Users\\theon\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
+              "RelativeToolTip": "..\\..\\..\\..\\OneDrive\\Desktop\\ASPRH3\\group-project-apocalypse-survival-planner\\Components\\Pages\\CreatePlan.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-19T18:06:29.647Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T18:06:29.647Z"
             }
           ]
         }
