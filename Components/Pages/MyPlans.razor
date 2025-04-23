@@ -6,6 +6,7 @@
 @inject PlanService PlanService
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
 
 <style>
 
@@ -94,19 +95,19 @@
             @foreach (var scenario in categorizedPlans.Keys)
             {
                 <h2 style="margin-top: 20px; color: #ff4d4d;">@scenario</h2>
-            <FluentGrid Columns="3">
-                @foreach (var plan in categorizedPlans[scenario])
-                {
-                    <FluentCard Class="plan-card" @onclick="() => ShowPlanDetails(plan)">
-                     <h3>@plan.PlanName</h3>
-                     <p>Scenario: @plan.Scenario</p>
-                     </FluentCard>
+                <FluentGrid Columns="3">
+                    @foreach (var plan in categorizedPlans[scenario])
+                    {
+                        <FluentCard Class="plan-card" @onclick="() => ShowPlanDetails(plan)">
+                            <h3>@plan.PlanName</h3>
+                            <p>Scenario: @plan.Scenario</p>
+                        </FluentCard>
                     }
 
                 </FluentGrid>
             }
         }
-            
+
         else
         {
 
@@ -131,7 +132,11 @@
 
             <div class="detail-view">
                 <h1 style="text-align: center; margin-bottom: 30px; color: #ff4d4d;">@selectedPlan?.PlanName</h1>
-                
+
+                <FluentButton Appearance="Appearance.Neutral" @onclick="DeletePlan">
+                    <FluentIcon Value="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Filled.Size24.Delete())" /> Delete Plan
+                </FluentButton>
+
                 <div class="detail-section">
                     <h2 style="border-bottom: 2px solid #ff4d4d; padding-bottom: 5px;">Scenario Overview</h2>
                     <p style="font-size: 1.1em; line-height: 1.6;">@selectedPlan?.Scenario</p>
@@ -200,7 +205,7 @@
 
         if (string.IsNullOrEmpty(userId))
         {
-           
+
             survivalPlans = new List<Plan>();
         }
         else
@@ -222,6 +227,21 @@
         showDetail = false;
         selectedPlan = null;
     }
+
+    private async Task DeletePlan()
+    {
+        if (selectedPlan != null)
+        {
+            var confirm = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete the plan '{selectedPlan.PlanName}'?");
+            if (confirm)
+            {
+                await PlanService.DeletePlanAsync(selectedPlan.Id);
+                survivalPlans = survivalPlans?.Where(p => p.Id != selectedPlan.Id).ToList();
+                BackToList();
+            }
+        }
+    }
+
 
     private void NavigateToPlan(int planId)
     {
