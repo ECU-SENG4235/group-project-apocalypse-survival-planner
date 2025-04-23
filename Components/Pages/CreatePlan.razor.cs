@@ -1,4 +1,4 @@
-﻿using ASP.Models;
+using ASP.Models;
 using ASP.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -189,6 +189,33 @@ namespace ASP.Components.Pages
                 return;
             }
 
+            // Validate category selections
+            if (Food.GetSelected().Count == 0)
+            {
+                buttonText = "Please select at least one food source.";
+                return;
+            }
+            if (Water.GetSelected().Count == 0)
+            {
+                buttonText = "Please select at least one water source.";
+                return;
+            }
+            if (Weapons.GetSelected().Count == 0)
+            {
+                buttonText = "Please select at least one weapon.";
+                return;
+            }
+            if (Vehicles.GetSelected().Count == 0)
+            {
+                buttonText = "Please select at least one vehicle.";
+                return;
+            }
+            if (Fuel.GetSelected().Count == 0)
+            {
+                buttonText = "Please select at least one fuel source.";
+                return;
+            }
+
             // Retrieve the current user's authentication state
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
@@ -199,7 +226,6 @@ namespace ASP.Components.Pages
                 buttonText = "User not authenticated.";
                 return;
             }
-
 
             var newPlan = new Plan
             {
@@ -214,11 +240,11 @@ namespace ASP.Components.Pages
                 Budget = decimal.TryParse(budgetText, out var parsedBudget) ? parsedBudget : 0,
                 TotalPrice = totalPrice,
                 OwnerId = userId
-
             };
 
             await PlanService.AddPlanAsync(newPlan);
             buttonText = $"Plan '{planName}' saved successfully!";
         }
+
     }
 }
