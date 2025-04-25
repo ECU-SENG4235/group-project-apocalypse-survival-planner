@@ -16,14 +16,12 @@ else
 {
     <div style="display: flex; flex-direction: column; gap: 32px; max-width: 900px; margin: auto;">
 
-        <!-- Plan Name -->
         <FluentCard style="padding: 32px;">
             <h3>Plan Details</h3>
             <FluentTextField @bind-Value="plan.PlanName" Placeholder="Enter plan name..." Label="Plan Name" />
             <FluentTextField @bind-Value="budgetText" Placeholder="Enter your budget..." Label="Budget ($)" />
         </FluentCard>
 
-        <!-- Scenario -->
         <FluentCard style="padding: 32px;">
             <h3>Scenario</h3>
             <FluentCombobox TOption="string" Value="plan.Scenario" ValueChanged="OnScenarioChanged" Label="Scenario">
@@ -38,7 +36,6 @@ else
             }
         </FluentCard>
 
-        <!-- Shelter -->
         <FluentCard style="padding: 32px;">
             <h3>Shelter</h3>
             <FluentCombobox TOption="string" Value="plan.Shelter" ValueChanged="OnShelterChanged" Label="Shelter">
@@ -75,14 +72,21 @@ else
             </FluentCard>
         }
 
-        <!-- Total & Save -->
         <div style="text-align: center; margin-top: 32px;">
             <h3>Total Price: @totalPrice.ToString("C")</h3>
+            @if (plan != null && totalPrice > plan.Budget)
+            {
+                <p style="color: red;">⚠️ Over budget by @(totalPrice - plan.Budget):C</p>
+            }
         </div>
 
-        <div style="display: flex; justify-content: center; margin-top: 32px;">
-            <FluentButton @onclick="UpdatePlan">Update Plan</FluentButton>
-        </div>
+        @if (plan != null && totalPrice <= plan.Budget)
+        {
+            <div style="display: flex; justify-content: center; margin-top: 32px;">
+                <FluentButton @onclick="UpdatePlan">Update Plan</FluentButton>
+            </div>
+        }
+
 
     </div>
 }
@@ -125,9 +129,22 @@ else
         { "Tent", "images/shelters/Tent.webp" }
     };
 
+    private Dictionary<string, decimal> shelterPrices = new()
+    {
+        { "Bunker", 5000 },
+        { "Mountain Cabin", 4000 },
+        { "Metropolitan Apartment", 3000 },
+        { "Suburban House", 3500 },
+        { "Medieval Castle", 10000 },
+        { "Jungle Hut", 2000 },
+        { "Military Base", 12000 },
+        { "Cruise Ship", 15000 },
+        { "RV", 2500 },
+        { "Tent", 500 }
+    };
+
     private string[] scenarioOptions = Array.Empty<string>();
     private string[] shelterOptions = Array.Empty<string>();
-
 
     private ItemCategory Food = new("Food")
         {
@@ -186,7 +203,6 @@ else
 
         scenarioOptions = scenarioImages.Keys.ToArray();
         shelterOptions = shelterImages.Keys.ToArray();
-
     }
 
     private void LoadCategoryFromPlanString(string? source, ItemCategory category)
@@ -220,6 +236,7 @@ else
     {
         plan.Shelter = value;
         shelterImageUrl = shelterImages.GetValueOrDefault(value, null);
+        RecalculateTotalPrice();
     }
 
     private void RecalculateTotalPrice()
@@ -232,6 +249,16 @@ else
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         totalPrice = PlanPriceCalculator.CalculateTotal(items);
+
+        if (!string.IsNullOrEmpty(plan?.Shelter) && shelterPrices.TryGetValue(plan.Shelter, out var shelterCost))
+        {
+            totalPrice += shelterCost;
+        }
+
+        if (decimal.TryParse(budgetText, out var parsedBudget) && plan != null)
+        {
+            plan.Budget = parsedBudget;
+        }
     }
 
     private async Task UpdatePlan()

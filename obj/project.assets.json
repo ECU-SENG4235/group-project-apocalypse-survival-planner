@@ -9554,24 +9554,32 @@
     ]
   },
   "packageFolders": {
-    "/Users/teevaughn/.nuget/packages/": {}
+    "C:\\Users\\theon\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/teevaughn/group-project-apocalypse-survival-planner-2/ASP.csproj",
+      "projectUniqueName": "C:\\Users\\theon\\Source\\Repos\\ASPRH6\\ASP.csproj",
       "projectName": "ASP",
-      "projectPath": "/Users/teevaughn/group-project-apocalypse-survival-planner-2/ASP.csproj",
-      "packagesPath": "/Users/teevaughn/.nuget/packages/",
-      "outputPath": "/Users/teevaughn/group-project-apocalypse-survival-planner-2/obj/",
+      "projectPath": "C:\\Users\\theon\\Source\\Repos\\ASPRH6\\ASP.csproj",
+      "packagesPath": "C:\\Users\\theon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\theon\\Source\\Repos\\ASPRH6\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/teevaughn/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -9698,7 +9706,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

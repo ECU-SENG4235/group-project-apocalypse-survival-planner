@@ -10,9 +10,7 @@ namespace ASP.Components.Pages
 {
     public partial class CreatePlan : ComponentBase
     {
-
         [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-
 
         private string buttonText = "Save Plan";
         private string planName = "";
@@ -89,16 +87,16 @@ namespace ASP.Components.Pages
 
         private Dictionary<string, decimal> shelterPrices = new()
         {
-            { "Bunker", 5000 },
-            { "Mountain Cabin", 4000 },
-            { "Metropolitan Apartment", 3000 },
-            { "Suburban House", 3500 },
-            { "Medieval Castle", 10000 },
-            { "Jungle Hut", 2000 },
-            { "Military Base", 12000 },
-            { "Cruise Ship", 15000 },
-            { "RV", 2500 },
-            { "Tent", 500 }
+            { "Bunker", 40000 },
+            { "Mountain Cabin", 85000 },
+            { "Metropolitan Apartment", 120000 },
+            { "Suburban House", 250000 },
+            { "Medieval Castle", 2000000 },
+            { "Jungle Hut", 500 },
+            { "Military Base", 5000000 },
+            { "Cruise Ship", 1000000 },
+            { "RV", 80000 },
+            { "Tent", 100 }
         };
 
         private string GetShelterLabel(string shelterName)
@@ -111,35 +109,35 @@ namespace ASP.Components.Pages
         private ItemCategory Food = new()
         {
             Labels = new[] { "Canned Food", "Garden", "Farm", "Hunting/Fishing", "MREs", "Foraging", "Insect Farming" },
-            Prices = new[] { 10m, 100m, 500m, 150m, 75m, 30m, 200m },
+            Prices = new[] { 2m, 250m, 5000m, 400m, 10m, 20m, 150m },
             Quantities = new int[7]
         };
 
         private ItemCategory Water = new()
         {
             Labels = new[] { "Bottled Water", "River", "Reservoir", "Well", "Rainwater Collection", "Desalination", "Water Purification Tablets" },
-            Prices = new[] { 20m, 50m, 200m, 100m, 80m, 400m, 15m },
+            Prices = new[] { 1m, 125m, 10000m, 3000m, 200m, 10000m, 10m },
             Quantities = new int[7]
         };
 
         private ItemCategory Weapons = new()
         {
             Labels = new[] { "Bat", "Firearm", "Chainsaw", "Slingshot", "Crossbow", "Katana", "Molotov Cocktails", "Spear", "Taser" },
-            Prices = new[] { 30m, 600m, 250m, 40m, 350m, 500m, 60m, 90m, 120m },
+            Prices = new[] { 30m, 700m, 250m, 40m, 300m, 200m, 10m, 20m, 150m },
             Quantities = new int[9]
         };
 
         private ItemCategory Vehicles = new()
         {
             Labels = new[] { "Car", "Bicycle", "Helicopter", "Boat", "Motorcycle", "Tank", "Horse", "ATV", "Bus" },
-            Prices = new[] { 10000m, 300m, 50000m, 8000m, 3000m, 100000m, 5000m, 7000m, 25000m },
+            Prices = new[] { 15000m, 500m, 250000m, 8000m, 4000m, 300000m, 2500m, 7000m, 20000m },
             Quantities = new int[9]
         };
 
         private ItemCategory Fuel = new()
         {
             Labels = new[] { "Gasoline", "Solar Panel", "Batteries", "Hamster-wheel Generator", "Wind Turbine", "Hydroelectric Generator", "Coal", "Wood-Burning Stove", "Biofuel" },
-            Prices = new[] { 100m, 1500m, 50m, 200m, 2000m, 3000m, 75m, 150m, 125m },
+            Prices = new[] { 4m, 300m, 20m, 50m, 2000m, 10000m, 100m, 200m, 300m },
             Quantities = new int[9]
         };
 
@@ -189,7 +187,6 @@ namespace ASP.Components.Pages
                 return;
             }
 
-            // Validate category selections
             if (Food.GetSelected().Count == 0)
             {
                 buttonText = "Please select at least one food source.";
@@ -216,7 +213,6 @@ namespace ASP.Components.Pages
                 return;
             }
 
-            // Retrieve the current user's authentication state
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             var userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
@@ -245,6 +241,5 @@ namespace ASP.Components.Pages
             await PlanService.AddPlanAsync(newPlan);
             buttonText = $"Plan '{planName}' saved successfully!";
         }
-
     }
 }

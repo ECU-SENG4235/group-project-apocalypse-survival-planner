@@ -1,5 +1,5 @@
-C:\Users\theon\Source\Repos\ASPRH5\wwwroot\favicon.ico
-C:\Users\theon\Source\Repos\ASPRH5\wwwroot\app.css
+C:\Users\theon\Source\Repos\ASPRH6\wwwroot\favicon.ico
+C:\Users\theon\Source\Repos\ASPRH6\wwwroot\app.css
 wwwroot\app.css
 wwwroot\favicon.ico
 wwwroot\Images\Scenarios\AIUp.webp
